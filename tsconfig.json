@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    /* Basic Options */
     "target": "es6",
     "rootDir": "./src",
     "sourceMap": true,
@@ -11,8 +10,7 @@
     "removeComments": true,
     "downlevelIteration": true,
     "lib": ["es2015", "es2016", "es2017"],
-
-    /* Strict Type-Checking Options */
+    
     "strict": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
@@ -23,7 +21,6 @@
     "strictFunctionTypes": true,
     "noFallthroughCasesInSwitch": true,
 
-    /* Module Resolution Options */
     "baseUrl": "./",
     "preserveSymlinks": true,
     "moduleResolution": "node",
@@ -33,7 +30,6 @@
       "*": ["node_modules/*", "src/types/*"]
     },
 
-    /* Experimental Options */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },

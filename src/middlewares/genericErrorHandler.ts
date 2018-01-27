@@ -15,7 +15,6 @@ import logger from '../utils/logger';
 export default function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
   logger.error(err);
 
-  // Joi Validation errors
   if (err.isJoi) {
     res.status(err.output.statusCode).json({
       code: HttpStatus.BAD_REQUEST,
