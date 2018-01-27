@@ -57,3 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+# IntelliJ IDE
+.idea
+
+# Visual Studio Code
+.vscode
+
+# Build directory
+dist
