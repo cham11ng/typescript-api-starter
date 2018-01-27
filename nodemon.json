@@ -1,0 +1,9 @@
+{
+  "verbose": false,
+  "ext": "ts, js, .env",
+  "exec": "ts-node src/index.ts",
+  "watch": [
+    ".env",
+    "src/**/*.ts"
+  ]
+}

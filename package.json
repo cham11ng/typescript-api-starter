@@ -1,0 +1,89 @@
+{
+  "name": "typescript-api-starter",
+  "version": "0.1.0",
+  "description": "Starter for Node.js express API with Typescript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cham11ng/typescript-api-starter.git"
+  },
+  "author": {
+    "name": "Sagar Chamling",
+    "email": "sgr.raee@gmail.com"
+  },
+  "engines": {
+    "node": ">= 8.9.4",
+    "npm": ">= 5.6.0"
+  },
+  "scripts": {
+    "transpile": "tsc",
+    "start": "node dist",
+    "start:dev": "nodemon",
+    "clean": "rimraf dist",
+    "prepush": "tsc --noEmit",
+    "precommit": "lint-staged",
+    "build": "run-s clean lint:fix transpile",
+    "lint": "tslint 'src/**/*.{ts,js}' 'test/**/*.{ts,js}'",
+    "lint:fix": "tslint --fix 'src/**/*.{ts,js}' 'test/**/*.{ts,js}'",
+    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write 'src/**/*.{ts,js,json}'"
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{ts, js}": [
+        "lint:fix",
+        "prettify",
+        "git add"
+      ]
+    }
+  },
+  "private": true,
+  "license": "MIT",
+  "keywords": [
+    "api",
+    "es6",
+    "node",
+    "express",
+    "javascript",
+    "typescript"
+  ],
+  "dependencies": {
+    "boom": "^7.1.1",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "helmet": "^3.10.0",
+    "http-status-codes": "^1.3.0",
+    "joi": "^13.1.1",
+    "morgan": "^1.9.0",
+    "sequelize": "^4.32.2",
+    "winston": "^2.4.0",
+    "winston-daily-rotate-file": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/boom": "^7.1.1",
+    "@types/chai": "^4.1.2",
+    "@types/cors": "^2.8.3",
+    "@types/dotenv": "^4.0.2",
+    "@types/express": "^4.11.0",
+    "@types/helmet": "^0.0.37",
+    "@types/joi": "^13.0.5",
+    "@types/mocha": "^2.2.47",
+    "@types/morgan": "^1.7.35",
+    "@types/winston": "^2.3.7",
+    "axios": "^0.17.1",
+    "chai": "^4.1.2",
+    "faker": "^4.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "mocha": "^5.0.0",
+    "nodemon": "^1.14.11",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.10.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.6.0",
+    "tslint-consistent-codestyle": "^1.11.0",
+    "typescript": "^2.6.2"
+  }
+}
