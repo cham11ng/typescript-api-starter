@@ -1,0 +1,17 @@
+import * as Knex from 'knex';
+import Bluebird from 'bluebird';
+
+export function seed(knex: Knex): Bluebird<any[]> {
+  return knex('table_name')
+    .del()
+    .then(() => {
+      return Promise.all([
+        knex('table_name').insert([
+          {
+            colName: 'rowValue',
+            colName2: 'rowValue'
+          }
+        ])
+      ]);
+    });
+}
