@@ -1,5 +1,7 @@
 <p align="center">
-  <img alt="Typescript API Starter" src="https://i.imgur.com/A1URjPL.png">
+  <a href="https://imgur.com/A1URjPL">
+    <img alt="Typescript API Starter" src="https://i.imgur.com/A1URjPL.png">
+  </a>
 </p>
 
 Starter for Node.js express API with Typescript.
@@ -24,11 +26,11 @@ $ yarn start (For production)
 ```
 
 <p align="center">
-  <a href="https://imgur.com/gallery/4rhTo" aligh="center">
+  <a href="https://imgur.com/gallery/4rhTo">
     <img src="https://i.imgur.com/GpcDbLB.gif" />
   </a>
 </p>
 
 ## License
 
-typescript-api-starter is under [MIT License](LICENSE.md).
+typescript-api-starter is under [MIT License](LICENSE).
