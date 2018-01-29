@@ -15,13 +15,16 @@ Starter for Node.js express API with Typescript.
 Clone the repository, install the dependencies.
 ```bash
 $ git clone git@github.com:cham11ng/typescript-api-starter.git
+
 $ cd typescript-api-starter
+
 $ yarn
 ```
 
 Start the application.
 ```bash
 $ yarn start:dev (For development)
+
 $ yarn start (For production)
 ```
 
@@ -30,6 +33,21 @@ $ yarn start (For production)
     <img src="https://i.imgur.com/GpcDbLB.gif" />
   </a>
 </p>
+
+## Generationg Migrations and Seeds
+To create migration use `make:migration` and seed use `make:seeder`:
+```bash
+$ yarn make:migration create_{table_name}_table
+
+$ yarn make:seeder {table_name}_table_seeder
+```
+
+Example,
+```bash
+$ yarn make:migration create_posts_table
+
+$ yarn make:seeder post_table_seeder
+```
 
 ## License
 

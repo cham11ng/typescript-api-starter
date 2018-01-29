@@ -1,0 +1,13 @@
+import * as Knex from 'knex';
+
+export function up(knex: Knex) {
+  return knex.schema.createTable('table_name', table => {
+    table.increments('id').primary();
+
+    table.timestamps(true, true);
+  });
+}
+
+export function down(knex: Knex) {
+  return knex.schema.dropTable('table_name');
+}
