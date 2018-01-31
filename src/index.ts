@@ -29,7 +29,7 @@ app.use(genericErrorHandler);
 app.use(notFoundHandler);
 
 app
-  .listen(parseInt(port, 10), host, () => {
+  .listen(+port, host, () => {
     logger.info(`Server started at http://${host}:${port}`);
   })
   .on('error', nodeErrorHandler);

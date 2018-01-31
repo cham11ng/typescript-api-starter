@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "rootDir": "./",
     "sourceMap": true,
     "outDir": "./dist",
     "declaration": true,
