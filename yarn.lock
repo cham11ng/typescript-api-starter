@@ -373,6 +373,13 @@ body-parser@1.18.2:
     raw-body "2.3.2"
     type-is "~1.6.15"
 
+bookshelf-camelcase@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/bookshelf-camelcase/-/bookshelf-camelcase-2.0.1.tgz#0d7791f2aabee6d98d56c87ce10ccb0f81a6553c"
+  dependencies:
+    lodash.camelcase "~4.3.0"
+    lodash.snakecase "~4.1.0"
+
 bookshelf@^0.12.1:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/bookshelf/-/bookshelf-0.12.1.tgz#242bed9cf39a90dc8302de50b1f8795a5bc7c2bf"
@@ -2036,9 +2043,17 @@ load-json-file@^4.0.0:
     pify "^3.0.0"
     strip-bom "^3.0.0"
 
+lodash.camelcase@~4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
+
 lodash.reduce@4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
+
+lodash.snakecase@~4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.snakecase/-/lodash.snakecase-4.1.1.tgz#39d714a35357147837aefd64b5dcbb16becd8f8d"
 
 lodash@^4.13.1, lodash@^4.17.4, lodash@^4.6.0:
   version "4.17.4"
