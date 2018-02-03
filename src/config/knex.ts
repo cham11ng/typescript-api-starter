@@ -5,7 +5,7 @@ dotenv.config();
 
 const isTestEnvironment = process.env.NODE_ENV === 'test';
 
-const config = {
+const dbConfig: Knex.Config = {
   client: process.env.DB_CLIENT,
   connection: {
     charset: 'utf8',
@@ -17,4 +17,4 @@ const config = {
   }
 };
 
-export default Knex(config);
+export default Knex(dbConfig);
