@@ -63,7 +63,6 @@
     "joi": "^13.1.1",
     "knex": "0.13",
     "morgan": "^1.9.0",
-    "passport": "^0.4.0",
     "pg": "^7.4.1",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^1.7.2"
