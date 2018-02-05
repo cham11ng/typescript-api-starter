@@ -28,9 +28,11 @@
     "make:seeder": "knex seed:make",
     "make:migration": "knex migrate:make",
     "build": "run-s clean lint:fix transpile",
-    "lint": "tslint 'src/**/*.{ts,js}' 'test/**/*.{ts,js}'",
-    "lint:fix": "tslint --fix 'src/**/*.{ts,js}' 'test/**/*.{ts,js}'",
-    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write 'src/**/*.{ts,js,json}'"
+    "test": "mocha test/**/*.spec.ts",
+    "test:api": "mocha test/api/**/*.spec.ts",
+    "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
+    "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
+    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write src/**/*.{ts,js,json} test/**/*.{ts,js}"
   },
   "lint-staged": {
     "linters": {
@@ -80,7 +82,6 @@
     "@types/mocha": "^2.2.47",
     "@types/morgan": "^1.7.35",
     "@types/winston": "^2.3.7",
-    "axios": "^0.17.1",
     "chai": "^4.1.2",
     "faker": "^4.1.0",
     "husky": "^0.14.3",
@@ -90,6 +91,7 @@
     "npm-run-all": "^4.1.2",
     "prettier": "^1.10.2",
     "rimraf": "^2.6.2",
+    "supertest": "^3.0.0",
     "ts-node": "^4.1.0",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.6.0",

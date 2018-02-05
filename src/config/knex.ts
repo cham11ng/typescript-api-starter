@@ -3,18 +3,17 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-const isTestEnvironment = process.env.NODE_ENV === 'test';
-
-const config = {
+const dbConfig: Knex.Config = {
   client: process.env.DB_CLIENT,
   connection: {
     charset: 'utf8',
+    timezone: 'UTC',
     host: process.env.DB_HOST,
     port: +(process.env.DB_PORT || '5432'),
-    database: isTestEnvironment ? process.env.TEST_DB_NAME : process.env.DB_NAME,
-    user: isTestEnvironment ? process.env.TEST_DB_USER : process.env.DB_USER,
-    password: isTestEnvironment ? process.env.TEST_DB_PASSWORD : process.env.DB_PASSWORD
+    database: process.env.NODE_ENV === 'test' ? process.env.TEST_DB_NAME : process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
   }
 };
 
-export default Knex(config);
+export default Knex(dbConfig);
