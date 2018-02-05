@@ -1,6 +1,7 @@
+<p align="center"><a href="https://imgur.com/A1URjPL"><img alt="Typescript API Starter" src="https://i.imgur.com/A1URjPL.png"></a></p>
 <p align="center">
-  <a href="https://imgur.com/A1URjPL">
-    <img alt="Typescript API Starter" src="https://i.imgur.com/A1URjPL.png">
+  <a href="https://travis-ci.org/cham11ng/typescript-api-starter">
+    <img src="https://travis-ci.org/cham11ng/typescript-api-starter.svg?branch=master" alt="Build Status">
   </a>
 </p>
 
@@ -29,9 +30,7 @@ $ yarn start (For production)
 ```
 
 <p align="center">
-  <a href="https://imgur.com/gallery/4rhTo">
-    <img src="https://i.imgur.com/GpcDbLB.gif" />
-  </a>
+  <a href="https://imgur.com/gallery/4rhTo"><img src="https://i.imgur.com/GpcDbLB.gif" /></a>
 </p>
 
 ## Generationg Migrations and Seeds
