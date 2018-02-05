@@ -6,6 +6,8 @@ module.exports = {
   development: {
     client: process.env.DB_CLIENT,
     connection: {
+      charset: 'utf8',
+      timezone: 'UTC',
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
       database: process.env.DB_NAME,
@@ -29,10 +31,12 @@ module.exports = {
   test: {
     client: process.env.DB_CLIENT,
     connection: {
+      charset: 'utf8',
+      timezone: 'UTC',
       port: process.env.DB_PORT,
       database: process.env.TEST_DB_NAME,
-      user: process.env.TEST_DB_USER,
-      password: process.env.TEST_DB_PASSWORD
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
     },
     migrations: {
       directory: 'src/database/migrations',

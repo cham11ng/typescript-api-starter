@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "node"
+  - "8"
+services:
+  - postgresql
+before_script:
+  - cp .env.example .env
+  - yarn install
+  - yarn build
+  - psql -c 'create database app_test;' -U postgres
+  - NODE_ENV=test yarn migrate
+script:
+  - NODE_ENV=test yarn test

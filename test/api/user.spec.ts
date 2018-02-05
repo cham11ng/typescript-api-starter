@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import * as request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
-import app from '../../src/index';
+import app from '../../dist';
 
 describe('Users API test', () => {
   it('should return users list', done => {
