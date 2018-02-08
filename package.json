@@ -39,7 +39,7 @@
       "*.{ts, js}": [
         "lint:fix",
         "prettify",
-        "git add"
+        "git add ."
       ]
     }
   },
