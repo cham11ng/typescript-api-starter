@@ -8,7 +8,7 @@ import UserDetail from '../../domain/entities/UserDetail';
  * @returns UserDetail
  */
 export default function userFactory(): UserDetail {
-  const now = new Date().toString();
+  const now = new Date().toISOString();
 
   return {
     name: faker.name.findName(),
