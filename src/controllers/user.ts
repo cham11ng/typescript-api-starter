@@ -1,8 +1,8 @@
 import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
+import UserDetail from '../domain/entities/UserDetail';
 import * as userService from '../services/userService';
-import UserDetail from '../resources/domain/UserDetail';
 
 export function index(req: Request, res: Response, next: NextFunction) {
   userService

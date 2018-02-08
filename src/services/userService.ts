@@ -3,7 +3,7 @@ import { Collection, Model } from 'bookshelf';
 
 import User from '../models/User';
 import transform from '../utils/transform';
-import UserDetail from '../resources/domain/UserDetail';
+import UserDetail from '../domain/entities/UserDetail';
 
 /**
  * Fetch all users from users table.

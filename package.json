@@ -76,6 +76,7 @@
     "@types/cors": "^2.8.3",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.11.1",
+    "@types/faker": "^4.1.2",
     "@types/helmet": "^0.0.37",
     "@types/joi": "^13.0.5",
     "@types/knex": "^0.14.4",
