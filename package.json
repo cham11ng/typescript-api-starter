@@ -28,18 +28,19 @@
     "make:seeder": "knex seed:make",
     "make:migration": "knex migrate:make",
     "build": "run-s clean lint:fix transpile",
+    "load:fake": "ts-node scripts/loadFakeData.ts",
     "test": "mocha test/**/*.spec.ts",
     "test:api": "mocha test/api/**/*.spec.ts",
     "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
     "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
-    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write src/**/*.{ts,js,json} test/**/*.{ts,js}"
+    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js,json} test/**/*.{ts,js}"
   },
   "lint-staged": {
     "linters": {
       "*.{ts, js}": [
         "lint:fix",
         "prettify",
-        "git add ."
+        "git add"
       ]
     }
   },
@@ -57,6 +58,7 @@
     "bookshelf": "^0.12.1",
     "bookshelf-camelcase": "^2.0.1",
     "boom": "^7.1.1",
+    "chalk": "^2.3.0",
     "cors": "^2.8.4",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
@@ -76,6 +78,7 @@
     "@types/cors": "^2.8.3",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.11.1",
+    "@types/faker": "^4.1.2",
     "@types/helmet": "^0.0.37",
     "@types/joi": "^13.0.5",
     "@types/knex": "^0.14.4",
