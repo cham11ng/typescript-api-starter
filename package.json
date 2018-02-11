@@ -33,7 +33,7 @@
     "test:api": "mocha test/api/**/*.spec.ts",
     "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
     "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
-    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write src/**/*.{ts,js,json} test/**/*.{ts,js}"
+    "prettify": "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js,json} test/**/*.{ts,js}"
   },
   "lint-staged": {
     "linters": {
