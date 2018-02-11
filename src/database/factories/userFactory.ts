@@ -1,19 +1,16 @@
 import * as faker from 'faker';
 
 import UserDetail from '../../domain/entities/UserDetail';
+import * as userService from '../../services/userService';
 
 /**
  * Returns user fake data.
  *
- * @returns UserDetail
+ * @returns {Promise<UserDetail>}
  */
-export function run(): UserDetail {
-  const now = new Date().toISOString();
-
-  return {
+export function run(): Promise<UserDetail> {
+  return userService.insert({
     name: faker.name.findName(),
-    email: faker.internet.email(),
-    updatedAt: now,
-    createdAt: now
-  };
+    email: faker.internet.email()
+  });
 }

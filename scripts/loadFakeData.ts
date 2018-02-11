@@ -10,11 +10,12 @@ const { info } = console;
     const table = process.argv[2];
     const total = +process.argv[3] || 1;
     const factoryCallback = factories[table].run;
-    print(faker.generate(factoryCallback, total));
+
+    print(await faker.generate(factoryCallback, total));
 
     process.exit(0);
   } catch (err) {
-    info(chalk`{bold.red ${process.argv[2]}} {red factory not found.}`);
+    info(chalk`{red ${err.message}}`);
 
     process.exit(1);
   }
