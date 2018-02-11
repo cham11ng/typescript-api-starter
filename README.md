@@ -15,25 +15,35 @@ Starter for Node.js express API with Typescript.
 ## Getting Started
 Clone the repository, install the dependencies.
 ```bash
-$ git clone git@github.com:cham11ng/typescript-api-starter.git
+$ git clone git@github.com:cham11ng/typescript-api-starter.git <application-name>
 
-$ cd typescript-api-starter
+$ cd <application-name>
 
-$ yarn
+$ cp .env.example .env # Update database credentials
+
+$ yarn migrate
 ```
+
+Load fake data in database.
+```bash
+$ yarn load:fake <FactoryName> <Number>
+```
+<p align="center">
+  <a href="https://imgur.com/gallery/d2M09Qj"><img src="https://i.imgur.com/d2M09Qj.gif" /></a>
+</p>
 
 Start the application.
 ```bash
-$ yarn start:dev (For development)
+$ yarn start # For production
 
-$ yarn start (For production)
+$ yarn start:dev # For development
 ```
 
 <p align="center">
   <a href="https://imgur.com/gallery/4rhTo"><img src="https://i.imgur.com/GpcDbLB.gif" /></a>
 </p>
 
-## Generationg Migrations and Seeds
+## Generating Migrations and Seeds
 To create migration use `make:migration` and seed use `make:seeder`:
 ```bash
 $ yarn make:migration create_{table_name}_table
@@ -46,6 +56,13 @@ Example,
 $ yarn make:migration create_posts_table
 
 $ yarn make:seeder post_table_seeder
+```
+
+Modify migration and seeder file as per the requirement. Then finally:
+```bash
+$ yarn migrate # to migrate
+
+$ yarn seed # to seed
 ```
 
 ## License
