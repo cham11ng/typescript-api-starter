@@ -34,6 +34,8 @@ $ yarn load:fake <FactoryName> <Number>
 
 Start the application.
 ```bash
+$ yarn build
+
 $ yarn start # For production
 
 $ yarn start:dev # For development
