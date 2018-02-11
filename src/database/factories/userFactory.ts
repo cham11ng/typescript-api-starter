@@ -3,11 +3,11 @@ import * as faker from 'faker';
 import UserDetail from '../../domain/entities/UserDetail';
 
 /**
- * Retunrs user fake data.
+ * Returns user fake data.
  *
  * @returns UserDetail
  */
-export default function userFactory(): UserDetail {
+export function run(): UserDetail {
   const now = new Date().toISOString();
 
   return {
