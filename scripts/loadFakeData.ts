@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import * as faker from '../src/utils/faker';
+import * as fake from '../src/utils/fake';
 import * as factories from '../src/database/factories';
 
 const { info } = console;
@@ -11,7 +11,7 @@ const { info } = console;
     const total = +process.argv[3] || 1;
     const factoryCallback = factories[table].run;
 
-    print(await faker.generate(factoryCallback, total));
+    print(await fake.generate(factoryCallback, total));
 
     process.exit(0);
   } catch (err) {
