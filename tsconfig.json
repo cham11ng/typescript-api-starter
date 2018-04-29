@@ -21,6 +21,7 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": "./",
+    "esModuleInterop": true,
     "preserveSymlinks": true,
     "moduleResolution": "node",
     "types": ["node", "express", "mocha"],
