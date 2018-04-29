@@ -7,9 +7,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: ${DB_NAME}:-starter
-      POSTGRES_USER: ${DB_USER}:-postgres
-      POSTGRES_PASSWORD: ${DB_PASSWORD}:-secret
+      POSTGRES_DB: ${DB_NAME:-starter}
+      POSTGRES_USER: ${DB_USERNAME:-starter}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
 
   api:
     image: "node:8-alpine"
