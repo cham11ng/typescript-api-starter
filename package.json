@@ -38,8 +38,8 @@
   "lint-staged": {
     "linters": {
       "*.{ts, js}": [
-        "lint:fix",
-        "prettify",
+        "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
+        "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js,json} test/**/*.{ts,js}",
         "git add"
       ]
     }

@@ -18,12 +18,13 @@ const logger = new winston.Logger({
       colorize: true,
       timestamp: tsFormat
     }),
+
     new winston.transports.DailyRotateFile({
-      prepend: true,
-      level: logLevel,
-      timestamp: tsFormat,
-      datePattern: 'yyyy-MM-dd',
-      filename: `${logDir}/-${logLevel}.log`
+      maxSize: '20m',
+      maxFiles: '7d',
+      zippedArchive: true,
+      datePattern: 'YYYY-MM-DD',
+      filename: `${logDir}/${logLevel}-%DATE%.log`
     })
   ]
 });
