@@ -9,7 +9,7 @@ const { info } = console;
   try {
     const table = process.argv[2];
     const total = +process.argv[3] || 1;
-    const factoryCallback = factories[table].run;
+    const factoryCallback = (factories as any)[table].run;
 
     print(await fake.generate(factoryCallback, total));
 
