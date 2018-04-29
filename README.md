@@ -56,14 +56,21 @@ $ cp .env.docker .env
 
 Install dependencies and run the application locally.
 ```
+$ docker-compose up -d postgres
+
 $ docker-compose up -d api
 
-$ docker-compose exec api bash yarn migrate # Make sure server is started checking logs before running this command
+$ docker-compose exec api sh yarn migrate # Make sure server is started checking logs before running this command
 ```
 
 View logs of the container.
 ```
 $ docker-compose logs -f api
+```
+
+To stop the services.
+```
+$ docker-compose stop api postgres
 ```
 
 ## Generating Migrations and Seeds
