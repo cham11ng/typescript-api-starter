@@ -5,12 +5,14 @@
   </a>
 </p>
 
-Starter for Node.js express API with Typescript.
+Starter for Node.js Express API in Typescript.
 
 ## Requirements
-* [Node.js](https://yarnpkg.com/en/docs/install) - 8.9.4 or above
-* [Yarn](https://yarnpkg.com/en/docs/install) - 1.3.2 or above
-* [NPM](https://docs.npmjs.com/getting-started/installing-node) - 5.6.0 or above
+* [Node.js](https://yarnpkg.com/en/docs/install)
+* [Yarn](https://yarnpkg.com/en/docs/install)
+* [NPM](https://docs.npmjs.com/getting-started/installing-node)
+* [Docker](https://docs.docker.com/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Getting Started
 Clone the repository, install the dependencies.
@@ -44,6 +46,25 @@ $ yarn start:dev # For development
 <p align="center">
   <a href="https://imgur.com/gallery/4rhTo"><img src="https://i.imgur.com/GpcDbLB.gif" /></a>
 </p>
+
+**Using Docker**
+
+Make a copy of `.env.docker` and save as `.env`.
+```
+$ cp .env.docker .env
+```
+
+Install dependencies and run the application locally.
+```
+$ docker-compose up -d api
+
+$ docker-compose exec api bash yarn migrate # Make sure server is started checking logs before running this command
+```
+
+View logs of the container.
+```
+$ docker-compose logs -f api
+```
 
 ## Generating Migrations and Seeds
 To create migration use `make:migration` and seed use `make:seeder`:
