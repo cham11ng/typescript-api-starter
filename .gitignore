@@ -64,3 +64,4 @@ typings/
 
 # Build directory
 dist
+build
