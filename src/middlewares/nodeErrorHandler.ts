@@ -1,5 +1,7 @@
+import config from '../config/app';
 import logger from '../utils/logger';
-import errorMessages from '../resources/lang/errors.json';
+
+const { errors } = config;
 
 /**
  * Node startup error handler.
@@ -10,13 +12,13 @@ import errorMessages from '../resources/lang/errors.json';
 export default function nodeErrorHandler(err: NodeJS.ErrnoException): void {
   switch (err.code) {
     case 'EACCES':
-      logger.error(errorMessages.portRequirePrivilege);
+      logger.error(errors.portRequirePrivilege);
       process.exit(1);
 
       break;
 
     case 'EADDRINUSE':
-      logger.error(errorMessages.portInUse);
+      logger.error(errors.portInUse);
       process.exit(1);
 
       break;
