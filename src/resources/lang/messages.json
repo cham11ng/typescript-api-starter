@@ -1,5 +1,8 @@
 {
   "users": {
+    "insert": "User inserted successfully.",
+    "fetch": "User detail fetched successfully",
+    "delete": "User removed successfully",
     "fetchAll": "List of users."
   }
 }

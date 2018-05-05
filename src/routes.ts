@@ -8,5 +8,6 @@ const router: Router = Router();
 router.get('/', homeController.index);
 
 router.get('/users', userController.index);
+router.post('/users', userController.store);
 
 export default router;
