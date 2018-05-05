@@ -1,3 +1,6 @@
+/**
+ * User Detail Interface.
+ */
 interface UserDetail {
   id?: number;
   name: string;

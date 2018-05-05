@@ -2,6 +2,7 @@ import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
 import logger from '../utils/logger';
+import APIResponseInterface from '../domain/responses/APIResponse';
 
 /**
  * Generic error response middleware for internal server errors.
@@ -10,39 +11,52 @@ import logger from '../utils/logger';
  * @param  {Request} req
  * @param  {Response} res
  * @param  {NextFunction} next
- * @returns <void>
+ * @returns void
  */
 export default function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
-  logger.error(err);
+  const error = buildError(err);
 
+  logger.error('Error stack trace: ', err.stack);
+
+  res.status(error.code).json(error);
+}
+
+/**
+ * Build error response for validation errors.
+ *
+ * @param  {Error} err
+ * @return {Object}
+ */
+function buildError(err: any): APIResponseInterface {
   if (err.isJoi) {
-    res.status(err.output.statusCode).json({
+    return {
       code: HttpStatus.BAD_REQUEST,
       message: HttpStatus.getStatusText(HttpStatus.BAD_REQUEST),
-      details:
+      data:
         err.details &&
-        err.details.map((error: any) => {
-          return {
-            message: error.message,
-            param: error.path.join('.')
-          };
-        })
-    });
+        err.details.map((error: any) => ({
+          param: error.path.join('.'),
+          message: error.message
+        }))
+    };
   }
 
   if (err.isBoom) {
-    res.status(err.output.statusCode).json({
-      error: {
-        code: err.output.statusCode,
-        message: err.output.payload.message || err.output.payload.error
-      }
-    });
+    return {
+      code: err.output.statusCode,
+      message: err.output.payload.message || err.output.payload.error
+    };
   }
 
-  res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-    error: {
-      code: HttpStatus.INTERNAL_SERVER_ERROR,
-      message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
-    }
-  });
+  if (err.isCustom) {
+    return {
+      code: err.statusCode,
+      message: err.message
+    };
+  }
+
+  return {
+    code: HttpStatus.INTERNAL_SERVER_ERROR,
+    message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+  };
 }
