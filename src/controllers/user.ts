@@ -7,6 +7,13 @@ import UserPayload from '../domain/requests/UserPayload';
 
 const { messages } = config;
 
+/**
+ * Controller to handle /users GET request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 export async function index(req: Request, res: Response, next: NextFunction) {
   try {
     const response = await userService.fetchAll();
@@ -21,6 +28,13 @@ export async function index(req: Request, res: Response, next: NextFunction) {
   }
 }
 
+/**
+ * Controller to handle /users POST request.
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ */
 export async function store(req: Request, res: Response, next: NextFunction) {
   try {
     const userPayload = req.body as UserPayload;
