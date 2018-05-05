@@ -1,32 +1,36 @@
+import 'winston-daily-rotate-file';
+
 import * as fs from 'fs';
 import * as winston from 'winston';
-import 'winston-daily-rotate-file';
 
 import app from '../config/app';
 
-const tsFormat = () => new Date().toISOString();
-const { dir: logDir, level: logLevel } = app.logging;
+const { level, maxSize, maxFiles, datePattern, dir: logDir } = app.logging;
 
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 
-const logger = new winston.Logger({
-  transports: [
-    new winston.transports.Console({
-      level: 'info',
-      colorize: true,
-      timestamp: tsFormat
-    }),
+const transports = [
+  new winston.transports.DailyRotateFile({
+    maxSize,
+    maxFiles,
+    datePattern,
+    zippedArchive: true,
+    filename: `${logDir}/${level}-%DATE%.log`
+  })
+];
 
-    new winston.transports.DailyRotateFile({
-      maxSize: '20m',
-      maxFiles: '7d',
-      zippedArchive: true,
-      datePattern: 'YYYY-MM-DD',
-      filename: `${logDir}/${logLevel}-%DATE%.log`
+if (process.env.NODE_ENV !== 'production') {
+  transports.push(
+    new winston.transports.Console({
+      level,
+      colorize: true,
+      timestamp: () => new Date().toISOString()
     })
-  ]
-});
+  );
+}
+
+const logger = new winston.Logger({ transports });
 
 export default logger;
