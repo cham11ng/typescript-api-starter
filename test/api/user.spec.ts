@@ -34,4 +34,16 @@ describe('Users API test', () => {
         done();
       });
   });
+
+  it('should fail request when payload is incorrect.', done => {
+    request(app)
+      .post('/api/users')
+      .end((err, res) => {
+        expect(res.status).to.equal(HttpStatus.BAD_REQUEST);
+        expect(res.body).to.have.keys('code', 'data', 'message');
+        expect(res.body.data).to.be.an('array');
+
+        done();
+      });
+  });
 });
