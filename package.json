@@ -28,7 +28,7 @@
     "make:seeder": "knex seed:make",
     "make:migration": "knex migrate:make",
     "build": "run-s clean lint:fix transpile",
-    "load:fake": "ts-node scripts/loadFakeData.ts",
+    "load:fake": "NODE_ENV=test ts-node scripts/loadFakeData.ts",
     "test": "mocha test/**/*.spec.ts",
     "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
     "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
