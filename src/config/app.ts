@@ -1,19 +1,29 @@
 import * as dotenv from 'dotenv';
-import pkg from '../../package.json';
+
+import app from '../../package.json';
+import errors from '../resources/lang/errors.json';
+import messages from '../resources/lang/messages.json';
 
 dotenv.config();
 
+const isTestEnvironment = process.env.NODE_ENV === 'test';
+
 export default {
-  name: pkg.name,
-  version: pkg.version,
+  errors,
+  messages,
+  name: app.name,
+  version: app.version,
   host: process.env.APP_HOST || '127.0.0.1',
-  port: (process.env.NODE_ENV === 'test' ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '8000',
+  port: (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '8000',
   pagination: {
     page: 1,
     maxRows: 20
   },
   logging: {
     dir: process.env.LOGGING_DIR || 'logs',
-    level: process.env.LOGGING_LEVEL || 'debug'
+    level: process.env.LOGGING_LEVEL || 'debug',
+    maxSize: process.env.LOGGING_MAX_SIZE || '20m',
+    maxFiles: process.env.LOGGING_MAX_FILES || '7d',
+    datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD'
   }
 };
