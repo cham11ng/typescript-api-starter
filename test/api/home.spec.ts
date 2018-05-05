@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
-import app from '../../dist';
+import app from '../../src';
 
 describe('API Information', () => {
   it('should return application information', done => {

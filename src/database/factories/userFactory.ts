@@ -1,4 +1,4 @@
-import * as faker from 'faker';
+import faker from 'faker';
 
 import UserDetail from '../../domain/entities/UserDetail';
 import * as userService from '../../services/userService';
