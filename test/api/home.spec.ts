@@ -1,23 +1,20 @@
-import { expect } from 'chai';
 import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
-import app from '../../src';
+import app from '../../src/app';
 
 describe('API Information', () => {
-  it('should return application information', done => {
-    request(app)
+  const expectedResponse = {
+    name: app.locals.name,
+    version: app.locals.version
+  };
+
+  test('should return application information', () => {
+    return request(app)
       .get('/api')
-      .end((err, res) => {
-        const expectedResponse = {
-          name: app.locals.name,
-          version: app.locals.version
-        };
-
-        expect(res.status).to.equal(HttpStatus.OK);
-        expect(res.body).to.deep.equal(expectedResponse);
-
-        done();
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.body).toEqual(expectedResponse);
       });
   });
 });
