@@ -1,4 +1,4 @@
-import config from '../config/app';
+import config from '../config/config';
 import logger from '../utils/logger';
 
 const { errors } = config;

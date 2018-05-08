@@ -3,7 +3,7 @@ import 'winston-daily-rotate-file';
 import * as fs from 'fs';
 import * as winston from 'winston';
 
-import app from '../config/app';
+import app from '../config/config';
 
 const { level, maxSize, maxFiles, datePattern, dir: logDir } = app.logging;
 

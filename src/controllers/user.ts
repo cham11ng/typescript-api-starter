@@ -1,7 +1,7 @@
 import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
-import config from '../config/app';
+import config from '../config/config';
 import * as userService from '../services/userService';
 import UserPayload from '../domain/requests/UserPayload';
 
