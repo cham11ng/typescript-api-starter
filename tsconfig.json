@@ -24,7 +24,7 @@
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "moduleResolution": "node",
-    "types": ["node", "express", "mocha"],
+    "types": ["node", "express"],
     "allowSyntheticDefaultImports": true,
     "paths": {
       "*": ["node_modules/*", "src/types/*"]

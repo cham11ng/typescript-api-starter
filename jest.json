@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "testEnvironment": "node",
+  "testMatch": ["**/*/*.spec.ts"],
+  "moduleFileExtensions": ["js", "ts"],
+  "moduleDirectories": ["node_modules"],
+  "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.ts$"],
+  "transform": {
+    ".*ts$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+  }
+}
