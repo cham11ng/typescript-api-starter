@@ -2,12 +2,8 @@ const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const PRODUCTION = 'production';
-
 module.exports = {
   webpack: (config, options) => {
-    const isProduction = options.env === PRODUCTION;
-
     config.context = path.resolve(__dirname, 'src');
     config.entry.main = './index.ts';
     config.output.path = path.resolve(__dirname, 'build');
@@ -34,14 +30,6 @@ module.exports = {
         tsconfig: path.resolve(__dirname, 'tsconfig.json')
       })
     );
-
-    if (isProduction) {
-      config.plugins.push(
-        new UglifyJSPlugin({
-          sourceMap: true
-        })
-      );
-    }
 
     return config;
   }
