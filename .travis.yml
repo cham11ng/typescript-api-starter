@@ -9,5 +9,6 @@ before_script:
   - yarn build
   - psql -c 'create database app_test;' -U postgres
   - NODE_ENV=test yarn migrate
+  - NODE_ENV=test yarn load:fake User 1
 script:
   - NODE_ENV=test yarn test
