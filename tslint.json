@@ -26,11 +26,11 @@
     "array-type": [true, "array"],
     "max-line-length": [true, 120],
     "interface-name": [true, "never-prefix"],
+    "align": [true, "parameters", "statements"],
     "triple-equals": [true, "allow-null-check"],
     "no-inferrable-types": [true, "ignore-params"],
     "arrow-parens": [true, "ban-single-arg-parens"],
     "typedef": [true, "parameter", "property-declaration"],
-    "align": [true, "arguments", "parameters", "statements"],
     "no-console": [true, "log", "info", "time", "debug", "error", "trace", "timeEnd"],
     "variable-name": [true, "check-format", "ban-keywords", "allow-pascal-case", "allow-leading-underscore"],
     "trailing-comma": [
