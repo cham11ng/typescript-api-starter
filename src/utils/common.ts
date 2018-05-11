@@ -31,5 +31,5 @@ export function capitalize(word: string): string {
 export function camelcase(text: string, separator: string = '_'): string {
   const words = text.split(separator);
 
-  return [words[0], words.slice(1).map(word => capitalize(word))].join('');
+  return [words[0], ...words.slice(1).map(word => capitalize(word))].join('');
 }

@@ -30,15 +30,15 @@ describe('Utils: capitalize()', () => {
 });
 
 describe('Utils: camelcase()', () => {
-  const camelcaseText = 'helloWorld';
+  const camelcaseText = 'helloStarterApi';
 
   test('should camelcase the given text', () => {
-    const text = 'hello_world';
+    const text = 'hello_starter_API';
     expect(camelcase(text)).toEqual(camelcaseText);
   });
 
   test('should camelcase the given text with given separator', () => {
-    const text = 'hello world';
+    const text = 'hello starter API';
     expect(camelcase(text, ' ')).toEqual(camelcaseText);
   });
 
