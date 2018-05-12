@@ -1,14 +1,14 @@
 import * as Knex from 'knex';
 import Bluebird from 'bluebird';
 
-import Tables from '../../resources/enums/Tables';
+import Table from '../../resources/enums/Table';
 
 export function seed(knex: Knex): Bluebird<any[]> {
-  return knex(Tables.users)
+  return knex(Table.USERS)
     .del()
     .then(() => {
       return Promise.all([
-        knex(Tables.users).insert([
+        knex(Table.USERS).insert([
           {
             email: 'sgr.raee@gmail.com',
             name: 'Sagar Chamling'

@@ -1,10 +1,10 @@
 import * as Knex from 'knex';
 import Bluebird from 'bluebird';
 
-import Tables from '../../resources/enums/Tables';
+import Table from '../../resources/enums/Table';
 
 export function up(knex: Knex): Bluebird<any[]> {
-  return knex.schema.createTable(Tables.users, table => {
+  return knex.schema.createTable(Table.USERS, table => {
     table.increments('id').primary();
     table
       .string('email')
@@ -17,5 +17,5 @@ export function up(knex: Knex): Bluebird<any[]> {
 }
 
 export function down(knex: Knex): Bluebird<any[]> {
-  return knex.schema.dropTable(Tables.users);
+  return knex.schema.dropTable(Table.USERS);
 }
