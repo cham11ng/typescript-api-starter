@@ -3,7 +3,7 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
-import { getRandomElement } from '../../src/utils/common';
+import { getRandomElement } from '../../src/utils/array';
 
 describe('Users API test', () => {
   test('should return users list.', () => {
