@@ -20,7 +20,7 @@ describe('Users API test', () => {
     };
 
     return request(app)
-      .get('/api/users')
+      .get('/users')
       .then(res => {
         const userInfo = getRandomElement(res.body.data);
 
@@ -48,7 +48,7 @@ describe('Users API test', () => {
     };
 
     return request(app)
-      .post('/api/users')
+      .post('/users')
       .send(userBody)
       .then(res => {
         expect(res.status).toBe(HttpStatus.OK);
@@ -69,7 +69,7 @@ describe('Users API test', () => {
     };
 
     return request(app)
-      .post('/api/users')
+      .post('/users')
       .then(res => {
         const errorResponse = getRandomElement(res.body.data);
 
