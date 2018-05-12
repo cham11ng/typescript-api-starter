@@ -15,7 +15,12 @@ export async function fetchAll(): Promise<UserDetail[]> {
   const users = await User.fetchAll();
   logger.debug('Fetched all users successfully:', JSON.stringify(users, null, 2));
 
-  return transform(users.serialize(), userTransform);
+  return transform(users.serialize(), (user: UserDetail) => ({
+    name: user.name,
+    email: user.email,
+    updatedAt: new Date(user.updatedAt).toLocaleString(),
+    createdAt: new Date(user.updatedAt).toLocaleString()
+  }));
 }
 
 /**
@@ -30,19 +35,4 @@ export async function insert(params: UserPayload): Promise<UserDetail> {
   logger.debug('Inserted user successfully:', JSON.stringify(user, null, 2));
 
   return object.camelize(user.serialize());
-}
-
-/**
- * Transform user detail.
- *
- * @param {UserDetail} user
- * @returns {UserDetail}
- */
-export function userTransform(user: UserDetail): UserDetail {
-  return {
-    name: user.name,
-    email: user.email,
-    updatedAt: new Date(user.updatedAt).toLocaleString(),
-    createdAt: new Date(user.updatedAt).toLocaleString()
-  };
 }
