@@ -43,8 +43,8 @@ describe('Users API test', () => {
     const userResponse = {
       ...userBody,
       id: expect.any(Number),
-      created_at: expect.any(String),
-      updated_at: expect.any(String)
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String)
     };
 
     return request(app)

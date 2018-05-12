@@ -1,8 +1,9 @@
 import User from '../models/User';
+import logger from '../utils/logger';
+import * as object from '../utils/object';
 import transform from '../utils/transform';
 import UserDetail from '../domain/entities/UserDetail';
 import UserPayload from '../domain/requests/UserPayload';
-import logger from '../utils/logger';
 
 /**
  * Fetch all users from users table.
@@ -28,7 +29,7 @@ export async function insert(params: UserPayload): Promise<UserDetail> {
   const user = await new User(params).save();
   logger.debug('Inserted user successfully:', JSON.stringify(user, null, 2));
 
-  return user.serialize();
+  return object.camelize(user.serialize());
 }
 
 /**
