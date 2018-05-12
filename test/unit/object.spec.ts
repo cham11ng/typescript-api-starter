@@ -124,16 +124,16 @@ describe('Utils: camelize()', () => {
   });
 
   test('should return same value if parameter is number', () => {
-    const expected = 10;
-    const result = camelize(10);
+    const value = 10;
+    const result = camelize(value);
 
-    expect(result).toEqual(expected);
+    expect(result).toEqual(value);
   });
 
   test('should return same value if parameter is string', () => {
-    const expected = 'helloStarterAPI';
-    const result = camelize('hello_starter_API');
+    const text = 'hello starter API';
+    const result = camelize(text);
 
-    expect(result).toEqual(expected);
+    expect(result).toEqual(text);
   });
 });

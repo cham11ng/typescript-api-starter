@@ -34,5 +34,5 @@ export function camelize(data: any): any {
     }, {});
   }
 
-  return camelcase(data);
+  return data;
 }
