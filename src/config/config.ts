@@ -20,6 +20,7 @@ export default {
     maxRows: 20
   },
   auth: {
+    saltRounds: process.env.SALT_ROUNDS || 11,
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '10m',
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
     accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
