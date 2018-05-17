@@ -16,7 +16,10 @@ export function up(knex: Knex) {
       .notNullable()
       .references('id')
       .inTable(Table.USERS);
-    table.boolean('is_active').notNullable();
+    table
+      .boolean('is_active')
+      .notNullable()
+      .defaultTo(true);
 
     table.timestamps(true, true);
   });
