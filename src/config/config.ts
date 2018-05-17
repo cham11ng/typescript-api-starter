@@ -19,6 +19,12 @@ export default {
     page: 1,
     maxRows: 20
   },
+  auth: {
+    accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '10m',
+    refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
+    accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
+    refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
+  },
   logging: {
     dir: process.env.LOGGING_DIR || 'logs',
     level: process.env.LOGGING_LEVEL || 'debug',
