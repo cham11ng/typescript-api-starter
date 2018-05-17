@@ -1,5 +1,5 @@
 /**
- * JWTPayload interface.
+ * JWTPayload Interface.
  */
 interface JWTPayload {
   name: string;

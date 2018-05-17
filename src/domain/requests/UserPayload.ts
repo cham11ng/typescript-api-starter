@@ -1,5 +1,5 @@
 /**
- *  User Payload Interface.
+ *  UserPayload Interface.
  */
 interface UserPayload {
   name: string;
