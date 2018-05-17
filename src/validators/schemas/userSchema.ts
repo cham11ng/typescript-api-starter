@@ -12,5 +12,10 @@ export const userSchema = Joi.object()
       .min(10)
       .max(100)
       .label('Email')
+      .required(),
+    password: Joi.string()
+      .min(6)
+      .max(100)
+      .label('Password')
       .required()
   });
