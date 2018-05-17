@@ -2,14 +2,19 @@ import { Router } from 'express';
 
 import * as homeController from './controllers/home';
 import * as userController from './controllers/user';
-import * as routes from './resources/constants/endpoints';
+import * as authController from './controllers/auth';
 import { validateUserRequest } from './validators/userValidator';
+import { validateLoginRequest } from './validators/loginValidator';
 
 const router: Router = Router();
 
-router.get(routes.home, homeController.index);
+router.get('/', homeController.index);
 
-router.get(routes.users, userController.index);
-router.post(routes.users, validateUserRequest, userController.store);
+router.post('/login', validateLoginRequest, authController.login);
+router.post('/refresh', authController.refresh);
+router.post('/logout', authController.logout);
+
+router.get('/users', userController.index);
+router.post('/users', validateUserRequest, userController.store);
 
 export default router;
