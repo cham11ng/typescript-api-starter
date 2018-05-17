@@ -1,5 +1,5 @@
 /**
- * User Detail Interface.
+ * UserDetail Interface.
  */
 interface UserDetail {
   id?: number;

@@ -1,7 +1,7 @@
 import JWTPayload from './JWTPayload';
 
 /**
- * LoggedInUser interface.
+ * LoggedInUser Interface.
  */
 interface LoggedInUser extends JWTPayload {
   sessionId: number;
