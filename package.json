@@ -58,7 +58,6 @@
     "body-parser": "^1.18.2",
     "bookshelf": "^0.13.3",
     "bookshelf-camelcase": "^2.0.1",
-    "boom": "^7.1.1",
     "chalk": "^2.3.0",
     "cors": "^2.8.4",
     "dotenv": "^5.0.0",
@@ -76,7 +75,6 @@
   "devDependencies": {
     "@types/bcrypt": "^2.0.0",
     "@types/bookshelf": "^0.9.7",
-    "@types/boom": "^7.1.1",
     "@types/cors": "^2.8.3",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.11.1",
