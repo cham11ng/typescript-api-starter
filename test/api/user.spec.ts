@@ -33,7 +33,8 @@ describe('Users API test', () => {
   test('should successfully insert user detail into database and return inserted user detail.', () => {
     const userBody = {
       name: faker.name.findName(),
-      email: faker.internet.email()
+      email: faker.internet.email(),
+      password: faker.internet.password()
     };
     const expectedResponse = {
       code: HttpStatus.OK,
@@ -43,6 +44,8 @@ describe('Users API test', () => {
     const userResponse = {
       ...userBody,
       id: expect.any(Number),
+      roleId: expect.any(Number),
+      password: expect.any(String),
       createdAt: expect.any(String),
       updatedAt: expect.any(String)
     };
