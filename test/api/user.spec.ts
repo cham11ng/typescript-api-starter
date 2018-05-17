@@ -3,7 +3,7 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
-import { getRandomElement } from '../../src/utils/common';
+import { getRandomElement } from '../../src/utils/array';
 
 describe('Users API test', () => {
   test('should return users list.', () => {
@@ -20,7 +20,7 @@ describe('Users API test', () => {
     };
 
     return request(app)
-      .get('/api/users')
+      .get('/users')
       .then(res => {
         const userInfo = getRandomElement(res.body.data);
 
@@ -43,12 +43,12 @@ describe('Users API test', () => {
     const userResponse = {
       ...userBody,
       id: expect.any(Number),
-      created_at: expect.any(String),
-      updated_at: expect.any(String)
+      createdAt: expect.any(String),
+      updatedAt: expect.any(String)
     };
 
     return request(app)
-      .post('/api/users')
+      .post('/users')
       .send(userBody)
       .then(res => {
         expect(res.status).toBe(HttpStatus.OK);
@@ -69,7 +69,7 @@ describe('Users API test', () => {
     };
 
     return request(app)
-      .post('/api/users')
+      .post('/users')
       .then(res => {
         const errorResponse = getRandomElement(res.body.data);
 

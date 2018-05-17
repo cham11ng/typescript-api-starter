@@ -1,13 +1,11 @@
-import faker from 'faker';
-
 /**
- * Get a random element from given array.
+ * Check the given parameter is string or not.
  *
- * @param {any[]} list
- * @returns {any}
+ * @param {any} text
+ * @returns {boolean}
  */
-export function getRandomElement(list: any[]): any {
-  return faker.random.arrayElement<any>(list);
+export function isString(text: any): boolean {
+  return typeof text === 'string';
 }
 
 /**
@@ -29,7 +27,11 @@ export function capitalize(word: string): string {
  * @returns string
  */
 export function camelcase(text: string, separator: string = '_'): string {
+  if (!isString(text)) {
+    return text;
+  }
+
   const words = text.split(separator);
 
-  return [words[0], ...words.slice(1).map(word => capitalize(word))].join('');
+  return [words[0], ...words.slice(1).map(word => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)].join('');
 }

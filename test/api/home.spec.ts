@@ -11,7 +11,7 @@ describe('API Information', () => {
 
   test('should return application information', () => {
     return request(app)
-      .get('/api')
+      .get('/')
       .then(res => {
         expect(res.status).toBe(HttpStatus.OK);
         expect(res.body).toEqual(expectedResponse);

@@ -1,10 +1,10 @@
 import bookshelf from '../config/bookshelf';
 
-import Tables from '../resources/enums/Tables';
+import Table from '../resources/enums/Table';
 
 class User extends bookshelf.Model<User> {
   get tableName(): string {
-    return Tables.users;
+    return Table.USERS;
   }
 
   get hasTimestamps(): boolean {

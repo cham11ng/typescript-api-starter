@@ -1,16 +1,4 @@
-import * as HttpStatus from 'http-status-codes';
-
-import { camelcase, capitalize, getRandomElement } from '../../src/utils/common';
-
-describe('Utils: getRandomElement()', () => {
-  const common = [12, 14, 16, 19, 10];
-
-  test('should get random element from given array', () => {
-    const element = getRandomElement(common);
-
-    expect(common.includes(element)).toEqual(true);
-  });
-});
+import { camelcase, capitalize } from '../../src/utils/string';
 
 describe('Utils: capitalize()', () => {
   const word = 'hello';
@@ -30,7 +18,7 @@ describe('Utils: capitalize()', () => {
 });
 
 describe('Utils: camelcase()', () => {
-  const camelcaseText = 'helloStarterApi';
+  const camelcaseText = 'helloStarterAPI';
 
   test('should camelcase the given text', () => {
     const text = 'hello_starter_API';
