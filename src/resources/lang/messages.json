@@ -2,7 +2,7 @@
   "auth": {
     "loginSuccess": "Login successful.",
     "logoutSuccess": "Logout successful.",
-    "invalidCredentials": "Invalid credentials.",
+    "invalidCredentials": "Invalid Credentials",
     "accessTokenRefreshed": "Access token refreshed successfully."
   },
   "users": {
