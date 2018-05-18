@@ -3,9 +3,11 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
+import Role from '../../src/resources/enums/Role';
 import { getRandomElement } from '../../src/utils/array';
+import * as userService from '../../src/services/userService';
 
-describe('Users API test', () => {
+describe('GET /users API test', () => {
   test('should return users list.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,
@@ -29,6 +31,25 @@ describe('Users API test', () => {
         expect(userInfo).toEqual(userResponse);
       });
   });
+});
+
+describe('POST /users API test', () => {
+  let authorization: string;
+  const user = {
+    roleId: Role.NORMAL_USER,
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    password: faker.internet.password()
+  };
+  const { email, password } = user;
+
+  beforeAll(async () => {
+    await userService.insert(user);
+    const response = await request(app)
+      .post('/login')
+      .send({ email, password });
+    authorization = `Bearer ${response.body.data.accessToken}`;
+  });
 
   test('should successfully insert user detail into database and return inserted user detail.', () => {
     const userBody = {
@@ -51,6 +72,7 @@ describe('Users API test', () => {
 
     return request(app)
       .post('/users')
+      .set('Authorization', authorization)
       .send(userBody)
       .then(res => {
         expect(res.status).toBe(HttpStatus.OK);
@@ -71,12 +93,21 @@ describe('Users API test', () => {
 
     return request(app)
       .post('/users')
+      .set('Authorization', authorization)
       .then(res => {
         const errorResponse = getRandomElement(res.body.data);
 
         expect(res.status).toBe(HttpStatus.BAD_REQUEST);
         expect(res.body).toEqual(expectedResponse);
         expect(errorResponse).toEqual(badRequestResponse);
+      });
+  });
+
+  test('should fail request without authorization token.', () => {
+    return request(app)
+      .post('/users')
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.BAD_REQUEST);
       });
   });
 });
