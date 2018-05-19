@@ -8,6 +8,17 @@ import { getRandomElement } from '../../src/utils/array';
 import * as userService from '../../src/services/userService';
 
 describe('GET /users API test', () => {
+  const user = {
+    roleId: Role.NORMAL_USER,
+    name: faker.name.findName(),
+    email: 'first-user@starter.com',
+    password: faker.internet.password()
+  };
+
+  beforeAll(async () => {
+    await userService.insert(user);
+  });
+
   test('should return users list.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,
@@ -38,7 +49,7 @@ describe('POST /users API test', () => {
   const user = {
     roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
-    email: faker.internet.email(),
+    email: 'login-user@starter.com',
     password: faker.internet.password()
   };
   const { email, password } = user;
@@ -54,7 +65,7 @@ describe('POST /users API test', () => {
   test('should successfully insert user detail into database and return inserted user detail.', () => {
     const userBody = {
       name: faker.name.findName(),
-      email: faker.internet.email(),
+      email: 'dummy-user@starter.com',
       password: faker.internet.password()
     };
     const expectedResponse = {
@@ -72,7 +83,7 @@ describe('POST /users API test', () => {
 
     return request(app)
       .post('/users')
-      .set('Authorization', authorization)
+      .set({ authorization })
       .send(userBody)
       .then(res => {
         expect(res.status).toBe(HttpStatus.OK);
@@ -93,7 +104,7 @@ describe('POST /users API test', () => {
 
     return request(app)
       .post('/users')
-      .set('Authorization', authorization)
+      .set({ authorization })
       .then(res => {
         const errorResponse = getRandomElement(res.body.data);
 
