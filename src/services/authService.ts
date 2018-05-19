@@ -15,7 +15,6 @@ const { errors, messages } = config;
 /**
  * Create user session for valid user login.
  *
- * @export
  * @param {LoginPayload} loginPayload
  * @returns {object}
  */
@@ -48,7 +47,6 @@ export async function login(loginPayload: LoginPayload) {
 /**
  * Refresh new access token.
  *
- * @export
  * @param {string} token
  * @param {jwtPayload} jwtPayload
  * @returns {string}

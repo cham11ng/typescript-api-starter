@@ -10,7 +10,6 @@ const { messages } = config;
 /**
  * Handle /login request.
  *
- * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
@@ -32,7 +31,6 @@ export async function login(req: Request, res: Response, next: NextFunction) {
 /**
  * Handle /refresh request.
  *
- * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
@@ -56,7 +54,6 @@ export async function refresh(req: Request, res: Response, next: NextFunction) {
 /**
  * Handle /logout request.
  *
- * @export
  * @param {Request} req
  * @param {Response} res
  * @param {NextFunction} next
