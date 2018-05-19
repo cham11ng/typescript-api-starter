@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const userSchema = Joi.object()
+export const userPOSTSchema = Joi.object()
   .options({ abortEarly: false })
   .keys({
     name: Joi.string()
