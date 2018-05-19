@@ -141,3 +141,55 @@ describe('Logout API test', () => {
       });
   });
 });
+
+describe('Refresh token API test', () => {
+  let authorization: string;
+  const user = {
+    roleId: Role.NORMAL_USER,
+    name: faker.name.findName(),
+    email: 'refresh-test@starter.com',
+    password: faker.internet.password()
+  };
+  const { email, password } = user;
+
+  beforeAll(async () => {
+    await userService.insert(user);
+    const response = await request(app)
+      .post('/login')
+      .send({ email, password });
+    authorization = `Bearer ${response.body.data.refreshToken}`;
+  });
+
+  test('should refresh token successfully with valid authorization token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.OK,
+      message: expect.any(String),
+      data: {
+        accessToken: expect.any(String)
+      }
+    };
+
+    return request(app)
+      .post('/refresh')
+      .set({ authorization })
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.body).toEqual(expectedResponse);
+      });
+  });
+
+  test('should fail refresh with invalid authorization token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.UNAUTHORIZED,
+      message: expect.any(String)
+    };
+
+    return request(app)
+      .post('/refresh')
+      .set({ authorization: faker.random.alphaNumeric() })
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
+        expect(res.body).toEqual(expectedResponse);
+      });
+  });
+});
