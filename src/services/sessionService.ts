@@ -2,11 +2,12 @@ import logger from '../utils/logger';
 import config from '../config/config';
 import * as object from '../utils/object';
 import UserSession from '../models/UserSession';
+import ErrorType from '../resources/enums/ErrorType';
 import ForbiddenError from '../exceptions/ForbiddenError';
 import UserSessionDetail from '../domain/entities/UserSessionDetail';
 import UserSessionPayload from '../domain/requests/UserSessionPayload';
 
-const { messages } = config;
+const { errors } = config;
 
 /**
  * Insert user from given user payload.
@@ -29,14 +30,21 @@ export async function create(params: UserSessionPayload): Promise<UserSessionDet
  * @returns {Promise<UserSessionDetail>}
  */
 export async function remove(token: string): Promise<UserSessionDetail> {
-  logger.debug('User Session: Deactivating token - ', token);
-  const session = await new UserSession().where({ token }).save({ isActive: false }, { patch: true, require: false });
+  try {
+    logger.debug('User Session: Deactivating token - ', token);
 
-  if (session) {
-    logger.debug('User Session: Deactivated user session', JSON.stringify(session, null, 2));
+    const session = await new UserSession()
+      .where({ token, is_active: true })
+      .save({ isActive: false }, { patch: true });
+
+    logger.debug('User Session: Deactivated session', JSON.stringify(session, null, 2));
 
     return object.camelize(session.serialize());
-  }
+  } catch (err) {
+    if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
+      throw new ForbiddenError(errors.sessionNotMaintained);
+    }
 
-  throw new ForbiddenError(messages.auth.logoutFailed);
+    throw err;
+  }
 }
