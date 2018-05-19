@@ -1,4 +1,4 @@
-import * as jwbt from 'jsonwebtoken';
+import jwbt from 'jsonwebtoken';
 
 import logger from './logger';
 import config from '../config/config';
