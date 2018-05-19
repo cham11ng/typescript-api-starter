@@ -20,7 +20,7 @@ describe('Login API test', () => {
     await userService.insert(user);
   });
 
-  test('should successfully logged in with valid credentials.', () => {
+  test('should login successfully with valid credentials.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,
       message: expect.any(String),
@@ -74,6 +74,70 @@ describe('Login API test', () => {
         expect(res.status).toBe(HttpStatus.BAD_REQUEST);
         expect(res.body).toEqual(expectedResponse);
         expect(errorResponse).toEqual(badRequestResponse);
+      });
+  });
+});
+
+describe('Logout API test', () => {
+  let authorization: string;
+  const user = {
+    roleId: Role.NORMAL_USER,
+    name: faker.name.findName(),
+    email: 'logout-test@starter.com',
+    password: faker.internet.password()
+  };
+  const { email, password } = user;
+
+  beforeAll(async () => {
+    await userService.insert(user);
+    const response = await request(app)
+      .post('/login')
+      .send({ email, password });
+    authorization = `Bearer ${response.body.data.refreshToken}`;
+  });
+
+  test('should logout successfully with valid authorization token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.OK,
+      message: expect.any(String)
+    };
+
+    return request(app)
+      .post('/logout')
+      .set({ authorization })
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.body).toEqual(expectedResponse);
+      });
+  });
+
+  test('should fail logout with same authorization token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.FORBIDDEN,
+      message: expect.any(String)
+    };
+
+    return request(app)
+      .post('/logout')
+      .set({ authorization })
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.FORBIDDEN);
+        expect(res.body).toEqual(expectedResponse);
+      });
+  });
+
+  test('should fail logout with invalid authorization token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.UNAUTHORIZED,
+      message: expect.any(String)
+    };
+
+    return request(app)
+      .post('/logout')
+      .set({ authorization: faker.random.alphaNumeric() })
+      .then(res => {
+        expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
+        expect(res.body).toEqual(expectedResponse);
       });
   });
 });
