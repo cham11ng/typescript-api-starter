@@ -16,7 +16,7 @@ import APIResponseInterface from '../domain/responses/APIResponse';
 export default function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
   const error = buildError(err);
 
-  logger.error('Error message: ', err.message);
+  logger.error('Error: ', JSON.stringify({ name: err.name, message: err.message }, null, 2));
   logger.error('Error stack trace: ', err.stack);
 
   res.status(error.code).json(error);
