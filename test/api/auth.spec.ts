@@ -11,7 +11,7 @@ describe('Login API test', () => {
   const user = {
     roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
-    email: faker.internet.email(),
+    email: 'login-test@starter.com',
     password: faker.internet.password()
   };
   const { email, password } = user;
