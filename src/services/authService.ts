@@ -26,7 +26,9 @@ export async function login(loginPayload: LoginPayload) {
 
   if (user) {
     logger.debug(`Login: Comparing request password - ${password} and hashed password - ${user.attributes.password}`);
+
     const isSame = await bcrypt.compare(password, user.attributes.password);
+
     logger.debug('Login: Password match status -', isSame);
 
     if (isSame) {
@@ -53,7 +55,9 @@ export async function login(loginPayload: LoginPayload) {
  */
 export async function refresh(token: string, jwtPayload: JWTPayload) {
   logger.debug('User Session: Fetching session of token -', token);
+
   const session = await new UserSession({ token, isActive: true }).fetch();
+
   logger.debug('User Session: fetched session -', JSON.stringify(session, null, 2));
 
   if (!session) {
