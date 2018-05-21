@@ -28,6 +28,7 @@
     "make:seeder": "knex seed:make",
     "make:migration": "knex migrate:make",
     "build": "run-s clean lint:fix transpile",
+    "send:mail": "ts-node scripts/mail-test",
     "load:fake": "NODE_ENV=test ts-node scripts/fake-loader",
     "test": "jest --config jest.json",
     "lint": "tslint src/**/*.{ts,js} test/**/*.{ts,js}",
@@ -69,6 +70,7 @@
     "knex": "0.14",
     "morgan": "^1.9.0",
     "nodemailer": "^4.6.4",
+    "nodemailer-markdown": "^1.0.2",
     "pg": "^7.4.1",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^3.1.3"
