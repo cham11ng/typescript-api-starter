@@ -1,8 +1,11 @@
 /**
- * MailOptios Interface.
+ * MailOptions Interface.
  */
 interface MailOptions {
-  from?: string;
+  from?: {
+    name: string;
+    address: string;
+  };
   to: string;
   html?: string;
   text?: string;

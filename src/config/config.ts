@@ -14,6 +14,8 @@ export default {
   name: app.name,
   version: app.version,
   host: process.env.APP_HOST || '127.0.0.1',
+  environment: process.env.NODE_ENV || 'development',
+  appUrl: process.env.APP_URL || 'http://localhost:8888',
   port: (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '8000',
   pagination: {
     page: 1,
@@ -23,6 +25,7 @@ export default {
     saltRounds: process.env.SALT_ROUNDS || 11,
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '10m',
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
+    emailVerificationDuration: process.env.EMAIL_VERIFICATION_DURATION || 24,
     accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
     refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
   },
@@ -32,19 +35,5 @@ export default {
     maxSize: process.env.LOGGING_MAX_SIZE || '20m',
     maxFiles: process.env.LOGGING_MAX_FILES || '7d',
     datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD'
-  },
-  mail: {
-    smtp: {
-      port: process.env.MAIL_PORT || 2525,
-      host: process.env.MAIL_HOST || 'smtp.mailtrap.io',
-      auth: {
-        user: process.env.MAIL_SMTP_USERNAME || 'MAILTRAP_SMTP_USERNAME',
-        pass: process.env.MAIL_SMTP_PASSWORD || 'MAILTRAP_SMTP_PASSWORD'
-      }
-    },
-    from: {
-      address: 'test@starter.com',
-      name: 'Typescript API Starter'
-    }
   }
 };
