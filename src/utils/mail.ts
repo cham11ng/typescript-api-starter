@@ -2,17 +2,16 @@ import nodemailer from 'nodemailer';
 import { markdown } from 'nodemailer-markdown';
 
 import logger from './logger';
-import config from '../config/config';
+import mail from '../config/mail';
 import MailOptions from '../domain/misc/MailOptions';
 
-const { smtp, from } = config.mail;
+const { smtp, from } = mail;
 
 const transporter: any = nodemailer.createTransport(smtp as any);
-
 transporter.use('compile', markdown());
 
 /**
- * Send email using nodemailer trasporter.
+ * Send email using nodemailer transporter.
  *
  * @param {MailOptions} mailOptions
  */
