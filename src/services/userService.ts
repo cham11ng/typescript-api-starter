@@ -22,6 +22,7 @@ export async function fetchAll(): Promise<UserDetail[]> {
   return transform(users.serialize(), (user: UserDetail) => ({
     name: user.name,
     email: user.email,
+    roleId: user.roleId,
     updatedAt: new Date(user.updatedAt).toLocaleString(),
     createdAt: new Date(user.updatedAt).toLocaleString()
   }));
