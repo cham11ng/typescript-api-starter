@@ -23,6 +23,7 @@
     "baseUrl": "./",
     "esModuleInterop": true,
     "preserveSymlinks": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "types": ["node", "express"],
     "allowSyntheticDefaultImports": true,
