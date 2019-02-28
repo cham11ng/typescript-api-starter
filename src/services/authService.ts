@@ -10,7 +10,7 @@ import LoginPayload from '../domain/requests/LoginPayload';
 import * as sessionService from '../services/sessionService';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 
-const { errors, messages } = config;
+const { errors } = config;
 
 /**
  * Create user session for valid user login.
@@ -81,6 +81,6 @@ export async function logout(token: string) {
   const session = await sessionService.remove(token);
 
   if (!session) {
-    throw new ForbiddenError(messages.auth.invalidToken);
+    throw new ForbiddenError(errors.sessionNotMaintained);
   }
 }
