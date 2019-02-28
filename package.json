@@ -19,8 +19,6 @@
     "start": "backpack",
     "run": "node build/main.js",
     "clean": "rimraf build",
-    "prepush": "yarn build",
-    "precommit": "lint-staged",
     "transpile": "backpack build",
     "build": "run-s clean lint:fix transpile",
     "send:mail": "ts-node scripts/mail-test",
@@ -35,14 +33,18 @@
     "lint:fix": "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
     "prettify": "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js} test/**/*.{ts,js}"
   },
-  "lint-staged": {
-    "linters": {
-      "*.{ts, js}": [
-        "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
-        "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js} test/**/*.{ts,js}",
-        "git add"
-      ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn build"
     }
+  },
+  "lint-staged": {
+    "*.{ts, js}": [
+      "tslint --fix src/**/*.{ts,js} test/**/*.{ts,js}",
+      "prettier --single-quote --parser typescript --print-width 120 --write scripts/*.ts src/**/*.{ts,js} test/**/*.{ts,js}",
+      "git add"
+    ]
   },
   "private": true,
   "license": "MIT",
