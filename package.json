@@ -68,7 +68,7 @@
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.1",
     "knex": "0.14",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "nodemailer": "^4.6.4",
     "nodemailer-markdown": "^1.0.2",
     "pg": "^7.4.1",
