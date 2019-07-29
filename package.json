@@ -17,7 +17,6 @@
   },
   "scripts": {
     "start": "backpack",
-    "run": "node build/main.js",
     "clean": "rimraf build",
     "transpile": "backpack build",
     "build": "run-s clean lint:fix transpile",
