@@ -23,7 +23,7 @@
     "build": "run-s clean lint:fix transpile",
     "send:mail": "ts-node scripts/mail-test",
     "load:fake": "ts-node scripts/fake-loader",
-    "test": "jest --config jest.json",
+    "test": "jest --config jest.json --forceExit",
     "seed": "knex seed:run --knexfile=knexfile.ts",
     "migrate": "knex migrate:latest --knexfile=knexfile.ts",
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts",
