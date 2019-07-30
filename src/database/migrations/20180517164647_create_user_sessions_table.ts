@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 import Table from '../../resources/enums/Table';
 
-export function up(knex: Knex) {
+export function up(knex: Knex): Promise<any> {
   return knex.schema.createTable(Table.USER_SESSIONS, table => {
     table.increments('id').primary();
 

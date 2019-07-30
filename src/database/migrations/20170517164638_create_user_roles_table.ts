@@ -7,7 +7,7 @@ import Table from '../../resources/enums/Table';
  *
  * @param {Knex} knex
  */
-export function up(knex: Knex): any {
+export function up(knex: Knex): Promise<any> {
   return knex.schema
     .createTable(Table.USER_ROLES, table => {
       table.increments('id').primary();
