@@ -14,7 +14,7 @@ const { accessTokenDuration, accessTokenSecretKey, refreshTokenDuration, refresh
  * @returns {string}
  */
 export function generateAccessToken(data: LoggedInUser): string {
-  logger.debug('JWT: Generating access token - ', JSON.stringify({ data, expiresIn: accessTokenDuration }, null, 2));
+  logger.log('debug', 'JWT: Generating access token - ', { data, expiresIn: accessTokenDuration });
 
   return jwbt.sign(data, accessTokenSecretKey, { expiresIn: accessTokenDuration });
 }
@@ -26,7 +26,7 @@ export function generateAccessToken(data: LoggedInUser): string {
  * @returns {string}
  */
 export function generateRefreshToken(data: JWTPayload): string {
-  logger.debug('JWT: Generating refresh token -', JSON.stringify({ data, expiresIn: refreshTokenDuration }, null, 2));
+  logger.log('debug', 'JWT: Generating refresh token -', { data, expiresIn: refreshTokenDuration });
 
   return jwbt.sign(data, refreshTokenSecretKey, { expiresIn: refreshTokenDuration });
 }

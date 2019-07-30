@@ -21,13 +21,13 @@ export async function send(mailOptions: MailOptions) {
       mailOptions = { ...mailOptions, from };
     }
 
-    logger.debug('Mail: Sending email with options -', JSON.stringify(mailOptions, null, 2));
+    logger.log('debug', 'Mail: Sending email with options -', mailOptions);
 
     const info = await transporter.sendMail(mailOptions);
 
     return info;
   } catch (err) {
-    logger.error('Mail: Failed to send email -', err.message);
+    logger.log('error', 'Mail: Failed to send email -', err.message);
   }
 }
 
