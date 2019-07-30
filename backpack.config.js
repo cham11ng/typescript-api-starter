@@ -16,11 +16,6 @@ module.exports = {
         options: {
           transpileOnly: true
         }
-      },
-      {
-        test: /\.json$/,
-        exclude: /node_modules/,
-        loader: 'json-loader'
       }
     ];
 
