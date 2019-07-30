@@ -21,7 +21,7 @@
     "transpile": "backpack build",
     "build": "run-s clean lint:fix transpile",
     "send:mail": "ts-node scripts/mail-test",
-    "load:fake": "ts-node scripts/fake-loader",
+    "load:fake": "NODE_ENV=test ts-node scripts/fake-loader",
     "test": "jest",
     "seed": "knex seed:run --knexfile=knexfile.ts --verbose",
     "migrate": "knex migrate:latest --knexfile=knexfile.ts --verbose",
