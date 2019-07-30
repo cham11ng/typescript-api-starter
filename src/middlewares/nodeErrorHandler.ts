@@ -12,13 +12,13 @@ const { errors } = config;
 export default function nodeErrorHandler(err: NodeJS.ErrnoException): void {
   switch (err.code) {
     case 'EACCES':
-      logger.error(errors.portRequirePrivilege);
+      logger.log('error', errors.portRequirePrivilege);
       process.exit(1);
 
       break;
 
     case 'EADDRINUSE':
-      logger.error(errors.portInUse);
+      logger.log('error', errors.portInUse);
       process.exit(1);
 
       break;

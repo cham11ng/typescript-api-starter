@@ -13,11 +13,11 @@ import UserPayload from '../domain/requests/UserPayload';
  * @returns {Promise<UserDetail[]>}
  */
 export async function fetchAll(): Promise<UserDetail[]> {
-  logger.debug('Fetching users from database:');
+  logger.log('debug', 'Fetching users from database:');
 
   const users = await User.fetchAll();
 
-  logger.debug('Fetched all users successfully:', JSON.stringify(users, null, 2));
+  logger.log('debug', 'Fetched all users successfully:', users);
 
   return transform(users.serialize(), (user: UserDetail) => ({
     name: user.name,
@@ -35,12 +35,12 @@ export async function fetchAll(): Promise<UserDetail[]> {
  * @returns {Promise<UserDetail>}
  */
 export async function insert(params: UserPayload): Promise<UserDetail> {
-  logger.debug('Inserting user into database:', JSON.stringify(params, null, 2));
+  logger.log('debug', 'Inserting user into database:', params);
 
   const password = await bcrypt.hash(params.password);
   const user = await new User({ ...params, password, roleId: Role.NORMAL_USER }).save();
 
-  logger.debug('Inserted user successfully:', JSON.stringify(user, null, 2));
+  logger.log('debug', 'Inserted user successfully:', user);
 
   return object.camelize(user.serialize());
 }

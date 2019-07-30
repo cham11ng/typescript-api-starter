@@ -16,11 +16,11 @@ const { errors } = config;
  * @returns {Promise<UserSessionDetail>}
  */
 export async function create(params: UserSessionPayload): Promise<UserSessionDetail> {
-  logger.debug('User Session: Creating session - ', JSON.stringify(params, null, 2));
+  logger.log('debug', 'User Session: Creating session - ', params);
 
   const session = await new UserSession(params).save();
 
-  logger.debug('User Session: Session created successfully - ', JSON.stringify(session, null, 2));
+  logger.log('debug', 'User Session: Session created successfully - ', session);
 
   return object.camelize(session.serialize());
 }
@@ -33,13 +33,13 @@ export async function create(params: UserSessionPayload): Promise<UserSessionDet
  */
 export async function remove(token: string): Promise<UserSessionDetail> {
   try {
-    logger.debug('User Session: Deactivating token - ', token);
+    logger.log('debug', 'User Session: Deactivating token - ', token);
 
     const session = await new UserSession()
       .where({ token, is_active: true })
       .save({ isActive: false }, { patch: true });
 
-    logger.debug('User Session: Deactivated session', JSON.stringify(session, null, 2));
+    logger.log('debug', 'User Session: Deactivated session', session);
 
     return object.camelize(session.serialize());
   } catch (err) {

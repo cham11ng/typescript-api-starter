@@ -22,14 +22,17 @@ export async function login(loginPayload: LoginPayload) {
   const { email, password } = loginPayload;
 
   const user = await new User({ email }).fetch();
-  logger.debug('Login: Fetched user by email - ', user);
+  logger.log('debug', 'Login: Fetched user by email - ', user);
 
   if (user) {
-    logger.debug(`Login: Comparing request password - ${password} and hashed password - ${user.attributes.password}`);
+    logger.log(
+      'debug',
+      `Login: Comparing request password - ${password} and hashed password - ${user.attributes.password}`
+    );
 
     const isSame = await bcrypt.compare(password, user.attributes.password);
 
-    logger.debug('Login: Password match status -', isSame);
+    logger.log('debug', 'Login: Password match status %s', isSame);
 
     if (isSame) {
       const { name, roleId, id: userId } = user.attributes;
@@ -54,18 +57,18 @@ export async function login(loginPayload: LoginPayload) {
  * @returns {string}
  */
 export async function refresh(token: string, jwtPayload: JWTPayload) {
-  logger.debug('User Session: Fetching session of token -', token);
+  logger.log('debug', 'User Session: Fetching session of token -', token);
 
   const session = await new UserSession({ token, isActive: true }).fetch();
 
-  logger.debug('User Session: fetched session -', JSON.stringify(session, null, 2));
+  logger.log('debug', 'User Session: fetched session -', session);
 
   if (!session) {
     throw new ForbiddenError(errors.sessionNotMaintained);
   }
 
   const accessToken = jwt.generateAccessToken({ ...jwtPayload, sessionId: session.id });
-  logger.debug('JWT: New access token generated -', accessToken);
+  logger.log('debug', 'JWT: New access token generated -', accessToken);
 
   return {
     accessToken
