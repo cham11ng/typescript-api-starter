@@ -22,7 +22,7 @@ endef
 export PRINT_HELP_PYSCRIPT
 
 clean: ## Remove log file.
-	rm -rf logs/**.log logs/.audit.json build
+	rm -rf logs/**.log logs/**.json build
 
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
