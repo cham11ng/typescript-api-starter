@@ -20,6 +20,8 @@ describe('Login API test', () => {
     await userService.insert(user);
   });
 
+  afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
+
   test('should login successfully with valid credentials.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,

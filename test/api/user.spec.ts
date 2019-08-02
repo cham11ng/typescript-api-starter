@@ -19,6 +19,8 @@ describe('GET /users API test', () => {
     await userService.insert(user);
   });
 
+  afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
+
   test('should return users list.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,
