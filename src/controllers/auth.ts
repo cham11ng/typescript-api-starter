@@ -35,7 +35,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function refresh(req: Request, res: Response, next: NextFunction) {
+export async function refresh(_: Request, res: Response, next: NextFunction) {
   try {
     const token = String(res.locals.refreshToken);
     const jwtPayload = res.locals.jwtPayload as JWTPayload;
@@ -58,7 +58,7 @@ export async function refresh(req: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function logout(req: Request, res: Response, next: NextFunction) {
+export async function logout(_: Request, res: Response, next: NextFunction) {
   try {
     const token = String(res.locals.refreshToken);
     await authService.logout(token);

@@ -13,7 +13,7 @@ import APIResponseInterface from '../domain/responses/APIResponse';
  * @param  {NextFunction} next
  * @returns void
  */
-export default function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
+export default function genericErrorHandler(err: any, _: Request, res: Response, __: NextFunction): void {
   const error = buildError(err);
 
   logger.log('error', 'Error: ', { name: err.name, message: err.message });

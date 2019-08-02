@@ -9,7 +9,7 @@ import validate from '../utils/validate';
  * @param {Joi.Schema} params
  */
 export function schema(params: Joi.Schema) {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, _: Response, next: NextFunction) => {
     try {
       await validate(req.body, params);
 
