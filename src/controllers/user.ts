@@ -14,7 +14,7 @@ const { messages } = config;
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function index(req: Request, res: Response, next: NextFunction) {
+export async function index(_: Request, res: Response, next: NextFunction) {
   try {
     const response = await userService.fetchAll();
 
