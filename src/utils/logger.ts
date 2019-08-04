@@ -7,22 +7,14 @@ import app from '../config/config';
 const { environment, logging } = app;
 const { combine, colorize, splat, printf, timestamp } = format;
 
+const keysToFilter = ['password', 'token'];
+
 const formatter = printf((info: any) => {
   const { level, message, timestamp: ts, ...restMeta } = info;
 
   const meta =
     restMeta && Object.keys(restMeta).length
-      ? JSON.stringify(
-          restMeta,
-          (key: any, value: any) => {
-            if (key === 'password') {
-              return '****';
-            }
-
-            return value;
-          },
-          2
-        )
+      ? JSON.stringify(restMeta, (key: any, value: any) => (keysToFilter.includes(key) ? '******' : value), 2)
       : restMeta instanceof Object
       ? ''
       : restMeta;
