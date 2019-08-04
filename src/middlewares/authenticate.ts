@@ -29,18 +29,20 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
       throw new BadRequestError(errors.noToken);
     }
 
-    logger.log('debug', 'JWT: Verifying token - ', req.headers.authorization, res.locals.accessToken);
+    logger.log('info', 'JWT: Verifying token - %s', res.locals.accessToken);
     const response: any = jwt.verifyAccessToken(res.locals.accessToken);
-    res.locals.loggedInPayload = response.encryptedData;
-    logger.log('debug', 'JWT: Authentication verified - ', res.locals.loggedInPayload);
+
+    res.locals.loggedInPayload = response.data;
+
+    logger.log('debug', 'JWT: Authentication verified -', res.locals.loggedInPayload);
 
     next();
   } catch (err) {
     const tokenErrorMessage = tokenErrorMessageMap[err.name];
-    logger.log('error', 'JWT: Authentication failed -', err.message);
+    logger.log('error', 'JWT: Authentication failed - %s', err.message);
 
     if (tokenErrorMessage) {
-      logger.log('error', 'JWT: Token error -', tokenErrorMessage);
+      logger.log('error', 'JWT: Token error - %s', tokenErrorMessage);
 
       next(new UnauthorizedError(tokenErrorMessage));
     } else {
