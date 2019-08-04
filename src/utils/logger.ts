@@ -5,13 +5,29 @@ import { createLogger, format, transports } from 'winston';
 import app from '../config/config';
 
 const { environment, logging } = app;
-const { combine, colorize, align, splat, simple, printf, timestamp } = format;
-// const { level, maxSize, maxFiles, datePattern, dir: logDir } = app.logging;
+const { combine, colorize, splat, printf, timestamp } = format;
 
 const formatter = printf((info: any) => {
-  const { level, message, timestamp: ts, ...meta } = info;
+  const { level, message, timestamp: ts, ...restMeta } = info;
 
-  return `[${ts}] - [${level}] ${message} ${JSON.stringify(meta, null, 2) || ''}`;
+  const meta =
+    restMeta && Object.keys(restMeta).length
+      ? JSON.stringify(
+          restMeta,
+          (key: any, value: any) => {
+            if (key === 'password') {
+              return '****';
+            }
+
+            return value;
+          },
+          2
+        )
+      : restMeta instanceof Object
+      ? ''
+      : restMeta;
+
+  return `[ ${ts} ] - [ ${level} ] ${message} ${meta}`;
 });
 
 if (!fs.existsSync(logging.dir)) {
@@ -26,7 +42,7 @@ if (environment === 'development') {
 
 const logger = createLogger({
   level: logging.level,
-  format: combine(splat(), simple(), colorize(), timestamp(), align(), formatter),
+  format: combine(splat(), colorize(), timestamp(), formatter),
   transports: [
     ...trans,
     new DailyRotateFile({
