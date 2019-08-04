@@ -8,15 +8,22 @@ import { getRandomElement } from '../../src/utils/array';
 import * as userService from '../../src/services/userService';
 
 describe('GET /users API test', () => {
+  let authorization: string;
   const user = {
     roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
     email: 'first-user@starter.com',
     password: faker.internet.password()
   };
+  const { email, password } = user;
 
   beforeAll(async () => {
     await userService.insert(user);
+
+    const response = await request(app)
+      .post('/login')
+      .send({ email, password });
+    authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
   afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
@@ -37,6 +44,7 @@ describe('GET /users API test', () => {
 
     return request(app)
       .get('/users')
+      .set({ authorization })
       .then(res => {
         const userInfo = getRandomElement(res.body.data);
 
