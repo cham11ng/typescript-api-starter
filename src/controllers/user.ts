@@ -8,7 +8,7 @@ import UserPayload from '../domain/requests/UserPayload';
 const { messages } = config;
 
 /**
- * Controller to handle /users GET request.
+ * Handle /users GET request.
  *
  * @param {Request} req
  * @param {Response} res
@@ -29,7 +29,7 @@ export async function index(_: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * Controller to handle /users POST request.
+ * Handle /users POST request.
  *
  * @param {Request} req
  * @param {Response} res
