@@ -2,8 +2,7 @@ import { Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
 
 /**
- * Controller to handle / GET request, show API information
- *
+ * Handle / GET request, responds API information.
  *
  * @param {Request} req
  * @param {Response} res
