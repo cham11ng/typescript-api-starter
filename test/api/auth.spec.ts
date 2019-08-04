@@ -145,7 +145,9 @@ describe('Logout API test', () => {
 });
 
 describe('Refresh token API test', () => {
+  let accessToken: string;
   let authorization: string;
+
   const user = {
     roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
@@ -162,7 +164,7 @@ describe('Refresh token API test', () => {
     authorization = `Bearer ${response.body.data.refreshToken}`;
   });
 
-  test('should refresh token successfully with valid authorization token.', () => {
+  test('should refresh access token successfully with valid authorization token.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,
       message: expect.any(String),
@@ -175,8 +177,36 @@ describe('Refresh token API test', () => {
       .post('/refresh')
       .set({ authorization })
       .then(res => {
+        accessToken = res.body.data.accessToken;
+
         expect(res.status).toBe(HttpStatus.OK);
         expect(res.body).toEqual(expectedResponse);
+      });
+  });
+
+  test('should successfully access API with new access token.', () => {
+    const expectedResponse = {
+      code: HttpStatus.OK,
+      message: expect.any(String),
+      data: expect.any(Array)
+    };
+    const userResponse = {
+      name: expect.any(String),
+      email: expect.any(String),
+      roleId: expect.any(Number),
+      updatedAt: expect.any(String),
+      createdAt: expect.any(String)
+    };
+
+    return request(app)
+      .get('/users')
+      .set({ authorization: `Bearer ${accessToken}` })
+      .then(res => {
+        const userInfo = getRandomElement(res.body.data);
+
+        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.body).toEqual(expectedResponse);
+        expect(userInfo).toEqual(userResponse);
       });
   });
 
