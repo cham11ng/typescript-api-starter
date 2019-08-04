@@ -13,19 +13,20 @@ import UserPayload from '../domain/requests/UserPayload';
  * @returns {Promise<UserDetail[]>}
  */
 export async function fetchAll(): Promise<UserDetail[]> {
-  logger.log('debug', 'Fetching users from database:');
+  logger.log('info', 'Fetching users from database');
 
   const users = await User.fetchAll();
-
-  logger.log('debug', 'Fetched all users successfully:', users);
-
-  return transform(users.serialize(), (user: UserDetail) => ({
+  const res = transform(users.serialize(), (user: UserDetail) => ({
     name: user.name,
     email: user.email,
     roleId: user.roleId,
     updatedAt: new Date(user.updatedAt).toLocaleString(),
     createdAt: new Date(user.updatedAt).toLocaleString()
   }));
+
+  logger.log('debug', 'Fetched all users successfully:', res);
+
+  return res;
 }
 
 /**
@@ -35,12 +36,12 @@ export async function fetchAll(): Promise<UserDetail[]> {
  * @returns {Promise<UserDetail>}
  */
 export async function insert(params: UserPayload): Promise<UserDetail> {
-  logger.log('debug', 'Inserting user into database:', params);
+  logger.log('info', 'Inserting user into database:', params);
 
   const password = await bcrypt.hash(params.password);
-  const user = await new User({ ...params, password, roleId: Role.NORMAL_USER }).save();
+  const user = (await new User({ ...params, password, roleId: Role.NORMAL_USER }).save()).serialize();
 
   logger.log('debug', 'Inserted user successfully:', user);
 
-  return object.camelize(user.serialize());
+  return object.camelize(user);
 }

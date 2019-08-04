@@ -16,13 +16,13 @@ const { errors } = config;
  * @returns {Promise<UserSessionDetail>}
  */
 export async function create(params: UserSessionPayload): Promise<UserSessionDetail> {
-  logger.log('debug', 'User Session: Creating session - ', params);
+  logger.log('info', 'User Session: Creating session -', params);
 
-  const session = await new UserSession(params).save();
+  const session = (await new UserSession(params).save()).serialize();
 
-  logger.log('debug', 'User Session: Session created successfully - ', session);
+  logger.log('debug', 'User Session: Session created successfully -', session);
 
-  return object.camelize(session.serialize());
+  return object.camelize(session);
 }
 
 /**
@@ -33,15 +33,15 @@ export async function create(params: UserSessionPayload): Promise<UserSessionDet
  */
 export async function remove(token: string): Promise<UserSessionDetail> {
   try {
-    logger.log('debug', 'User Session: Deactivating token - ', token);
+    logger.log('info', 'User Session: Deactivating token - %s', token);
 
-    const session = await new UserSession()
+    const session = (await new UserSession()
       .where({ token, is_active: true })
-      .save({ isActive: false }, { patch: true });
+      .save({ isActive: false }, { patch: true })).serialize();
 
-    logger.log('debug', 'User Session: Deactivated session', session);
+    logger.log('debug', 'User Session: Deactivated session -', session);
 
-    return object.camelize(session.serialize());
+    return object.camelize(session);
   } catch (err) {
     if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
       throw new ForbiddenError(errors.sessionNotMaintained);
