@@ -22,17 +22,13 @@ export async function login(loginPayload: LoginPayload) {
   const { email, password } = loginPayload;
 
   const user = await new User({ email }).fetch();
-  logger.log('debug', 'Login: Fetched user by email - ', user);
-
   if (user) {
-    logger.log(
-      'debug',
-      `Login: Comparing request password - ${password} and hashed password - ${user.attributes.password}`
-    );
+    logger.log('debug', 'Login: Fetched user by email -', user.attributes);
+    logger.log('debug', 'Login: Comparing password');
 
     const isSame = await bcrypt.compare(password, user.attributes.password);
 
-    logger.log('debug', 'Login: Password match status %s', isSame);
+    logger.log('debug', 'Login: Password match status - %s', isSame);
 
     if (isSame) {
       const { name, roleId, id: userId } = user.attributes;
@@ -57,18 +53,18 @@ export async function login(loginPayload: LoginPayload) {
  * @returns {string}
  */
 export async function refresh(token: string, jwtPayload: JWTPayload) {
-  logger.log('debug', 'User Session: Fetching session of token -', token);
+  logger.log('info', 'User Session: Fetching session of token - %s', token);
 
   const session = await new UserSession({ token, isActive: true }).fetch();
-
-  logger.log('debug', 'User Session: fetched session -', session);
 
   if (!session) {
     throw new ForbiddenError(errors.sessionNotMaintained);
   }
 
+  logger.log('debug', 'User Session: Fetched session -', session.serialize());
+  logger.log('info', 'JWT: Generating new access token');
+
   const accessToken = jwt.generateAccessToken({ ...jwtPayload, sessionId: session.id });
-  logger.log('debug', 'JWT: New access token generated -', accessToken);
 
   return {
     accessToken
@@ -81,6 +77,8 @@ export async function refresh(token: string, jwtPayload: JWTPayload) {
  * @param {string} token
  */
 export async function logout(token: string) {
+  logger.log('info', 'Logout: Logging out user session - %s', token);
+
   const session = await sessionService.remove(token);
 
   if (!session) {

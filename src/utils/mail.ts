@@ -27,7 +27,7 @@ export async function send(mailOptions: MailOptions) {
 
     return info;
   } catch (err) {
-    logger.log('error', 'Mail: Failed to send email -', err.message);
+    logger.log('error', 'Mail: Failed to send email - %s', err.message);
   }
 }
 
