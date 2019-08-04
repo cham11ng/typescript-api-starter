@@ -29,18 +29,20 @@ async function validateRefreshToken(req: Request, res: Response, next: NextFunct
       throw new BadRequestError(errors.noToken);
     }
 
-    logger.log('debug', 'JWT: Verifying token - ', res.locals.refreshToken);
+    logger.log('info', 'JWT: Verifying token - %s', res.locals.refreshToken);
     const response: any = jwt.verifyRefreshToken(res.locals.refreshToken);
-    res.locals.jwtPayload = response.encryptedData;
-    logger.log('debug', 'JWT: Authentication verified - ', res.locals.jwtPayload);
+
+    res.locals.jwtPayload = response.data;
+
+    logger.log('debug', 'JWT: Authentication verified -', res.locals.jwtPayload);
 
     next();
   } catch (err) {
     const tokenErrorMessage = tokenErrorMessageMap[err.name];
-    logger.log('error', 'JWT: Authentication failed -', err.message);
+    logger.log('error', 'JWT: Authentication failed - %s', err.message);
 
     if (tokenErrorMessage) {
-      logger.log('error', 'JWT: Token error -', tokenErrorMessage);
+      logger.log('error', 'JWT: Token error - %s', tokenErrorMessage);
 
       next(new UnauthorizedError(tokenErrorMessage));
     } else {
