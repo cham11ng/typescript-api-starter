@@ -8,14 +8,17 @@
 Starter for Node.js Express API in Typescript.
 
 ## Requirements
-* [Node.js](https://yarnpkg.com/en/docs/install)
-* [Yarn](https://yarnpkg.com/en/docs/install)
-* [NPM](https://docs.npmjs.com/getting-started/installing-node)
-* [Docker](https://docs.docker.com/install/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
+
+- [Node.js](https://yarnpkg.com/en/docs/install)
+- [Yarn](https://yarnpkg.com/en/docs/install)
+- [NPM](https://docs.npmjs.com/getting-started/installing-node)
+- [Docker](https://docs.docker.com/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Getting Started
+
 Clone the repository, install the dependencies.
+
 ```bash
 $ git clone git@github.com:cham11ng/typescript-api-starter.git <application-name>
 
@@ -27,14 +30,17 @@ $ yarn migrate
 ```
 
 Load fake data in database.
+
 ```bash
 $ yarn load:fake <FactoryName> <Number>
 ```
+
 <p align="center">
   <a href="https://imgur.com/gallery/d2M09Qj"><img src="https://i.imgur.com/d2M09Qj.gif" /></a>
 </p>
 
 Start the application.
+
 ```bash
 $ yarn build
 
@@ -50,11 +56,13 @@ $ yarn start:dev # For development
 **Using Docker**
 
 Make a copy of `.env.docker` and save as `.env`.
+
 ```bash
 $ cp .env.docker .env
 ```
 
 Install dependencies and run the application locally.
+
 ```bash
 $ docker-compose up -d postgres
 
@@ -64,17 +72,21 @@ $ docker-compose exec api sh yarn migrate # Make sure server is started checking
 ```
 
 View logs of the container.
+
 ```bash
 $ docker-compose logs -f
 ```
 
 To stop the services.
+
 ```bash
 $ docker-compose stop api postgres
 ```
 
 ## Generating Migrations and Seeds
+
 To create migration use `make:migration` and seed use `make:seeder`:
+
 ```bash
 $ yarn make:migration create_{table_name}_table
 
@@ -82,6 +94,7 @@ $ yarn make:seeder {table_name}_table_seeder
 ```
 
 Example,
+
 ```bash
 $ yarn make:migration create_posts_table
 
@@ -89,11 +102,16 @@ $ yarn make:seeder post_table_seeder
 ```
 
 Modify migration and seeder file as per the requirement. Then finally:
+
 ```bash
 $ yarn migrate # to migrate
 
 $ yarn seed # to seed
 ```
+
+## Contributing
+
+Feel free to send pull requests.
 
 ## License
 
