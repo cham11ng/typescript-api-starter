@@ -22,7 +22,8 @@ export async function login(loginPayload: LoginPayload) {
   const { email, password } = loginPayload;
 
   logger.log('info', 'Checking email: %s', email);
-  const user = await new User({ email }).fetch({ require: false });
+  const user = await new User({ email }).fetch();
+
   if (user) {
     logger.log('debug', 'Login: Fetched user by email -', user.attributes);
     logger.log('debug', 'Login: Comparing password');
@@ -56,7 +57,7 @@ export async function login(loginPayload: LoginPayload) {
 export async function refresh(token: string, jwtPayload: JWTPayload) {
   logger.log('info', 'User Session: Fetching session of token - %s', token);
 
-  const session = await new UserSession({ token, isActive: true }).fetch({ require: false });
+  const session = await new UserSession({ token, isActive: true }).fetch();
 
   if (!session) {
     throw new ForbiddenError(errors.sessionNotMaintained);
