@@ -3,6 +3,7 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
+import { clearDb } from '../helper';
 import Role from '../../src/resources/enums/Role';
 import { getRandomElement } from '../../src/utils/array';
 import * as userService from '../../src/services/userService';
@@ -18,6 +19,8 @@ describe('GET /users API test', () => {
   const { email, password } = user;
 
   beforeAll(async () => {
+    await clearDb();
+
     await userService.insert(user);
 
     const response = await request(app)
