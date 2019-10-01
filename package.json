@@ -107,11 +107,11 @@
     "prettier": "^1.18.2",
     "rimraf": "^2.6.3",
     "supertest": "^4.0.2",
-    "ts-loader": "^6.0.4",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
+    "ts-loader": "^6.2.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-consistent-codestyle": "^1.15.1",
-    "typescript": "^3.5.3"
+    "tslint-consistent-codestyle": "^1.16.0",
+    "typescript": "^3.6.3"
   }
 }
