@@ -3,9 +3,8 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
-import { clearDb } from '../helper';
 import Role from '../../src/resources/enums/Role';
-import { getRandomElement } from '../../src/utils/array';
+import { clearDb, getRandomElement } from '../helper';
 import * as userService from '../../src/services/userService';
 
 describe('Login API test', () => {
