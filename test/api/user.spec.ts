@@ -3,15 +3,13 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
-import { clearDb } from '../helper';
 import Role from '../../src/resources/enums/Role';
-import { getRandomElement } from '../../src/utils/array';
+import { clearDb, getRandomElement } from '../helper';
 import * as userService from '../../src/services/userService';
 
 describe('GET /users API test', () => {
   let authorization: string;
   const user = {
-    roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
     email: 'first-user@starter.com',
     password: faker.internet.password()

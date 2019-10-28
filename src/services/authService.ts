@@ -21,7 +21,9 @@ const { errors } = config;
 export async function login(loginPayload: LoginPayload) {
   const { email, password } = loginPayload;
 
+  logger.log('info', 'Checking email: %s', email);
   const user = await new User({ email }).fetch();
+
   if (user) {
     logger.log('debug', 'Login: Fetched user by email -', user.attributes);
     logger.log('debug', 'Login: Comparing password');

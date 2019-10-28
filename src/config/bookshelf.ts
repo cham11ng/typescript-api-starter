@@ -1,8 +1,9 @@
-import knex from './knex';
 import Bookshelf from 'bookshelf';
+
+import knex from './knex';
 
 const bookshelf: Bookshelf = Bookshelf(knex);
 
-bookshelf.plugin(['virtuals', 'pagination', 'visibility', 'bookshelf-camelcase']);
+bookshelf.plugin('bookshelf-case-converter-plugin');
 
 export default bookshelf;
