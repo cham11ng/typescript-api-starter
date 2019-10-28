@@ -12,9 +12,8 @@ describe('Auth Workflow', () => {
   let accessToken: string;
 
   const user = {
-    roleId: Role.NORMAL_USER,
     name: faker.name.findName(),
-    email: 'login-test@starter.com',
+    email: faker.internet.email(),
     password: faker.internet.password()
   };
   const { email, password } = user;
@@ -92,53 +91,6 @@ describe('Auth Workflow', () => {
     });
   });
 
-  describe('Logout API test', () => {
-    test('should logout successfully with valid authorization token.', () => {
-      const expectedResponse = {
-        code: HttpStatus.OK,
-        message: expect.any(String)
-      };
-
-      return request(app)
-        .post('/logout')
-        .set({ authorization })
-        .then(res => {
-          expect(res.status).toBe(HttpStatus.OK);
-          expect(res.body).toEqual(expectedResponse);
-        });
-    });
-
-    test('should fail logout with same authorization token.', () => {
-      const expectedResponse = {
-        code: HttpStatus.FORBIDDEN,
-        message: expect.any(String)
-      };
-
-      return request(app)
-        .post('/logout')
-        .set({ authorization })
-        .then(res => {
-          expect(res.status).toBe(HttpStatus.FORBIDDEN);
-          expect(res.body).toEqual(expectedResponse);
-        });
-    });
-
-    test('should fail logout with invalid authorization token.', () => {
-      const expectedResponse = {
-        code: HttpStatus.UNAUTHORIZED,
-        message: expect.any(String)
-      };
-
-      return request(app)
-        .post('/logout')
-        .set({ authorization: faker.random.alphaNumeric() })
-        .then(res => {
-          expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
-          expect(res.body).toEqual(expectedResponse);
-        });
-    });
-  });
-
   describe('Refresh token API test', () => {
     test('should refresh access token successfully with valid authorization token.', () => {
       const expectedResponse = {
@@ -194,6 +146,53 @@ describe('Auth Workflow', () => {
 
       return request(app)
         .post('/refresh')
+        .set({ authorization: faker.random.alphaNumeric() })
+        .then(res => {
+          expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
+          expect(res.body).toEqual(expectedResponse);
+        });
+    });
+  });
+
+  describe('Logout API test', () => {
+    test('should logout successfully with valid authorization token.', () => {
+      const expectedResponse = {
+        code: HttpStatus.OK,
+        message: expect.any(String)
+      };
+
+      return request(app)
+        .post('/logout')
+        .set({ authorization })
+        .then(res => {
+          expect(res.status).toBe(HttpStatus.OK);
+          expect(res.body).toEqual(expectedResponse);
+        });
+    });
+
+    test('should fail logout with same authorization token.', () => {
+      const expectedResponse = {
+        code: HttpStatus.FORBIDDEN,
+        message: expect.any(String)
+      };
+
+      return request(app)
+        .post('/logout')
+        .set({ authorization })
+        .then(res => {
+          expect(res.status).toBe(HttpStatus.FORBIDDEN);
+          expect(res.body).toEqual(expectedResponse);
+        });
+    });
+
+    test('should fail logout with invalid authorization token.', () => {
+      const expectedResponse = {
+        code: HttpStatus.UNAUTHORIZED,
+        message: expect.any(String)
+      };
+
+      return request(app)
+        .post('/logout')
         .set({ authorization: faker.random.alphaNumeric() })
         .then(res => {
           expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
