@@ -1,0 +1,58 @@
+name: Starter CI
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+        platform: [ubuntu-latest]
+
+    runs-on: ${{ matrix.platform }}
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: app_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Building source code
+        run: yarn build
+
+      - name: Running tests
+        run: yarn test
+        env:
+          NODE_ENV: test
+          DB_CLIENT: pg
+          DB_PORT: 5432
+          DB_HOST: 0.0.0.0
+          DB_USER: postgres
+          DB_PASSWORD: secret
+          TEST_DB_NAME: app_test
