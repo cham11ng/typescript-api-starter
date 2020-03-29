@@ -26,8 +26,8 @@
     "seed": "knex seed:run --knexfile=knexfile.ts --verbose",
     "migrate": "knex migrate:latest --knexfile=knexfile.ts --verbose",
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts --verbose",
-    "make:seeder": "knex seed:make --knexfile=knexfile.ts",
-    "make:migration": "knex migrate:make --knexfile=knexfile.ts",
+    "make:seeder": "knex seed:make --knexfile=knexfile.ts -x ts",
+    "make:migration": "knex migrate:make --knexfile=knexfile.ts -x ts",
     "lint": "eslint {src,scripts,test}/**/*.{ts,json} --no-error-on-unmatched-pattern",
     "lint:fix": "eslint --fix {src,scripts,test}/**/*.{ts,json} --no-error-on-unmatched-pattern"
   },
