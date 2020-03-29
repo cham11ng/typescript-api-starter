@@ -33,11 +33,11 @@ module.exports = {
     connection: {
       charset: 'utf8',
       timezone: 'UTC',
-      port: process.env.DB_PORT,
-      host: process.env.DB_HOST,
-      database: process.env.TEST_DB_NAME,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      host: process.env.DB_HOST,
+      port: process.env.TEST_APP_PORT,
+      database: process.env.TEST_DB_NAME,
+      password: process.env.TEST_DB_PASSWORD
     },
     migrations: {
       directory: 'src/database/migrations',
