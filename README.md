@@ -1,7 +1,7 @@
 <p align="center"><a href="https://imgur.com/A1URjPL"><img alt="Typescript API Starter" src="https://i.imgur.com/A1URjPL.png"></a></p>
 <p align="center">
   <a href="https://travis-ci.org/cham11ng/typescript-api-starter">
-    <img src="https://travis-ci.org/cham11ng/typescript-api-starter.svg?branch=master" alt="Build Status">
+    <img src="https://github.com/cham11ng/typescript-api-starter/workflows/Starter%20CI/badge.svg?branch=dev" alt="Build Status">
   </a>
 </p>
 
