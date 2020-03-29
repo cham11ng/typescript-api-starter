@@ -9,7 +9,13 @@ import { Request, Response, NextFunction } from 'express';
  * @param  {NextFunction} next
  * @returns <void>
  */
-export default function notFoundError(_: Request, res: Response, __: NextFunction): void {
+export default function notFoundError(
+  _: Request,
+  res: Response,
+  // TODO: Remove this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  __: NextFunction
+): void {
   res.status(HttpStatus.NOT_FOUND).json({
     error: {
       code: HttpStatus.NOT_FOUND,

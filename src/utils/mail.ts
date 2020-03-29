@@ -15,7 +15,7 @@ transporter.use('compile', markdown());
  *
  * @param {MailOptions} mailOptions
  */
-export async function send(mailOptions: MailOptions) {
+export async function send(mailOptions: MailOptions): Promise<any> {
   try {
     if (!mailOptions.from) {
       mailOptions = { ...mailOptions, from };

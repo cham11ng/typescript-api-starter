@@ -1,5 +1,4 @@
 import faker from 'faker';
-import bcrypt from 'bcrypt';
 
 import { hash, compare } from '../../src/utils/bcrypt';
 

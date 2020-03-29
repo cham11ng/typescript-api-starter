@@ -5,7 +5,12 @@ import config from '../config/config';
 import JWTPayload from '../domain/misc/JWTPayload';
 import LoggedInUser from '../domain/misc/LoggedInUser';
 
-const { accessTokenDuration, accessTokenSecretKey, refreshTokenDuration, refreshTokenSecretKey } = config.auth;
+const {
+  accessTokenDuration,
+  accessTokenSecretKey,
+  refreshTokenDuration,
+  refreshTokenSecretKey
+} = config.auth;
 
 /**
  * Generate access token from given data
@@ -14,9 +19,14 @@ const { accessTokenDuration, accessTokenSecretKey, refreshTokenDuration, refresh
  * @returns {string}
  */
 export function generateAccessToken(data: LoggedInUser): string {
-  logger.log('info', 'JWT: Generating access token -', { data, expiresIn: accessTokenDuration });
+  logger.log('info', 'JWT: Generating access token -', {
+    data,
+    expiresIn: accessTokenDuration
+  });
 
-  return jwbt.sign({ data }, accessTokenSecretKey, { expiresIn: accessTokenDuration });
+  return jwbt.sign({ data }, accessTokenSecretKey, {
+    expiresIn: accessTokenDuration
+  });
 }
 
 /**
@@ -26,9 +36,14 @@ export function generateAccessToken(data: LoggedInUser): string {
  * @returns {string}
  */
 export function generateRefreshToken(data: JWTPayload): string {
-  logger.log('info', 'JWT: Generating refresh token -', { data, expiresIn: refreshTokenDuration });
+  logger.log('info', 'JWT: Generating refresh token -', {
+    data,
+    expiresIn: refreshTokenDuration
+  });
 
-  return jwbt.sign({ data }, refreshTokenSecretKey, { expiresIn: refreshTokenDuration });
+  return jwbt.sign({ data }, refreshTokenSecretKey, {
+    expiresIn: refreshTokenDuration
+  });
 }
 
 /**

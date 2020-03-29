@@ -3,7 +3,7 @@ addons:
     apt:
       update: true
 node_js:
-  - "lts/carbon"
+  - "10"
 services:
   - postgresql
 before_script:

@@ -8,6 +8,7 @@ import JWTPayload from '../domain/misc/JWTPayload';
 import ForbiddenError from '../exceptions/ForbiddenError';
 import LoginPayload from '../domain/requests/LoginPayload';
 import * as sessionService from '../services/sessionService';
+import TokenResponse from '../domain/responses/TokenResponse';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 
 const { errors } = config;
@@ -16,9 +17,11 @@ const { errors } = config;
  * Create user session for valid user login.
  *
  * @param {LoginPayload} loginPayload
- * @returns {object}
+ * @returns {TokenResponse}
  */
-export async function login(loginPayload: LoginPayload) {
+export async function login(
+  loginPayload: LoginPayload
+): Promise<TokenResponse> {
   const { email, password } = loginPayload;
 
   logger.log('info', 'Checking email: %s', email);
@@ -38,7 +41,10 @@ export async function login(loginPayload: LoginPayload) {
       const refreshToken = jwt.generateRefreshToken(loggedInUser);
       const userSessionPayload = { userId, token: refreshToken };
       const session = await sessionService.create(userSessionPayload);
-      const accessToken = jwt.generateAccessToken({ ...loggedInUser, sessionId: session.id });
+      const accessToken = jwt.generateAccessToken({
+        ...loggedInUser,
+        sessionId: session.id
+      });
 
       return { refreshToken, accessToken };
     }
@@ -52,9 +58,12 @@ export async function login(loginPayload: LoginPayload) {
  *
  * @param {string} token
  * @param {jwtPayload} jwtPayload
- * @returns {string}
+ * @returns {TokenResponse}
  */
-export async function refresh(token: string, jwtPayload: JWTPayload) {
+export async function refresh(
+  token: string,
+  jwtPayload: JWTPayload
+): Promise<TokenResponse> {
   logger.log('info', 'User Session: Fetching session of token - %s', token);
 
   const session = await new UserSession({ token, isActive: true }).fetch();
@@ -66,7 +75,10 @@ export async function refresh(token: string, jwtPayload: JWTPayload) {
   logger.log('debug', 'User Session: Fetched session -', session.serialize());
   logger.log('info', 'JWT: Generating new access token');
 
-  const accessToken = jwt.generateAccessToken({ ...jwtPayload, sessionId: session.id });
+  const accessToken = jwt.generateAccessToken({
+    ...jwtPayload,
+    sessionId: session.id
+  });
 
   return {
     accessToken
@@ -78,7 +90,7 @@ export async function refresh(token: string, jwtPayload: JWTPayload) {
  *
  * @param {string} token
  */
-export async function logout(token: string) {
+export async function logout(token: string): Promise<void> {
   logger.log('info', 'Logout: Logging out user session - %s', token);
 
   const session = await sessionService.remove(token);

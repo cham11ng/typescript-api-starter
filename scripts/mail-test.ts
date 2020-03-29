@@ -1,6 +1,6 @@
 import * as mail from '../src/utils/mail';
 
-(async () => {
+(async (): Promise<void> => {
   try {
     await mail.send({
       to: 'sgr.raee@gmail.com',

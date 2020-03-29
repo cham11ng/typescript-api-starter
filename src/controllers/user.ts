@@ -14,7 +14,11 @@ const { messages } = config;
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function index(_: Request, res: Response, next: NextFunction) {
+export async function index(
+  _: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   try {
     const response = await userService.fetchAll();
 
@@ -35,7 +39,11 @@ export async function index(_: Request, res: Response, next: NextFunction) {
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function store(req: Request, res: Response, next: NextFunction) {
+export async function store(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   try {
     const userPayload = req.body as UserPayload;
 

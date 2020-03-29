@@ -8,7 +8,7 @@ const tables = [Table.USER_SESSIONS, Table.USERS];
 /**
  * Delete all table's data.
  */
-export async function clearDb() {
+export async function clearDb(): Promise<void> {
   for (const table of tables) {
     await knex(table).del();
   }

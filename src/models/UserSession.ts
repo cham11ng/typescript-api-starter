@@ -3,7 +3,7 @@ import bookshelf from '../config/bookshelf';
 import Table from '../resources/enums/Table';
 
 class UserSession extends bookshelf.Model<UserSession> {
-  get requireFetch() {
+  get requireFetch(): boolean {
     return false;
   }
 

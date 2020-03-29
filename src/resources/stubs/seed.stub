@@ -1,7 +1,6 @@
 import * as Knex from 'knex';
-import Bluebird from 'bluebird';
 
-export function seed(knex: Knex): Bluebird<any[]> {
+export function seed(knex: Knex): Knex.SchemaBuilder {
   return knex('table_name')
     .del()
     .then(() => {

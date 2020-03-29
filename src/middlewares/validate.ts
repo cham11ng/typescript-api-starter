@@ -10,7 +10,11 @@ import validate from '../utils/validate';
  * @param {Joi.Schema} params
  */
 export function schema(params: Joi.Schema) {
-  return async (req: Request, _: Response, next: NextFunction) => {
+  return async (
+    req: Request,
+    _: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       logger.log('info', 'Validating schema');
 

@@ -16,7 +16,9 @@ export default {
   host: process.env.APP_HOST || '127.0.0.1',
   environment: process.env.NODE_ENV || 'development',
   appUrl: process.env.APP_URL || 'http://localhost:8888',
-  port: (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) || '8000',
+  port:
+    (isTestEnvironment ? process.env.TEST_APP_PORT : process.env.APP_PORT) ||
+    '8000',
   pagination: {
     page: 1,
     maxRows: 20
@@ -26,8 +28,10 @@ export default {
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '10m',
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
     emailVerificationDuration: process.env.EMAIL_VERIFICATION_DURATION || 24,
-    accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
-    refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
+    accessTokenSecretKey:
+      process.env.ACCESS_TOKEN_SECRET_KEY || '<ACCESS_TOKEN_SECRET_KEY>',
+    refreshTokenSecretKey:
+      process.env.REFRESH_TOKEN_SECRET_KEY || '<REFRESH_TOKEN_SECRET_KEY>'
   },
   logging: {
     dir: process.env.LOGGING_DIR || 'logs',
