@@ -22,4 +22,3 @@ services:
     ports:
       - "8888:8888"
     command: sh -c "yarn && yarn start:dev"
-

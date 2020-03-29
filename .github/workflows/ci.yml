@@ -51,8 +51,8 @@ jobs:
         env:
           NODE_ENV: test
           DB_CLIENT: pg
+          DB_PORT: 5432
           DB_HOST: 0.0.0.0
           DB_USER: postgres
-          TEST_APP_PORT: 5432
+          DB_PASSWORD: secret
           TEST_DB_NAME: app_test
-          TEST_DB_PASSWORD: secret
