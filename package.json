@@ -12,8 +12,8 @@
     "email": "sgr.raee@gmail.com"
   },
   "engines": {
-    "node": ">= 8.9.4",
-    "npm": ">= 5.6.0"
+    "node": ">= 10.16.0",
+    "yarn": ">= 1.16.0"
   },
   "scripts": {
     "start": "backpack",
