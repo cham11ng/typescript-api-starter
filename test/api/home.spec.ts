@@ -9,8 +9,6 @@ describe('API Information', () => {
     version: app.locals.version
   };
 
-  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
-
   test('should return application information', () => {
     return request(app)
       .get('/')

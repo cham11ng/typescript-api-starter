@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
 
 export function up(knex: Knex): Knex.SchemaBuilder {
-  return knex.schema.createTable('table_name', table => {
+  return knex.schema.createTable('table_name', (table) => {
     table.increments('id').primary();
 
     table.timestamps(true, true);

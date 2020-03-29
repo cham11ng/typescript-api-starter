@@ -27,8 +27,6 @@ describe('GET /users API test', () => {
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
-  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
-
   test('should return users list.', () => {
     const expectedResponse = {
       code: HttpStatus.OK,

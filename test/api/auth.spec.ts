@@ -29,8 +29,6 @@ describe('Auth Workflow', () => {
     authorization = `Bearer ${response.body.data.refreshToken}`;
   });
 
-  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
-
   describe('Login API test', () => {
     test('should login successfully with valid credentials.', () => {
       const expectedResponse = {
