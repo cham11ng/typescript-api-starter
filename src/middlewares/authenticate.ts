@@ -21,9 +21,16 @@ const tokenErrorMessageMap: any = {
  * @param {Response} res
  * @param {NextFunction} next
  */
-async function authenticate(req: Request, res: Response, next: NextFunction) {
+async function authenticate(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   try {
-    res.locals.accessToken = String(req.headers.authorization).replace('Bearer ', '');
+    res.locals.accessToken = String(req.headers.authorization).replace(
+      'Bearer ',
+      ''
+    );
 
     if (!req.headers.authorization || !res.locals.accessToken) {
       throw new BadRequestError(errors.noToken);
@@ -34,7 +41,11 @@ async function authenticate(req: Request, res: Response, next: NextFunction) {
 
     res.locals.loggedInPayload = response.data;
 
-    logger.log('debug', 'JWT: Authentication verified -', res.locals.loggedInPayload);
+    logger.log(
+      'debug',
+      'JWT: Authentication verified -',
+      res.locals.loggedInPayload
+    );
 
     next();
   } catch (err) {

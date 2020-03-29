@@ -26,12 +26,17 @@ export function capitalize(word: string): string {
  * @param {string} [separator='_']
  * @returns string
  */
-export function camelcase(text: string, separator: string = '_'): string {
+export function camelcase(text: string, separator = '_'): string {
   if (!isString(text)) {
     return text;
   }
 
   const words = text.split(separator);
 
-  return [words[0], ...words.slice(1).map(word => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)].join('');
+  return [
+    words[0],
+    ...words
+      .slice(1)
+      .map((word) => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)
+  ].join('');
 }

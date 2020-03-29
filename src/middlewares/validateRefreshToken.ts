@@ -21,9 +21,16 @@ const tokenErrorMessageMap: any = {
  * @param {Response} res
  * @param {NextFunction} next
  */
-async function validateRefreshToken(req: Request, res: Response, next: NextFunction) {
+async function validateRefreshToken(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   try {
-    res.locals.refreshToken = String(req.headers.authorization).replace('Bearer ', '');
+    res.locals.refreshToken = String(req.headers.authorization).replace(
+      'Bearer ',
+      ''
+    );
 
     if (!req.headers.authorization || !res.locals.refreshToken) {
       throw new BadRequestError(errors.noToken);
@@ -34,7 +41,11 @@ async function validateRefreshToken(req: Request, res: Response, next: NextFunct
 
     res.locals.jwtPayload = response.data;
 
-    logger.log('debug', 'JWT: Authentication verified -', res.locals.jwtPayload);
+    logger.log(
+      'debug',
+      'JWT: Authentication verified -',
+      res.locals.jwtPayload
+    );
 
     next();
   } catch (err) {

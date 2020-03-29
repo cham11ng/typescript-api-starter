@@ -7,8 +7,13 @@ import { camelcase } from './string';
  * @param {any} obj
  * @returns {boolean}
  */
-export function isObject(obj: any) {
-  return obj !== undefined && obj !== null && !Array.isArray(obj) && obj instanceof Object;
+export function isObject(obj: any): boolean {
+  return (
+    obj !== undefined &&
+    obj !== null &&
+    !Array.isArray(obj) &&
+    obj instanceof Object
+  );
 }
 
 /**

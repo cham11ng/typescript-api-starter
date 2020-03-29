@@ -9,12 +9,12 @@ describe('API Information', () => {
     version: app.locals.version
   };
 
-  afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
+  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
 
   test('should return application information', () => {
     return request(app)
       .get('/')
-      .then(res => {
+      .then((res) => {
         expect(res.status).toBe(HttpStatus.OK);
         expect(res.body).toEqual(expectedResponse);
       });

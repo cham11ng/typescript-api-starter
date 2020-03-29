@@ -15,7 +15,9 @@ const { errors } = config;
  * @param {UserSessionPayload} params
  * @returns {Promise<UserSessionDetail>}
  */
-export async function create(params: UserSessionPayload): Promise<UserSessionDetail> {
+export async function create(
+  params: UserSessionPayload
+): Promise<UserSessionDetail> {
   logger.log('info', 'User Session: Creating session -', params);
 
   const session = (await new UserSession(params).save()).serialize();
@@ -35,9 +37,13 @@ export async function remove(token: string): Promise<UserSessionDetail> {
   try {
     logger.log('info', 'User Session: Deactivating token - %s', token);
 
-    const session = (await new UserSession()
-      .where({ token, is_active: true })
-      .save({ isActive: false }, { patch: true })).serialize();
+    const session = (
+      await new UserSession()
+        // TODO: Fix this via. knex
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        .where({ token, is_active: true })
+        .save({ isActive: false }, { patch: true })
+    ).serialize();
 
     logger.log('debug', 'User Session: Deactivated session -', session);
 

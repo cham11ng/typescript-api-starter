@@ -27,7 +27,7 @@ describe('GET /users API test', () => {
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
-  afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
+  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
 
   test('should return users list.', () => {
     const expectedResponse = {
@@ -46,7 +46,7 @@ describe('GET /users API test', () => {
     return request(app)
       .get('/users')
       .set({ authorization })
-      .then(res => {
+      .then((res) => {
         const userInfo = getRandomElement(res.body.data);
 
         expect(res.status).toBe(HttpStatus.OK);
@@ -97,7 +97,7 @@ describe('POST /users API test', () => {
       .post('/users')
       .set({ authorization })
       .send(userBody)
-      .then(res => {
+      .then((res) => {
         expect(res.status).toBe(HttpStatus.OK);
         expect(res.body).toEqual(expectedResponse);
       });
@@ -117,7 +117,7 @@ describe('POST /users API test', () => {
     return request(app)
       .post('/users')
       .set({ authorization })
-      .then(res => {
+      .then((res) => {
         const errorResponse = getRandomElement(res.body.data);
 
         expect(res.status).toBe(HttpStatus.BAD_REQUEST);
@@ -129,7 +129,7 @@ describe('POST /users API test', () => {
   test('should fail request without authorization token.', () => {
     return request(app)
       .post('/users')
-      .then(res => {
+      .then((res) => {
         expect(res.status).toBe(HttpStatus.BAD_REQUEST);
       });
   });

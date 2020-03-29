@@ -6,8 +6,9 @@ import * as HttpStatus from 'http-status-codes';
  *
  * @param {Request} req
  * @param {Response} res
+ * @returns {void}
  */
-export function index(req: Request, res: Response) {
+export function index(req: Request, res: Response): void {
   res.status(HttpStatus.OK).json({
     name: req.app.locals.name,
     version: req.app.locals.version

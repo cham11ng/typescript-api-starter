@@ -2,8 +2,8 @@ import * as Knex from 'knex';
 
 import Table from '../../resources/enums/Table';
 
-export function up(knex: Knex): Promise<any> {
-  return knex.schema.createTable(Table.USER_SESSIONS, table => {
+export function up(knex: Knex): Knex.SchemaBuilder {
+  return knex.schema.createTable(Table.USER_SESSIONS, (table) => {
     table.increments('id').primary();
 
     table.text('token').notNullable();
@@ -13,15 +13,12 @@ export function up(knex: Knex): Promise<any> {
       .notNullable()
       .references('id')
       .inTable(Table.USERS);
-    table
-      .boolean('is_active')
-      .notNullable()
-      .defaultTo(true);
+    table.boolean('is_active').notNullable().defaultTo(true);
 
     table.timestamps(true, true);
   });
 }
 
-export function down(knex: Knex) {
+export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable(Table.USER_SESSIONS);
 }

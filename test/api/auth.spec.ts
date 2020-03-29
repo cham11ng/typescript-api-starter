@@ -3,7 +3,6 @@ import request from 'supertest';
 import * as HttpStatus from 'http-status-codes';
 
 import app from '../../src/app';
-import Role from '../../src/resources/enums/Role';
 import { clearDb, getRandomElement } from '../helper';
 import * as userService from '../../src/services/userService';
 
@@ -30,7 +29,7 @@ describe('Auth Workflow', () => {
     authorization = `Bearer ${response.body.data.refreshToken}`;
   });
 
-  afterAll(() => new Promise(resolve => setTimeout(() => resolve(), 500)));
+  afterAll(() => new Promise((resolve) => setTimeout(() => resolve(), 500)));
 
   describe('Login API test', () => {
     test('should login successfully with valid credentials.', () => {
@@ -46,7 +45,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/login')
         .send({ email, password })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.OK);
           expect(res.body).toEqual(expectedResponse);
         });
@@ -61,7 +60,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/login')
         .send({ email, password: `${password}${password}` })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
           expect(res.body).toEqual(expectedResponse);
         });
@@ -81,7 +80,7 @@ describe('Auth Workflow', () => {
 
       return request(app)
         .post('/login')
-        .then(res => {
+        .then((res) => {
           const errorResponse = getRandomElement(res.body.data);
 
           expect(res.status).toBe(HttpStatus.BAD_REQUEST);
@@ -104,7 +103,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/refresh')
         .set({ authorization })
-        .then(res => {
+        .then((res) => {
           accessToken = res.body.data.accessToken;
 
           expect(res.status).toBe(HttpStatus.OK);
@@ -129,7 +128,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .get('/users')
         .set({ authorization: `Bearer ${accessToken}` })
-        .then(res => {
+        .then((res) => {
           const userInfo = getRandomElement(res.body.data);
 
           expect(res.status).toBe(HttpStatus.OK);
@@ -147,7 +146,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/refresh')
         .set({ authorization: faker.random.alphaNumeric() })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
           expect(res.body).toEqual(expectedResponse);
         });
@@ -164,7 +163,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/logout')
         .set({ authorization })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.OK);
           expect(res.body).toEqual(expectedResponse);
         });
@@ -179,7 +178,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/logout')
         .set({ authorization })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.FORBIDDEN);
           expect(res.body).toEqual(expectedResponse);
         });
@@ -194,7 +193,7 @@ describe('Auth Workflow', () => {
       return request(app)
         .post('/logout')
         .set({ authorization: faker.random.alphaNumeric() })
-        .then(res => {
+        .then((res) => {
           expect(res.status).toBe(HttpStatus.UNAUTHORIZED);
           expect(res.body).toEqual(expectedResponse);
         });

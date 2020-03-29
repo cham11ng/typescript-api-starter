@@ -11,8 +11,10 @@ module.exports = {
   },
   ignorePatterns: ['./node_modules/*'],
   rules: {
-    'no-error-on-unmatched-pattern': 'off'
+    'no-error-on-unmatched-pattern': 'off',
+    '@typescript-eslint/no-explicit-any': 'off', // TODO: Remove this.
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    // e.g. '@typescript-eslint/explicit-function-return-type': 'off',
   }
 };

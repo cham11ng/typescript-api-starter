@@ -7,38 +7,31 @@ import Table from '../../resources/enums/Table';
  *
  * @param {Knex} knex
  */
-export function up(knex: Knex): Promise<any> {
+export function up(knex: Knex): Promise<void> {
   return knex.schema
-    .createTable(Table.USER_ROLES, table => {
+    .createTable(Table.USER_ROLES, (table) => {
       table.increments('id').primary();
 
-      table
-        .string('name', 50)
-        .unique()
-        .notNullable();
+      table.string('name', 50).unique().notNullable();
       table.string('description', 100).nullable();
 
       table.timestamps(true, true);
     })
     .then(async () => {
-      return knex(Table.USER_ROLES)
+      await knex(Table.USER_ROLES)
         .truncate()
-        .then(() =>
-          Promise.all([
-            knex(Table.USER_ROLES).insert([
-              {
-                id: 1,
-                name: 'Admin',
-                description: 'This is super admin.'
-              },
-              {
-                id: 2,
-                name: 'Normal User',
-                description: 'This is normal user.'
-              }
-            ])
-          ])
-        );
+        .insert([
+          {
+            id: 1,
+            name: 'Admin',
+            description: 'This is super admin.'
+          },
+          {
+            id: 2,
+            name: 'Normal User',
+            description: 'This is normal user.'
+          }
+        ]);
     });
 }
 
@@ -47,6 +40,6 @@ export function up(knex: Knex): Promise<any> {
  *
  * @param {Knex} knex
  */
-export function down(knex: Knex) {
+export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable(Table.USER_ROLES);
 }
