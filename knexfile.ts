@@ -33,8 +33,8 @@ module.exports = {
     connection: {
       charset: 'utf8',
       timezone: 'UTC',
-      user: process.env.DB_USER,
       host: process.env.DB_HOST,
+      user: process.env.DB_USER,
       port: process.env.TEST_APP_PORT,
       database: process.env.TEST_DB_NAME,
       password: process.env.TEST_DB_PASSWORD

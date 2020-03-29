@@ -50,6 +50,9 @@ jobs:
       run: yarn test
       env:
         NODE_ENV: test
+        DB_CLIENT: pg
+        DB_HOST: postgres
+        DB_USER: postgres
+        TEST_APP_PORT: 5432
         TEST_DB_NAME: app_test
-        TEST_DB_USER: postgres
         TEST_DB_PASSWORD: secret
