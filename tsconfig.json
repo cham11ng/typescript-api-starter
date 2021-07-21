@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./build",
     "declaration": true,
     "module": "commonjs",
     "importHelpers": true,
