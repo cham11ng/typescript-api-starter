@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DB: app_test
+          POSTGRES_DB: starter_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: secret
         ports:
@@ -55,4 +55,4 @@ jobs:
           DB_HOST: 0.0.0.0
           DB_USER: postgres
           DB_PASSWORD: secret
-          TEST_DB_NAME: app_test
+          TEST_DB_NAME: starter_test

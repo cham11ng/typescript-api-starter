@@ -2,8 +2,10 @@ version: "3"
 
 services:
   postgres:
-    image: "postgres:10-alpine"
+    image: "postgres:latest"
     container_name: "starter-postgres"
+    volumes:
+      - './volumes/postgres:/var/lib/postgresql/data'
     ports:
       - "5432:5432"
     environment:
