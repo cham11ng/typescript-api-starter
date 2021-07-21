@@ -34,7 +34,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "sync-env && lint-staged",
+      "pre-commit": "",
       "pre-push": "yarn build"
     }
   },
