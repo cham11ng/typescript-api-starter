@@ -40,7 +40,6 @@ export async function remove(token: string): Promise<UserSessionDetail> {
     const session = (
       await new UserSession()
         // TODO: Fix this via. knex
-        // eslint-disable-next-line @typescript-eslint/camelcase
         .where({ token, is_active: true })
         .save({ isActive: false }, { patch: true })
     ).serialize();

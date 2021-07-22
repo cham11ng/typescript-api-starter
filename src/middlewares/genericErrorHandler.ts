@@ -54,6 +54,7 @@ function buildError(err: any): APIResponseInterface {
  * @returns void
  */
 export default function genericErrorHandler(
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   err: any,
   _: Request,
   res: Response,

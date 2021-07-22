@@ -1,6 +1,10 @@
 import { Request, Response } from 'express';
 import * as HttpStatus from 'http-status-codes';
 
+import config from '../config/config';
+
+const { name, version } = config;
+
 /**
  * Handle / GET request, responds API information.
  *
@@ -8,9 +12,9 @@ import * as HttpStatus from 'http-status-codes';
  * @param {Response} res
  * @returns {void}
  */
-export function index(req: Request, res: Response): void {
+export function index(_: Request, res: Response): void {
   res.status(HttpStatus.OK).json({
-    name: req.app.locals.name,
-    version: req.app.locals.version
+    name,
+    version
   });
 }
