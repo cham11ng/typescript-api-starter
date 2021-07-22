@@ -56,3 +56,4 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: secret
           TEST_DB_NAME: starter_test
+          TEST_APP_PORT: 8888

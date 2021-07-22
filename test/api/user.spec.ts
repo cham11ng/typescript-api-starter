@@ -1,6 +1,6 @@
 import faker from 'faker';
 import request from 'supertest';
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import app from '../../src/app';
 import Role from '../../src/resources/enums/Role';
@@ -29,7 +29,7 @@ describe('GET /users API test', () => {
 
   test('should return users list.', () => {
     const expectedResponse = {
-      code: HttpStatus.OK,
+      code: StatusCodes.OK,
       message: expect.any(String),
       data: expect.any(Array)
     };
@@ -47,7 +47,7 @@ describe('GET /users API test', () => {
       .then((res) => {
         const userInfo = getRandomElement(res.body.data);
 
-        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.status).toBe(StatusCodes.OK);
         expect(res.body).toEqual(expectedResponse);
         expect(userInfo).toEqual(userResponse);
       });
@@ -79,7 +79,7 @@ describe('POST /users API test', () => {
       password: faker.internet.password()
     };
     const expectedResponse = {
-      code: HttpStatus.OK,
+      code: StatusCodes.OK,
       message: expect.any(String),
       data: {
         ...userBody,
@@ -96,14 +96,14 @@ describe('POST /users API test', () => {
       .set({ authorization })
       .send(userBody)
       .then((res) => {
-        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.status).toBe(StatusCodes.OK);
         expect(res.body).toEqual(expectedResponse);
       });
   });
 
   test('should fail request when payload is incorrect.', () => {
     const expectedResponse = {
-      code: HttpStatus.BAD_REQUEST,
+      code: StatusCodes.BAD_REQUEST,
       message: expect.any(String),
       data: expect.any(Array)
     };
@@ -118,7 +118,7 @@ describe('POST /users API test', () => {
       .then((res) => {
         const errorResponse = getRandomElement(res.body.data);
 
-        expect(res.status).toBe(HttpStatus.BAD_REQUEST);
+        expect(res.status).toBe(StatusCodes.BAD_REQUEST);
         expect(res.body).toEqual(expectedResponse);
         expect(errorResponse).toEqual(badRequestResponse);
       });
@@ -128,7 +128,7 @@ describe('POST /users API test', () => {
     return request(app)
       .post('/users')
       .then((res) => {
-        expect(res.status).toBe(HttpStatus.BAD_REQUEST);
+        expect(res.status).toBe(StatusCodes.BAD_REQUEST);
       });
   });
 });

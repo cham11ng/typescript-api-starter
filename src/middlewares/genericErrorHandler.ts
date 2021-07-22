@@ -1,5 +1,5 @@
-import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
+import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
 import logger from '../utils/logger';
 import APIResponseInterface from '../domain/responses/APIResponse';
@@ -13,8 +13,8 @@ import APIResponseInterface from '../domain/responses/APIResponse';
 function buildError(err: any): APIResponseInterface {
   if (err.isJoi) {
     return {
-      code: HttpStatus.BAD_REQUEST,
-      message: HttpStatus.getStatusText(HttpStatus.BAD_REQUEST),
+      code: StatusCodes.BAD_REQUEST,
+      message: getReasonPhrase(StatusCodes.BAD_REQUEST),
       data:
         err.details &&
         err.details.map((error: any) => ({
@@ -39,8 +39,8 @@ function buildError(err: any): APIResponseInterface {
   }
 
   return {
-    code: HttpStatus.INTERNAL_SERVER_ERROR,
-    message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
+    code: StatusCodes.INTERNAL_SERVER_ERROR,
+    message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
   };
 }
 

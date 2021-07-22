@@ -1,4 +1,4 @@
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import Error from './Error';
 
@@ -22,7 +22,7 @@ class UnauthorizedError extends Error {
    * @memberof UnauthorizedError
    */
   constructor(message: string) {
-    super(message, HttpStatus.UNAUTHORIZED);
+    super(message, StatusCodes.UNAUTHORIZED);
 
     this.message = message;
   }

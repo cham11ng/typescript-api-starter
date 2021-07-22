@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import config from '../config/config';
 
@@ -13,7 +13,7 @@ const { name, version } = config;
  * @returns {void}
  */
 export function index(_: Request, res: Response): void {
-  res.status(HttpStatus.OK).json({
+  res.status(StatusCodes.OK).json({
     name,
     version
   });

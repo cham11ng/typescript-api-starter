@@ -1,5 +1,5 @@
-import * as HttpStatus from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
+import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
 /**
  * Error response middleware for 404 not found.
@@ -16,10 +16,10 @@ export default function notFoundError(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   __: NextFunction
 ): void {
-  res.status(HttpStatus.NOT_FOUND).json({
+  res.status(StatusCodes.NOT_FOUND).json({
     error: {
-      code: HttpStatus.NOT_FOUND,
-      message: HttpStatus.getStatusText(HttpStatus.NOT_FOUND)
+      code: StatusCodes.NOT_FOUND,
+      message: getReasonPhrase(StatusCodes.NOT_FOUND)
     }
   });
 }
