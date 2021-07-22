@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { camelize, isObject } from '../../src/utils/object';
 
 describe('Utils: isObject()', () => {

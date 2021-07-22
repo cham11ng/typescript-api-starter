@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,            // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module"          // Allows for the use of imports
+  },
+  "ignorePatterns": ["./node_modules/*"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-error-on-unmatched-pattern": "off",
+    "@typescript-eslint/no-explicit-any": "off", // TODO: Remove this.
+    "prettier/prettier": 2,
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"]
+    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+  }
+}

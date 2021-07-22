@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-sync-env && lint-staged
+yarn sync-env && yarn lint-staged
