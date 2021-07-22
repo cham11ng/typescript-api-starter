@@ -41,7 +41,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Building source code
         run: yarn build

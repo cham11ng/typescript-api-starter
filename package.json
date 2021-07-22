@@ -55,7 +55,7 @@
     "typescript"
   ],
   "dependencies": {
-    "bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
     "bookshelf": "^1.2.0",
     "bookshelf-case-converter-plugin": "^2.0.0",
     "chalk": "^4.1.1",
@@ -78,6 +78,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-typescript": "^7.14.5",
     "@types/bcrypt": "^5.0.0",
     "@types/bookshelf": "^1.2.2",
     "@types/cors": "^2.8.12",
@@ -97,6 +99,7 @@
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-security": "^1.4.0",
     "faker": "^5.5.3",
     "husky": "^7.0.1",
     "jest": "^27.0.6",

@@ -15,12 +15,13 @@ services:
 
   api:
     image: "node:16-alpine"
+    env_file: '.env.docker'
     container_name: "starter-api"
     volumes:
-      - "./:${CODE_SOURCE}"
-    working_dir: ${CODE_SOURCE}
+      - "./:/source"
+    working_dir: /source
     depends_on:
       - postgres
     ports:
-      - "8888:8888"
+      - "8000:8000"
     command: sh -c "yarn && yarn start"
