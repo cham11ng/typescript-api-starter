@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.x, 16.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
@@ -41,7 +41,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Building source code
         run: yarn build
