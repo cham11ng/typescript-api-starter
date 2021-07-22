@@ -12,8 +12,7 @@
     "email": "sgr.raee@gmail.com"
   },
   "engines": {
-    "node": ">= 10.16.0",
-    "yarn": ">= 1.15.2"
+    "node": ">= 16.5.0"
   },
   "scripts": {
     "start": "nodemon",

@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [12.x, 16.x]
+        node-version: [16.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
@@ -52,7 +52,7 @@ jobs:
           NODE_ENV: test
           DB_CLIENT: pg
           DB_PORT: 5432
-          DB_HOST: 0.0.0.0
+          DB_HOST: 127.0.0.1
           DB_USER: postgres
           DB_PASSWORD: secret
           TEST_DB_NAME: starter_test
