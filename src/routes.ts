@@ -18,6 +18,11 @@ router.post('/refresh', validateRefreshToken, authController.refresh);
 router.post('/logout', validateRefreshToken, authController.logout);
 
 router.get('/users', authenticate, userController.index);
-router.post('/users', validate.schema(userPOSTSchema), userController.store);
+router.post(
+  '/users',
+  authenticate,
+  validate.schema(userPOSTSchema),
+  userController.store
+);
 
 export default router;
