@@ -10,6 +10,7 @@ import * as userService from '../../services/userService';
  */
 export function run(): Promise<UserDetail> {
   return userService.insert({
+    password: 'secret',
     name: faker.name.findName(),
     email: faker.internet.email()
   });

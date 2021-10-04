@@ -9,7 +9,7 @@
     "removeComments": true,
     "downlevelIteration": true,
     "lib": ["es2015", "es2016", "es2017"],
-    
+
     "strict": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
@@ -17,12 +17,14 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
     "noImplicitReturns": true,
+    "noUnusedParameters": true,
     "strictFunctionTypes": true,
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": "./",
     "esModuleInterop": true,
     "preserveSymlinks": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "types": ["node", "express"],
     "allowSyntheticDefaultImports": true,

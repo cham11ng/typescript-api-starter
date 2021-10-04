@@ -1,14 +1,13 @@
 import * as Knex from 'knex';
-import Bluebird from 'bluebird';
 
-export function up(knex: Knex): Bluebird<any[]> {
-  return knex.schema.createTable('table_name', table => {
+export function up(knex: Knex): Knex.SchemaBuilder {
+  return knex.schema.createTable('table_name', (table) => {
     table.increments('id').primary();
 
     table.timestamps(true, true);
   });
 }
 
-export function down(knex: Knex): Bluebird<any[]> {
+export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable('table_name');
 }

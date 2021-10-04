@@ -7,6 +7,9 @@ import * as Joi from 'joi';
  * @param <Joi.SchemaLike> schema
  * @returns <Promise>
  */
-export default async function validate<T>(data: T, schema: Joi.SchemaLike) {
+export default async function validate<T>(
+  data: T,
+  schema: Joi.SchemaLike
+): Promise<void> {
   await Joi.validate(data, schema, { abortEarly: false });
 }

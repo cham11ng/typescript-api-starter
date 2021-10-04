@@ -5,23 +5,6 @@ import logger from '../utils/logger';
 import APIResponseInterface from '../domain/responses/APIResponse';
 
 /**
- * Generic error response middleware for internal server errors.
- *
- * @param  {any} err
- * @param  {Request} req
- * @param  {Response} res
- * @param  {NextFunction} next
- * @returns void
- */
-export default function genericErrorHandler(err: any, req: Request, res: Response, next: NextFunction): void {
-  const error = buildError(err);
-
-  logger.error('Error stack trace: ', err.stack);
-
-  res.status(error.code).json(error);
-}
-
-/**
  * Build error response for validation errors.
  *
  * @param  {Error} err
@@ -59,4 +42,28 @@ function buildError(err: any): APIResponseInterface {
     code: HttpStatus.INTERNAL_SERVER_ERROR,
     message: HttpStatus.getStatusText(HttpStatus.INTERNAL_SERVER_ERROR)
   };
+}
+
+/**
+ * Generic error response middleware for internal server errors.
+ *
+ * @param  {any} err
+ * @param  {Request} req
+ * @param  {Response} res
+ * @param  {NextFunction} next
+ * @returns void
+ */
+export default function genericErrorHandler(
+  err: any,
+  _: Request,
+  res: Response,
+  // TODO: Remove this.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  __: NextFunction
+): void {
+  const error = buildError(err);
+
+  logger.log('error', 'Error: %s', err.stack || err.message);
+
+  res.status(error.code).json(error);
 }

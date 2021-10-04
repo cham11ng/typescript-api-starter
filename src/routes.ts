@@ -1,15 +1,23 @@
 import { Router } from 'express';
 
+import * as validate from './middlewares/validate';
 import * as homeController from './controllers/home';
 import * as userController from './controllers/user';
-import * as routes from './resources/constants/endpoints';
-import { validateUserRequest } from './validators/userValidator';
+import * as authController from './controllers/auth';
+import authenticate from './middlewares/authenticate';
+import { loginSchema } from './validators/loginRequest';
+import { userPOSTSchema } from './validators/userRequest';
+import validateRefreshToken from './middlewares/validateRefreshToken';
 
 const router: Router = Router();
 
-router.get(routes.home, homeController.index);
+router.get('/', homeController.index);
 
-router.get(routes.users, userController.index);
-router.post(routes.users, validateUserRequest, userController.store);
+router.post('/login', validate.schema(loginSchema), authController.login);
+router.post('/refresh', validateRefreshToken, authController.refresh);
+router.post('/logout', validateRefreshToken, authController.logout);
+
+router.get('/users', authenticate, userController.index);
+router.post('/users', validate.schema(userPOSTSchema), userController.store);
 
 export default router;

@@ -1,5 +1,4 @@
 const path = require('path');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
@@ -17,11 +16,6 @@ module.exports = {
         options: {
           transpileOnly: true
         }
-      },
-      {
-        test: /\.json$/,
-        exclude: /node_modules/,
-        loader: 'json-loader'
       }
     ];
 

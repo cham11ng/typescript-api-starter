@@ -5,7 +5,13 @@ import * as factories from '../src/database/factories';
 
 const { info } = console;
 
-(async () => {
+function print<T>(data: T): void {
+  const jsonData = JSON.stringify(data, null, ' ');
+
+  info(chalk.green(jsonData));
+}
+
+(async (): Promise<void> => {
   try {
     const table = process.argv[2];
     const total = +process.argv[3] || 1;
@@ -20,9 +26,3 @@ const { info } = console;
     process.exit(1);
   }
 })();
-
-function print<T>(data: T): void {
-  const jsonData = JSON.stringify(data, null, ' ');
-
-  info(chalk.green(jsonData));
-}

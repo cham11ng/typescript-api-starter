@@ -12,7 +12,7 @@ describe('API Information', () => {
   test('should return application information', () => {
     return request(app)
       .get('/')
-      .then(res => {
+      .then((res) => {
         expect(res.status).toBe(HttpStatus.OK);
         expect(res.body).toEqual(expectedResponse);
       });
