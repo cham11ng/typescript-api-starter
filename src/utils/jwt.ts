@@ -12,6 +12,10 @@ const {
   refreshTokenSecretKey
 } = config.auth;
 
+if (!refreshTokenSecretKey || !accessTokenSecretKey) {
+  throw new Error('Auth refresh and access token secrets cannot be empty.');
+}
+
 /**
  * Generate access token from given data
  *
