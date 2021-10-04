@@ -57,3 +57,5 @@ jobs:
           DB_PASSWORD: secret
           TEST_DB_NAME: starter_test
           TEST_APP_PORT: 8888
+          ACCESS_TOKEN_SECRET_KEY: 'somerandoma'
+          REFRESH_TOKEN_SECRET_KEY: 'somerandomr'
