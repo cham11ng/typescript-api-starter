@@ -1,4 +1,4 @@
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
 import config from '../config/config';
@@ -22,8 +22,8 @@ export async function index(
   try {
     const response = await userService.fetchAll();
 
-    res.status(HttpStatus.OK).json({
-      code: HttpStatus.OK,
+    res.status(StatusCodes.OK).json({
+      code: StatusCodes.OK,
       data: response,
       message: messages.users.fetchAll
     });
@@ -49,8 +49,8 @@ export async function store(
 
     const response = await userService.insert(userPayload);
 
-    res.status(HttpStatus.OK).json({
-      code: HttpStatus.OK,
+    res.status(StatusCodes.OK).json({
+      code: StatusCodes.OK,
       data: response,
       message: messages.users.insert
     });

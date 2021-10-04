@@ -1,35 +1,29 @@
 import faker from 'faker';
 import request from 'supertest';
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import app from '../../src/app';
-import Role from '../../src/resources/enums/Role';
-import { clearDb, getRandomElement } from '../helper';
-import * as userService from '../../src/services/userService';
+import { getRandomElement, init, TEST_EMAIL, TEST_PASSWORD } from '../helper';
 
 describe('GET /users API test', () => {
+  const email = TEST_EMAIL;
+  const password = TEST_PASSWORD;
+
   let authorization: string;
-  const user = {
-    name: faker.name.findName(),
-    email: 'first-user@starter.com',
-    password: faker.internet.password()
-  };
-  const { email, password } = user;
 
   beforeAll(async () => {
-    await clearDb();
-
-    await userService.insert(user);
+    await init();
 
     const response = await request(app)
       .post('/login')
       .send({ email, password });
+
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
   test('should return users list.', () => {
     const expectedResponse = {
-      code: HttpStatus.OK,
+      code: StatusCodes.OK,
       message: expect.any(String),
       data: expect.any(Array)
     };
@@ -47,7 +41,7 @@ describe('GET /users API test', () => {
       .then((res) => {
         const userInfo = getRandomElement(res.body.data);
 
-        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.status).toBe(StatusCodes.OK);
         expect(res.body).toEqual(expectedResponse);
         expect(userInfo).toEqual(userResponse);
       });
@@ -56,19 +50,17 @@ describe('GET /users API test', () => {
 
 describe('POST /users API test', () => {
   let authorization: string;
-  const user = {
-    roleId: Role.NORMAL_USER,
-    name: faker.name.findName(),
-    email: 'login-user@starter.com',
-    password: faker.internet.password()
-  };
-  const { email, password } = user;
+
+  const email = TEST_EMAIL;
+  const password = TEST_PASSWORD;
 
   beforeAll(async () => {
-    await userService.insert(user);
+    await init();
+
     const response = await request(app)
       .post('/login')
       .send({ email, password });
+
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
@@ -79,7 +71,7 @@ describe('POST /users API test', () => {
       password: faker.internet.password()
     };
     const expectedResponse = {
-      code: HttpStatus.OK,
+      code: StatusCodes.OK,
       message: expect.any(String),
       data: {
         ...userBody,
@@ -96,14 +88,14 @@ describe('POST /users API test', () => {
       .set({ authorization })
       .send(userBody)
       .then((res) => {
-        expect(res.status).toBe(HttpStatus.OK);
+        expect(res.status).toBe(StatusCodes.OK);
         expect(res.body).toEqual(expectedResponse);
       });
   });
 
   test('should fail request when payload is incorrect.', () => {
     const expectedResponse = {
-      code: HttpStatus.BAD_REQUEST,
+      code: StatusCodes.BAD_REQUEST,
       message: expect.any(String),
       data: expect.any(Array)
     };
@@ -118,7 +110,7 @@ describe('POST /users API test', () => {
       .then((res) => {
         const errorResponse = getRandomElement(res.body.data);
 
-        expect(res.status).toBe(HttpStatus.BAD_REQUEST);
+        expect(res.status).toBe(StatusCodes.BAD_REQUEST);
         expect(res.body).toEqual(expectedResponse);
         expect(errorResponse).toEqual(badRequestResponse);
       });
@@ -128,7 +120,7 @@ describe('POST /users API test', () => {
     return request(app)
       .post('/users')
       .then((res) => {
-        expect(res.status).toBe(HttpStatus.BAD_REQUEST);
+        expect(res.status).toBe(StatusCodes.BAD_REQUEST);
       });
   });
 });

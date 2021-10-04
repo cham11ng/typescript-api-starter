@@ -2,8 +2,10 @@ version: "3"
 
 services:
   postgres:
-    image: "postgres:10-alpine"
+    image: "postgres:latest"
     container_name: "starter-postgres"
+    volumes:
+      - './volumes/postgres:/var/lib/postgresql/data'
     ports:
       - "5432:5432"
     environment:
@@ -12,13 +14,14 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
 
   api:
-    image: "node:8-alpine"
+    image: "node:16-alpine"
+    env_file: '.env.docker'
     container_name: "starter-api"
     volumes:
-      - "./:${CODE_SOURCE}"
-    working_dir: ${CODE_SOURCE}
+      - "./:/source"
+    working_dir: /source
     depends_on:
       - postgres
     ports:
-      - "8888:8888"
-    command: sh -c "yarn && yarn start:dev"
+      - "8000:8000"
+    command: sh -c "yarn && yarn start"

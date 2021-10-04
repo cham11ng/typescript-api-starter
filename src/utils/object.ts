@@ -7,6 +7,7 @@ import { camelcase } from './string';
  * @param {any} obj
  * @returns {boolean}
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function isObject(obj: any): boolean {
   return (
     obj !== undefined &&
@@ -23,6 +24,7 @@ export function isObject(obj: any): boolean {
  * @param {any} data
  * @returns {any}
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function camelize(data: any): any {
   const isDate = data instanceof Date;
 

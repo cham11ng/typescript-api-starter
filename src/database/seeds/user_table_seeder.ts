@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import * as Knex from 'knex';
 
 import * as bcrypt from '../../utils/bcrypt';

@@ -1,14 +1,4 @@
 /**
- * Check the given parameter is string or not.
- *
- * @param {any} text
- * @returns {boolean}
- */
-export function isString(text: any): boolean {
-  return typeof text === 'string';
-}
-
-/**
  * Capitalize the first letter of given word.
  *
  * @param {string} word
@@ -27,7 +17,7 @@ export function capitalize(word: string): string {
  * @returns string
  */
 export function camelcase(text: string, separator = '_'): string {
-  if (!isString(text)) {
+  if (!(typeof text === 'string')) {
     return text;
   }
 

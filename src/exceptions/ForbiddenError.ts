@@ -1,4 +1,4 @@
-import * as HttpStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 
 import Error from './Error';
 
@@ -22,7 +22,7 @@ class ForbiddenError extends Error {
    * @memberof ForbiddenError
    */
   constructor(message: string) {
-    super(message, HttpStatus.FORBIDDEN);
+    super(message, StatusCodes.FORBIDDEN);
 
     this.message = message;
   }
