@@ -3,28 +3,21 @@ import request from 'supertest';
 import { StatusCodes } from 'http-status-codes';
 
 import app from '../../src/app';
-import { clearDb, getRandomElement } from '../helper';
-import * as userService from '../../src/services/userService';
+import { init, getRandomElement, TEST_PASSWORD, TEST_EMAIL } from '../helper';
 
 describe('Auth Workflow', () => {
-  let authorization: string;
-  let accessToken: string;
+  const email = TEST_EMAIL;
+  const password = TEST_PASSWORD;
 
-  const user = {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    password: faker.internet.password()
-  };
-  const { email, password } = user;
+  let accessToken: string;
+  let authorization: string;
 
   beforeAll(async () => {
-    await clearDb();
-
-    await userService.insert(user);
+    await init();
 
     const response = await request(app)
       .post('/login')
-      .send({ email, password });
+      .send({ email, password: TEST_PASSWORD });
 
     authorization = `Bearer ${response.body.data.refreshToken}`;
   });

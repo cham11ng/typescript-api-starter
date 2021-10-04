@@ -3,27 +3,21 @@ import request from 'supertest';
 import { StatusCodes } from 'http-status-codes';
 
 import app from '../../src/app';
-import Role from '../../src/resources/enums/Role';
-import { clearDb, getRandomElement } from '../helper';
-import * as userService from '../../src/services/userService';
+import { getRandomElement, init, TEST_EMAIL, TEST_PASSWORD } from '../helper';
 
 describe('GET /users API test', () => {
+  const email = TEST_EMAIL;
+  const password = TEST_PASSWORD;
+
   let authorization: string;
-  const user = {
-    name: faker.name.findName(),
-    email: 'first-user@starter.com',
-    password: faker.internet.password()
-  };
-  const { email, password } = user;
 
   beforeAll(async () => {
-    await clearDb();
-
-    await userService.insert(user);
+    await init();
 
     const response = await request(app)
       .post('/login')
       .send({ email, password });
+
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
@@ -56,19 +50,17 @@ describe('GET /users API test', () => {
 
 describe('POST /users API test', () => {
   let authorization: string;
-  const user = {
-    roleId: Role.NORMAL_USER,
-    name: faker.name.findName(),
-    email: 'login-user@starter.com',
-    password: faker.internet.password()
-  };
-  const { email, password } = user;
+
+  const email = TEST_EMAIL;
+  const password = TEST_PASSWORD;
 
   beforeAll(async () => {
-    await userService.insert(user);
+    await init();
+
     const response = await request(app)
       .post('/login')
       .send({ email, password });
+
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
