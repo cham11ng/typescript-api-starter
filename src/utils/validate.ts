@@ -11,5 +11,5 @@ export default async function validate<T>(
   data: T,
   schema: Joi.SchemaLike
 ): Promise<void> {
-  await Joi.validate(data, schema, { abortEarly: false });
+  await Joi.valid(data, schema, { abortEarly: false });
 }
