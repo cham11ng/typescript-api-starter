@@ -111,7 +111,7 @@ $ yarn seed # to seed
 
 ## Setting up REST Client
 
-Create a file or add `.vscode > settings.json` and switch an environment `Cmd/Ctrl + Shift + P` > `REST Client: Switch Environment`. Then, you can request APIs from `api.rest` file.
+Create a file or add following lines in `.vscode` > `settings.json` and switch an environment `Cmd/Ctrl + Shift + P` > `REST Client: Switch Environment`. Then, you can request APIs from `api.rest` file.
 
 ```
 {

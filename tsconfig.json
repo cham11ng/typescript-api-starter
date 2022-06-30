@@ -26,7 +26,7 @@
     "preserveSymlinks": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
-    "types": ["node", "express"],
+    "types": ["node", "express", "jest"],
     "allowSyntheticDefaultImports": true,
     "paths": {
       "*": ["node_modules/*", "src/types/*"]
