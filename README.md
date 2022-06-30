@@ -113,7 +113,7 @@ $ yarn seed # to seed
 
 Create a file or add following lines in `.vscode` > `settings.json` and switch an environment `Cmd/Ctrl + Shift + P` > `REST Client: Switch Environment`. Then, you can request APIs from `api.rest` file.
 
-```
+```json
 {
   "rest-client.environmentVariables": {
     "$shared": {

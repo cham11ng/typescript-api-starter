@@ -21,20 +21,24 @@
     "sync-env": "sync-dotenv",
     "build": "concurrently 'yarn clean' 'yarn lint:fix' 'yarn transpile'",
     "send:mail": "ts-node scripts/mail-test",
-    "load:fake": "NODE_ENV=test ts-node scripts/fake-loader",
+    "load:fake": "ts-node scripts/fake-loader",
     "test": "NODE_ENV=test yarn migrate && NODE_ENV=test jest --forceExit --detectOpenHandles --maxWorkers=1 --verbose",
     "seed": "knex seed:run --knexfile=knexfile.ts --verbose",
     "migrate": "knex migrate:latest --knexfile=knexfile.ts --verbose",
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts --verbose",
     "make:seeder": "knex seed:make --knexfile=knexfile.ts -x ts",
     "make:migration": "knex migrate:make --knexfile=knexfile.ts -x ts",
+    "prepare": "husky install",
     "lint": "eslint . --ext .ts,.json",
     "lint:fix": "eslint --fix . --ext .ts,.json",
-    "prettify": "prettier 'src/**/*.ts' --write"
+    "prettify": "prettier 'src/**/*.ts' --write",
+    "prettier:check": "prettier --list-different 'src/**/*.ts'",
+    "format:code": "concurrently 'yarn lint:fix' 'yarn prettify' 'sync-dotenv'"
   },
   "lint-staged": {
     "*.{ts,json}": [
-      "eslint --fix . --ext .ts,.json"
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "private": true,
@@ -87,7 +91,7 @@
     "eslint-plugin-security": "^1.4.0",
     "husky": "^8.0.1",
     "jest": "^28.1.2",
-    "lint-staged": "^11.0.1",
+    "lint-staged": "^13.0.3",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
