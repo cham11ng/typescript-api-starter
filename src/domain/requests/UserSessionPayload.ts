@@ -3,7 +3,7 @@
  */
 interface UserSessionPayload {
   token: string;
-  userId: string;
+  userId: number;
 }
 
 export default UserSessionPayload;

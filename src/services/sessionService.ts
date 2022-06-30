@@ -1,6 +1,5 @@
 import logger from '../utils/logger';
 import config from '../config/config';
-import * as object from '../utils/object';
 import UserSession from '../models/UserSession';
 import ErrorType from '../resources/enums/ErrorType';
 import ForbiddenError from '../exceptions/ForbiddenError';
@@ -20,11 +19,11 @@ export async function create(
 ): Promise<UserSessionDetail> {
   logger.log('info', 'User Session: Creating session -', params);
 
-  const session = (await new UserSession(params).save()).serialize();
+  const session = await UserSession.query().insert(params).returning('*');
 
   logger.log('debug', 'User Session: Session created successfully -', session);
 
-  return object.camelize(session);
+  return session;
 }
 
 /**
@@ -37,16 +36,14 @@ export async function remove(token: string): Promise<UserSessionDetail> {
   try {
     logger.log('info', 'User Session: Deactivating token - %s', token);
 
-    const session = (
-      await new UserSession()
-        // TODO: Fix this via. knex
-        .where({ token, is_active: true })
-        .save({ isActive: false }, { patch: true })
-    ).serialize();
-
+    const [session] = await UserSession.query()
+      .update({ isActive: false })
+      .where('token', token)
+      .where('isActive', true)
+      .returning('*');
     logger.log('debug', 'User Session: Deactivated session -', session);
 
-    return object.camelize(session);
+    return session;
   } catch (err: any) {
     if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
       throw new ForbiddenError(errors.sessionNotMaintained);

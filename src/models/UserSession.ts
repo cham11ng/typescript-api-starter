@@ -1,18 +1,17 @@
-import bookshelf from '../config/bookshelf';
+import { Model } from 'objection';
 
 import Table from '../resources/enums/Table';
 
-class UserSession extends bookshelf.Model<UserSession> {
-  get requireFetch(): boolean {
-    return false;
-  }
+class UserSession extends Model {
+  id!: number;
+  token!: string;
+  userId!: number;
+  isActive!: boolean;
+  updatedBy!: string;
+  createdBy!: string;
 
-  get tableName(): string {
+  static get tableName(): string {
     return Table.USER_SESSIONS;
-  }
-
-  get hasTimestamps(): boolean {
-    return true;
   }
 }
 
