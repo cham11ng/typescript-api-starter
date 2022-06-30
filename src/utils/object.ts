@@ -35,7 +35,7 @@ export function camelize(data: any): any {
   if (!isDate && isObject(data)) {
     return Object.keys(data).reduce((accumulator, current) => {
       const key = camelcase(current);
-      const value = camelize(data[parseInt(current)]);
+      const value = camelize(data[current as any]);
 
       return Object.assign(accumulator, { [key]: value });
     }, {});
