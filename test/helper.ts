@@ -10,7 +10,8 @@ const tables = [Table.USER_SESSIONS, Table.USERS];
 
 export const TEST_EMAIL = faker.internet.email();
 export const TEST_PASSWORD = faker.internet.password();
-let userData;
+
+let userData: UserDetail;
 
 /**
  * Create user.
