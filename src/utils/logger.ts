@@ -29,8 +29,8 @@ const formatter = printf((info: any) => {
   return `[ ${ts} ] [ ${transactionId} ] - [ ${level} ] ${message} ${meta}`;
 });
 
-if (!fs.existsSync(logging.dir)) {
-  fs.mkdirSync(logging.dir);
+if (!fs.existsSync('logs')) {
+  fs.mkdirSync('logs');
 }
 
 let trans: any = [];
@@ -49,7 +49,7 @@ const logger = createLogger({
       maxFiles: logging.maxFiles,
       datePattern: logging.datePattern,
       zippedArchive: true,
-      filename: `${logging.dir}/${logging.level}-%DATE%.log`
+      filename: `logs/${logging.level}-%DATE%.log`
     })
   ]
 });

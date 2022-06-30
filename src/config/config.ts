@@ -28,7 +28,6 @@ export default {
     refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY || ''
   },
   logging: {
-    dir: process.env.LOGGING_DIR || 'logs',
     level: process.env.LOGGING_LEVEL || 'info',
     maxSize: process.env.LOGGING_MAX_SIZE || '20m',
     maxFiles: process.env.LOGGING_MAX_FILES || '7d',
