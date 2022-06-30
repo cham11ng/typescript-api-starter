@@ -4,6 +4,5 @@
     ".env"
   ],
   "ext": "ts,.env",
-  "verbose": true,
-  "exec": "ts-node src/index.ts"
+  "verbose": true
 }

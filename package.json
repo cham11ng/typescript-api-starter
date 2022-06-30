@@ -15,7 +15,7 @@
     "node": ">= 16.5.0"
   },
   "scripts": {
-    "start": "nodemon",
+    "start": "concurrently 'npx tsc --watch' 'nodemon -q build/index.js'",
     "transpile": "tsc",
     "clean": "rimraf build",
     "sync-env": "sync-dotenv",
