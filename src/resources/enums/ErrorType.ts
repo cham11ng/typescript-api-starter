@@ -1,10 +1,7 @@
 /**
- * List of ErrorType.
+ * List of JWTErrorType.
  */
-enum ErrorType {
+export enum JWTErrorType {
   INVALID = 'JsonWebTokenError',
-  EXPIRED = 'TokenExpiredError',
-  NO_ROWS_UPDATED_ERROR = 'No Rows Updated'
+  EXPIRED = 'TokenExpiredError'
 }
-
-export default ErrorType;

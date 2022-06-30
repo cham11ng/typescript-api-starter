@@ -1,7 +1,6 @@
 import User from '../models/User';
 import logger from '../utils/logger';
 import * as bcrypt from '../utils/bcrypt';
-import * as object from '../utils/object';
 import transform from '../utils/transform';
 import Role from '../resources/enums/Role';
 import UserDetail from '../domain/entities/UserDetail';
@@ -45,5 +44,5 @@ export async function insert(params: UserPayload): Promise<UserDetail> {
 
   logger.log('debug', 'Inserted user successfully:', user);
 
-  return object.camelize(user);
+  return user;
 }

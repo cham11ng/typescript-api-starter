@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import knex from '../src/config/knex';
+import knex from '../src/config/db';
 import UserDetail from '../src/domain/entities/UserDetail';
 import Table from '../src/resources/enums/Table';
 

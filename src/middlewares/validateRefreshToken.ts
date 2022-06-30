@@ -3,16 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
-import ErrorType from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
+import { JWTErrorType } from '../resources/enums/ErrorType';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
+import { tokenErrorMessageMap } from '../resources/constants/maps';
 
 const { errors } = config;
-
-const tokenErrorMessageMap: any = {
-  [ErrorType.INVALID]: errors.invalidToken,
-  [ErrorType.EXPIRED]: errors.refreshTokenExpired
-};
 
 /**
  * A middleware to validateRefershToken the authorization token i.e. refresh token.
@@ -49,7 +45,7 @@ async function validateRefreshToken(
 
     next();
   } catch (err: any) {
-    const tokenErrorMessage = tokenErrorMessageMap[err.name];
+    const tokenErrorMessage = tokenErrorMessageMap[err.name as JWTErrorType];
     logger.log('error', 'JWT: Authentication failed - %s', err.message);
 
     if (tokenErrorMessage) {

@@ -1,7 +1,6 @@
 import logger from '../utils/logger';
 import config from '../config/config';
 import UserSession from '../models/UserSession';
-import ErrorType from '../resources/enums/ErrorType';
 import ForbiddenError from '../exceptions/ForbiddenError';
 import UserSessionDetail from '../domain/entities/UserSessionDetail';
 import UserSessionPayload from '../domain/requests/UserSessionPayload';
@@ -33,22 +32,21 @@ export async function create(
  * @returns {Promise<UserSessionDetail>}
  */
 export async function remove(token: string): Promise<UserSessionDetail> {
-  try {
-    logger.log('info', 'User Session: Deactivating token - %s', token);
+  logger.log('info', 'User Session: Deactivating token - %s', token);
 
-    const [session] = await UserSession.query()
-      .update({ isActive: false })
-      .where('token', token)
-      .where('isActive', true)
-      .returning('*');
-    logger.log('debug', 'User Session: Deactivated session -', session);
+  const session = await UserSession.query().findOne({
+    token,
+    isActive: true
+  });
 
-    return session;
-  } catch (err: any) {
-    if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
-      throw new ForbiddenError(errors.sessionNotMaintained);
-    }
-
-    throw err;
+  if (!session) {
+    throw new ForbiddenError(errors.sessionNotMaintained);
   }
+
+  const updatedSession = await session
+    .$query()
+    .updateAndFetch({ isActive: false });
+  logger.log('debug', 'User Session: Deactivated session -', updatedSession);
+
+  return updatedSession;
 }

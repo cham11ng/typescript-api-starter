@@ -1,18 +1,15 @@
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
 import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
-import ErrorType from './../resources/enums/ErrorType';
+import { JWTErrorType } from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
+import { tokenErrorMessageMap } from '../resources/constants/maps';
 
 const { errors } = config;
-
-const tokenErrorMessageMap: any = {
-  [ErrorType.INVALID]: errors.invalidToken,
-  [ErrorType.EXPIRED]: errors.accessTokenExpired
-};
 
 /**
  * A middleware to authenticate the authorization token i.e. access token.
@@ -48,17 +45,21 @@ async function authenticate(
     );
 
     next();
-  } catch (err: any) {
-    const tokenErrorMessage = tokenErrorMessageMap[err.name];
-    logger.log('error', 'JWT: Authentication failed - %s', err.message);
+  } catch (err) {
+    if (err instanceof JsonWebTokenError) {
+      const tokenErrorMessage = tokenErrorMessageMap[err.name as JWTErrorType];
+      logger.log('error', 'JWT: Authentication failed - %s', err.message);
 
-    if (tokenErrorMessage) {
-      logger.log('error', 'JWT: Token error - %s', tokenErrorMessage);
+      if (tokenErrorMessage) {
+        logger.log('error', 'JWT: Token error - %s', tokenErrorMessage);
 
-      next(new UnauthorizedError(tokenErrorMessage));
-    } else {
-      next(err);
+        next(new UnauthorizedError(tokenErrorMessage));
+
+        return;
+      }
     }
+
+    next(err);
   }
 }
 

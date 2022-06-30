@@ -5,7 +5,7 @@
   </a>
 </p>
 
-Starter for Node.js Express API in Typescript.
+Starter for Node.js Express API in Typescript with jsonwebtoken, joi, Knex, Objection.js and many other popular tools.
 
 ## Requirements
 
@@ -13,7 +13,6 @@ Starter for Node.js Express API in Typescript.
 - [Yarn](https://yarnpkg.com/en/docs/install)
 - [NPM](https://docs.npmjs.com/getting-started/installing-node)
 - [Docker](https://docs.docker.com/install/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Getting Started
 
@@ -42,11 +41,9 @@ $ yarn load:fake <FactoryName> <Number>
 Start the application.
 
 ```bash
-$ yarn build
+$ yarn build # For production
 
-$ yarn start # For production
-
-$ yarn start:dev # For development
+$ yarn start # For development
 ```
 
 <p align="center">
@@ -64,23 +61,23 @@ $ cp .env.docker .env
 Install dependencies and run the application locally.
 
 ```bash
-$ docker-compose up -d postgres
+$ docker compose up -d postgres
 
-$ docker-compose up -d api
+$ docker compose up -d api
 
-$ docker-compose exec api sh yarn migrate # Make sure server is started checking logs before running this command
+$ docker compose exec api sh yarn migrate # Make sure server is started checking logs before running this command
 ```
 
 View logs of the container.
 
 ```bash
-$ docker-compose logs -f
+$ docker compose logs -f
 ```
 
 To stop the services.
 
 ```bash
-$ docker-compose stop api postgres
+$ docker compose stop api postgres
 ```
 
 ## Generating Migrations and Seeds

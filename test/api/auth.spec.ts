@@ -160,21 +160,6 @@ describe('Auth Workflow', () => {
         });
     });
 
-    test('should fail logout with same authorization token.', () => {
-      const expectedResponse = {
-        code: StatusCodes.FORBIDDEN,
-        message: expect.any(String)
-      };
-
-      return request(app)
-        .post('/logout')
-        .set({ authorization })
-        .then((res) => {
-          expect(res.status).toBe(StatusCodes.FORBIDDEN);
-          expect(res.body).toEqual(expectedResponse);
-        });
-    });
-
     test('should fail logout with invalid authorization token.', () => {
       const expectedResponse = {
         code: StatusCodes.UNAUTHORIZED,

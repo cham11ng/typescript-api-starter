@@ -26,8 +26,12 @@ export async function send(mailOptions: MailOptions): Promise<any> {
     const info = await transporter.sendMail(mailOptions);
 
     return info;
-  } catch (err: any) {
-    logger.log('error', 'Mail: Failed to send email - %s', err.message);
+  } catch (err) {
+    logger.log(
+      'error',
+      'Mail: Failed to send email - %s',
+      err instanceof Error ? err.message : err
+    );
   }
 }
 
