@@ -1,4 +1,4 @@
-import { JsonWebTokenError, Jwt, JwtPayload } from 'jsonwebtoken';
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
 import * as jwt from '../utils/jwt';
