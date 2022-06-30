@@ -12,6 +12,10 @@ const {
   refreshTokenSecretKey
 } = config.auth;
 
+if (!refreshTokenSecretKey || !accessTokenSecretKey) {
+  throw new Error('Auth refresh and access token secrets cannot be empty.');
+}
+
 /**
  * Generate access token from given data
  *
@@ -52,7 +56,7 @@ export function generateRefreshToken(data: JWTPayload): string {
  * @param {string} token
  * @returns {object | string}
  */
-export function verifyAccessToken(token: string): object | string {
+export function verifyAccessToken(token: string): jwbt.JwtPayload | string {
   return jwbt.verify(token, accessTokenSecretKey);
 }
 
@@ -62,6 +66,6 @@ export function verifyAccessToken(token: string): object | string {
  * @param {string} token
  * @returns {object | string}
  */
-export function verifyRefreshToken(token: string): object | string {
+export function verifyRefreshToken(token: string): jwbt.JwtPayload | string {
   return jwbt.verify(token, refreshTokenSecretKey);
 }

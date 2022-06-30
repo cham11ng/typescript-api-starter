@@ -9,9 +9,11 @@ export async function generate<T>(
   factoryCallback: () => Promise<T>,
   total = 1
 ): Promise<T[]> {
-  const data = [];
+  const data: T[] = [];
   for (let i = 0; i < total; i++) {
-    data[i] = await factoryCallback();
+    const res = await factoryCallback();
+
+    data.push(res);
   }
 
   return data;

@@ -1,9 +1,9 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 import { hash, compare } from '../../src/utils/bcrypt';
 
 describe('Utils: compare()', () => {
-  let hashedText;
+  let hashedText: string;
   const plainText = faker.internet.password();
 
   beforeAll(async () => {

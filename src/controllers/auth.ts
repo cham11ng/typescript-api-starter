@@ -1,4 +1,4 @@
-import * as HTTPStatus from 'http-status-codes';
+import { StatusCodes } from 'http-status-codes';
 import { Request, Response, NextFunction } from 'express';
 
 import config from '../config/config';
@@ -22,9 +22,9 @@ export async function login(
   try {
     const data = await authService.login(req.body);
 
-    res.status(HTTPStatus.OK).json({
+    res.status(StatusCodes.OK).json({
       data,
-      code: HTTPStatus.OK,
+      code: StatusCodes.OK,
       message: messages.auth.loginSuccess
     });
   } catch (error) {
@@ -49,9 +49,9 @@ export async function refresh(
     const jwtPayload = res.locals.jwtPayload as JWTPayload;
     const data = await authService.refresh(token, jwtPayload);
 
-    res.status(HTTPStatus.OK).json({
+    res.status(StatusCodes.OK).json({
       data,
-      code: HTTPStatus.OK,
+      code: StatusCodes.OK,
       message: messages.auth.accessTokenRefreshed
     });
   } catch (error) {
@@ -75,8 +75,8 @@ export async function logout(
     const token = String(res.locals.refreshToken);
     await authService.logout(token);
 
-    res.status(HTTPStatus.OK).json({
-      code: HTTPStatus.OK,
+    res.status(StatusCodes.OK).json({
+      code: StatusCodes.OK,
       message: messages.auth.logoutSuccess
     });
   } catch (error) {

@@ -1,25 +1,24 @@
 import cors from 'cors';
 import helmet from 'helmet';
-import morgan from 'morgan';
 import express from 'express';
-import bodyParser from 'body-parser';
 
 import routes from './routes';
-import config from './config/config';
+import { bindModel } from './config/db';
+import logHandler from './middlewares/logHandler';
 import notFoundHandler from './middlewares/notFoundHandler';
+import transactionHandler from './middlewares/transactionHandler';
 import genericErrorHandler from './middlewares/genericErrorHandler';
 
-const { name, version } = config;
 const app: express.Application = express();
 
-app.locals.name = name;
-app.locals.version = version;
+bindModel();
 
 app.use(cors());
 app.use(helmet());
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(transactionHandler);
+app.use(logHandler);
+app.use(express.json({ limit: '300kb' }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/', routes);
 

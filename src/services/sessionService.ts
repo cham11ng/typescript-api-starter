@@ -1,8 +1,6 @@
 import logger from '../utils/logger';
 import config from '../config/config';
-import * as object from '../utils/object';
 import UserSession from '../models/UserSession';
-import ErrorType from '../resources/enums/ErrorType';
 import ForbiddenError from '../exceptions/ForbiddenError';
 import UserSessionDetail from '../domain/entities/UserSessionDetail';
 import UserSessionPayload from '../domain/requests/UserSessionPayload';
@@ -20,11 +18,11 @@ export async function create(
 ): Promise<UserSessionDetail> {
   logger.log('info', 'User Session: Creating session -', params);
 
-  const session = (await new UserSession(params).save()).serialize();
+  const session = await UserSession.query().insert(params).returning('*');
 
   logger.log('debug', 'User Session: Session created successfully -', session);
 
-  return object.camelize(session);
+  return session;
 }
 
 /**
@@ -34,25 +32,21 @@ export async function create(
  * @returns {Promise<UserSessionDetail>}
  */
 export async function remove(token: string): Promise<UserSessionDetail> {
-  try {
-    logger.log('info', 'User Session: Deactivating token - %s', token);
+  logger.log('info', 'User Session: Deactivating token - %s', token);
 
-    const session = (
-      await new UserSession()
-        // TODO: Fix this via. knex
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        .where({ token, is_active: true })
-        .save({ isActive: false }, { patch: true })
-    ).serialize();
+  const session = await UserSession.query().findOne({
+    token,
+    isActive: true
+  });
 
-    logger.log('debug', 'User Session: Deactivated session -', session);
-
-    return object.camelize(session);
-  } catch (err) {
-    if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
-      throw new ForbiddenError(errors.sessionNotMaintained);
-    }
-
-    throw err;
+  if (!session) {
+    throw new ForbiddenError(errors.sessionNotMaintained);
   }
+
+  const updatedSession = await session
+    .$query()
+    .updateAndFetch({ isActive: false });
+  logger.log('debug', 'User Session: Deactivated session -', updatedSession);
+
+  return updatedSession;
 }

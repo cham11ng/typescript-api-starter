@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [16.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}
@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_DB: app_test
+          POSTGRES_DB: starter_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: secret
         ports:
@@ -41,7 +41,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn install
 
       - name: Building source code
         run: yarn build
@@ -52,7 +52,10 @@ jobs:
           NODE_ENV: test
           DB_CLIENT: pg
           DB_PORT: 5432
-          DB_HOST: 0.0.0.0
+          DB_HOST: 127.0.0.1
           DB_USER: postgres
           DB_PASSWORD: secret
-          TEST_DB_NAME: app_test
+          TEST_DB_NAME: starter_test
+          TEST_APP_PORT: 8888
+          ACCESS_TOKEN_SECRET_KEY: 'somerandoma'
+          REFRESH_TOKEN_SECRET_KEY: 'somerandomr'

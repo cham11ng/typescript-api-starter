@@ -2,14 +2,13 @@ import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
 
 import logger from '../utils/logger';
-import validate from '../utils/validate';
 
 /**
  * A middleware to validate schema.
  *
- * @param {Joi.Schema} params
+ * @param {Joi.Schema} schema
  */
-export function schema(params: Joi.Schema) {
+export default function validate(schema: Joi.Schema) {
   return async (
     req: Request,
     _: Response,
@@ -18,7 +17,9 @@ export function schema(params: Joi.Schema) {
     try {
       logger.log('info', 'Validating schema');
 
-      await validate(req.body, params);
+      logger.log('debug', 'Validation Payload', req.body);
+      const value = await schema.validateAsync(req.body);
+      logger.log('debug', 'Validation Response:', value);
 
       next();
     } catch (err) {

@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 import UserDetail from '../../domain/entities/UserDetail';
 import * as userService from '../../services/userService';

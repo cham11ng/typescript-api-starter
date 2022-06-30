@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
-import * as Knex from 'knex';
+import { Knex } from 'knex';
 
 import * as bcrypt from '../../utils/bcrypt';
 import Role from '../../resources/enums/Role';

@@ -25,18 +25,18 @@ export async function login(
   const { email, password } = loginPayload;
 
   logger.log('info', 'Checking email: %s', email);
-  const user = await new User({ email }).fetch();
+  const user = await User.query().findOne({ email });
 
   if (user) {
-    logger.log('debug', 'Login: Fetched user by email -', user.attributes);
+    logger.log('debug', 'Login: Fetched user by email -', user);
     logger.log('debug', 'Login: Comparing password');
 
-    const isSame = await bcrypt.compare(password, user.attributes.password);
+    const isSame = await bcrypt.compare(password, user.password);
 
     logger.log('debug', 'Login: Password match status - %s', isSame);
 
     if (isSame) {
-      const { name, roleId, id: userId } = user.attributes;
+      const { name, roleId, id: userId } = user;
       const loggedInUser = { name, email, userId, roleId };
       const refreshToken = jwt.generateRefreshToken(loggedInUser);
       const userSessionPayload = { userId, token: refreshToken };
@@ -66,13 +66,15 @@ export async function refresh(
 ): Promise<TokenResponse> {
   logger.log('info', 'User Session: Fetching session of token - %s', token);
 
-  const session = await new UserSession({ token, isActive: true }).fetch();
-
+  const session = await UserSession.query().findOne({
+    token,
+    isActive: true
+  });
   if (!session) {
     throw new ForbiddenError(errors.sessionNotMaintained);
   }
 
-  logger.log('debug', 'User Session: Fetched session -', session.serialize());
+  logger.log('debug', 'User Session: Fetched session -', session);
   logger.log('info', 'JWT: Generating new access token');
 
   const accessToken = jwt.generateAccessToken({

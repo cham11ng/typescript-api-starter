@@ -27,7 +27,11 @@ export async function send(mailOptions: MailOptions): Promise<any> {
 
     return info;
   } catch (err) {
-    logger.log('error', 'Mail: Failed to send email - %s', err.message);
+    logger.log(
+      'error',
+      'Mail: Failed to send email - %s',
+      err instanceof Error ? err.message : err
+    );
   }
 }
 
