@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 
 import * as fake from '../src/utils/fake';
+import { bindModel } from '../src/config/db';
 import factories, { FactoryType } from '../src/database/factories';
 
 const { info } = console;
@@ -18,10 +19,12 @@ function print<T>(data: T): void {
 
     const factoryCallback = factories[table as FactoryType].run;
 
+    bindModel();
+
     print(await fake.generate(factoryCallback, total));
 
     process.exit(0);
-  } catch (err: any) {
+  } catch (err) {
     info(chalk`{red ${err.message}}`);
 
     process.exit(1);
