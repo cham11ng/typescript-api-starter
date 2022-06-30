@@ -1,18 +1,24 @@
-import bookshelf from '../config/bookshelf';
+import { Model } from 'objection';
 
 import Table from '../resources/enums/Table';
 
-class UserRole extends bookshelf.Model<UserRole> {
-  get requireFetch(): boolean {
-    return false;
-  }
+class UserRole extends Model {
+  id!: number;
+  name!: number;
+  description!: number;
+  createdAt!: string;
+  updatedAt!: string;
 
-  get tableName(): string {
+  static get tableName(): string {
     return Table.USER_ROLES;
   }
 
-  get hasTimestamps(): boolean {
-    return true;
+  $beforeInsert() {
+    this.createdAt = new Date().toISOString();
+  }
+
+  $beforeUpdate() {
+    this.updatedAt = new Date().toISOString();
   }
 }
 
