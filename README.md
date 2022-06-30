@@ -109,6 +109,30 @@ $ yarn migrate # to migrate
 $ yarn seed # to seed
 ```
 
+## Setting up REST Client
+
+Create a file or add `.vscode > settings.json` and switch an environment `Cmd/Ctrl + Shift + P` > `REST Client: Switch Environment`. Then, you can request APIs from `api.rest` file.
+
+```
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "refreshToken": "foo",
+      "accessToken": "bar",
+      "email": "sgr.raee@gmail.com",
+      "password": "secret" 
+    },
+    "local": {
+      "host": "localhost",
+      "refreshToken": "{{$shared refreshToken}}",
+      "accessToken": "{{$shared accessToken}}",
+      "email": "{{$shared email}}",
+      "password": "{{$shared password}}"
+    }
+  }
+}
+```
+
 ## Contributing
 
 Feel free to send pull requests.

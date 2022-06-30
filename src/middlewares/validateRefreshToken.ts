@@ -48,7 +48,7 @@ async function validateRefreshToken(
     );
 
     next();
-  } catch (err) {
+  } catch (err: any) {
     const tokenErrorMessage = tokenErrorMessageMap[err.name];
     logger.log('error', 'JWT: Authentication failed - %s', err.message);
 

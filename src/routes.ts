@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as validate from './middlewares/validate';
+import validate from './middlewares/validate';
 import * as homeController from './controllers/home';
 import * as userController from './controllers/user';
 import * as authController from './controllers/auth';
@@ -13,7 +13,7 @@ const router: Router = Router();
 
 router.get('/', homeController.index);
 
-router.post('/login', validate.schema(loginSchema), authController.login);
+router.post('/login', validate(loginSchema), authController.login);
 router.post('/refresh', validateRefreshToken, authController.refresh);
 router.post('/logout', validateRefreshToken, authController.logout);
 
@@ -21,7 +21,7 @@ router.get('/users', authenticate, userController.index);
 router.post(
   '/users',
   authenticate,
-  validate.schema(userPOSTSchema),
+  validate(userPOSTSchema),
   userController.store
 );
 

@@ -47,7 +47,7 @@ export async function remove(token: string): Promise<UserSessionDetail> {
     logger.log('debug', 'User Session: Deactivated session -', session);
 
     return object.camelize(session);
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === ErrorType.NO_ROWS_UPDATED_ERROR) {
       throw new ForbiddenError(errors.sessionNotMaintained);
     }

@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 import knex from '../src/config/knex';
 import UserDetail from '../src/domain/entities/UserDetail';
@@ -49,5 +49,5 @@ export async function init(): Promise<UserDetail> {
  * @returns {any}
  */
 export function getRandomElement(list: any[]): any {
-  return faker.random.arrayElement<any>(list);
+  return faker.helpers.arrayElement<any>(list);
 }

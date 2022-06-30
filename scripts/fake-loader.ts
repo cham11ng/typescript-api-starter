@@ -20,7 +20,7 @@ function print<T>(data: T): void {
     print(await fake.generate(factoryCallback, total));
 
     process.exit(0);
-  } catch (err) {
+  } catch (err: any) {
     info(chalk`{red ${err.message}}`);
 
     process.exit(1);
