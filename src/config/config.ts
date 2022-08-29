@@ -31,7 +31,8 @@ export default {
     level: process.env.LOGGING_LEVEL || 'info',
     maxSize: process.env.LOGGING_MAX_SIZE || '20m',
     maxFiles: process.env.LOGGING_MAX_FILES || '7d',
-    datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD'
+    datePattern: process.env.LOGGING_DATE_PATTERN || 'YYYY-MM-DD',
+    logFileGenarationSupport: process.env.LOG_FILE_GENERATION_SUPPORT || 'false'
   },
   db: {
     client: process.env.DB_CLIENT,
