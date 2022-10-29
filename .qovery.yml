@@ -1,0 +1,16 @@
+application:
+  name: typescript-api-starter
+  project: typescript-api-starter
+  publicly_accessible: true
+
+databases:
+  - type: postgresql
+    version: "12"
+    name: tas-postgres
+
+routers:
+  - name: main
+    routes:
+      - application_name: typescript-api-starter
+        paths:
+          - /*
