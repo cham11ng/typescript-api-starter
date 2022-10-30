@@ -6,7 +6,7 @@ application:
 databases:
   - type: postgresql
     version: "12"
-    name: tas-postgres
+    name: tasp
 
 routers:
   - name: dev
