@@ -9,7 +9,7 @@ databases:
     name: tas-postgres
 
 routers:
-  - name: main
+  - name: dev
     routes:
       - application_name: typescript-api-starter
         paths:
