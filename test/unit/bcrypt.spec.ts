@@ -1,12 +1,13 @@
 import { faker } from '@faker-js/faker';
+import { describe, test, beforeEach, expect } from 'bun:test';
 
-import { hash, compare } from '../../src/utils/bcrypt';
+import { hash, compare } from '../../src/utils/hash';
 
 describe('Utils: compare()', () => {
   let hashedText: string;
   const plainText = faker.internet.password();
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     hashedText = await hash(plainText);
   });
 

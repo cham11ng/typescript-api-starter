@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-
 import config from '../config/config';
 
 /**
@@ -9,9 +7,9 @@ import config from '../config/config';
  * @returns {Promise<string>}
  */
 export function hash(value: string): Promise<string> {
-  const saltRounds = config.auth.saltRounds;
+  const passwordCost = Number(config.auth.passwordCost);
 
-  return bcrypt.hash(value, saltRounds);
+  return Bun.password.hash(value, { algorithm: 'bcrypt', cost: passwordCost });
 }
 
 /**
@@ -22,5 +20,5 @@ export function hash(value: string): Promise<string> {
  * @returns {Promise<boolean>}
  */
 export function compare(value: string, hashedValue: string): Promise<boolean> {
-  return bcrypt.compare(value, hashedValue);
+  return Bun.password.verify(value, hashedValue);
 }

@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 
-import * as bcrypt from '../../utils/bcrypt';
+import * as bcrypt from '../../utils/hash';
 import Role from '../../resources/enums/Role';
 import Table from '../../resources/enums/Table';
 

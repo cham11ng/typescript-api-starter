@@ -12,7 +12,7 @@ describe('Auth Workflow', () => {
   let accessToken: string;
   let authorization: string;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await init();
 
     const response = await request(app)
@@ -136,7 +136,7 @@ describe('Auth Workflow', () => {
 
       return request(app)
         .post('/refresh')
-        .set({ authorization: faker.random.alphaNumeric() })
+        .set({ authorization: faker.string.alphanumeric() })
         .then((res) => {
           expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
           expect(res.body).toEqual(expectedResponse);
@@ -168,7 +168,7 @@ describe('Auth Workflow', () => {
 
       return request(app)
         .post('/logout')
-        .set({ authorization: faker.random.alphaNumeric() })
+        .set({ authorization: faker.string.alphanumeric() })
         .then((res) => {
           expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
           expect(res.body).toEqual(expectedResponse);

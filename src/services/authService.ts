@@ -2,7 +2,7 @@ import User from '../models/User';
 import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
 import config from '../config/config';
-import * as bcrypt from '../utils/bcrypt';
+import * as bcrypt from '../utils/hash';
 import UserSession from '../models/UserSession';
 import JWTPayload from '../domain/misc/JWTPayload';
 import ForbiddenError from '../exceptions/ForbiddenError';

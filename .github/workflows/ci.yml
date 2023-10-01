@@ -35,19 +35,19 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Install bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          bun-version: latest
 
       - name: Install dependencies
-        run: yarn install
+        run: bun install
 
       - name: Building source code
-        run: yarn build
+        run: bun run build
 
       - name: Running tests
-        run: yarn test
+        run: bun test
         env:
           NODE_ENV: test
           DB_CLIENT: pg

@@ -22,7 +22,7 @@ async function createUser(): Promise<UserDetail> {
   return await userService.insert({
     email: TEST_EMAIL,
     password: TEST_PASSWORD,
-    name: faker.name.findName()
+    name: faker.person.fullName()
   });
 }
 

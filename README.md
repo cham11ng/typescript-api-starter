@@ -9,8 +9,8 @@ Starter for Node.js Express API in Typescript with jsonwebtoken, joi, Knex, Obje
 
 ## Requirements
 
-- [Node.js](https://yarnpkg.com/en/docs/install)
-- [Yarn](https://yarnpkg.com/en/docs/install)
+- [Node.js](https://bunpkg.com/en/docs/install)
+- [bun](https://bunpkg.com/en/docs/install)
 - [NPM](https://docs.npmjs.com/getting-started/installing-node)
 - [Docker](https://docs.docker.com/install/)
 
@@ -25,13 +25,13 @@ $ cd <application-name>
 
 $ cp .env.example .env # Update database credentials
 
-$ yarn migrate
+$ bun migrate
 ```
 
 Load fake data in database.
 
 ```bash
-$ yarn load:fake <FactoryName> <Number>
+$ bun load:fake <FactoryName> <Number>
 ```
 
 <p align="center">
@@ -41,9 +41,9 @@ $ yarn load:fake <FactoryName> <Number>
 Start the application.
 
 ```bash
-$ yarn build # For production
+$ bun run build # For production
 
-$ yarn start # For development
+$ bun start # For development
 ```
 
 <p align="center">
@@ -65,7 +65,7 @@ $ docker compose up -d postgres
 
 $ docker compose up -d api
 
-$ docker compose exec api sh yarn migrate # Make sure server is started checking logs before running this command
+$ docker compose exec api sh bun migrate # Make sure server is started checking logs before running this command
 ```
 
 View logs of the container.
@@ -85,25 +85,25 @@ $ docker compose stop api postgres
 To create migration use `make:migration` and seed use `make:seeder`:
 
 ```bash
-$ yarn make:migration create_{table_name}_table
+$ bun make:migration create_{table_name}_table
 
-$ yarn make:seeder {table_name}_table_seeder
+$ bun make:seeder {table_name}_table_seeder
 ```
 
 Example,
 
 ```bash
-$ yarn make:migration create_posts_table
+$ bun make:migration create_posts_table
 
-$ yarn make:seeder post_table_seeder
+$ bun make:seeder post_table_seeder
 ```
 
 Modify migration and seeder file as per the requirement. Then finally:
 
 ```bash
-$ yarn migrate # to migrate
+$ bun migrate # to migrate
 
-$ yarn seed # to seed
+$ bun seed # to seed
 ```
 
 ## Setting up REST Client

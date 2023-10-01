@@ -630,9 +630,9 @@ declare namespace Objection {
   type OrderByRawMethod<QB extends AnyQueryBuilder> = RawInterface<QB>;
 
   interface FirstMethod {
-    <QB extends AnyQueryBuilder>(this: QB): QB extends ArrayQueryBuilder<QB>
-      ? MaybeSingleQueryBuilder<QB>
-      : QB;
+    <QB extends AnyQueryBuilder>(
+      this: QB
+    ): QB extends ArrayQueryBuilder<QB> ? MaybeSingleQueryBuilder<QB> : QB;
   }
 
   type ForIdValue = MaybeCompositeId | AnyQueryBuilder;

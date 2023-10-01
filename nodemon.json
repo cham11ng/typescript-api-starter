@@ -1,8 +1,0 @@
-{
-  "watch": [
-    "src/**/*",
-    ".env"
-  ],
-  "ext": "ts,.env",
-  "verbose": true
-}

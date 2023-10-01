@@ -1,0 +1,5 @@
+[test]
+
+coverage = true                    # always enable coverage
+coverageSkipTestFiles = true       # default false
+coverageThreshold = { line = 0.95, function = 0.95 }

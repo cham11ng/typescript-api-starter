@@ -1,6 +1,6 @@
 import User from '../models/User';
 import logger from '../utils/logger';
-import * as bcrypt from '../utils/bcrypt';
+import * as bcrypt from '../utils/hash';
 import transform from '../utils/transform';
 import Role from '../resources/enums/Role';
 import UserDetail from '../domain/entities/UserDetail';

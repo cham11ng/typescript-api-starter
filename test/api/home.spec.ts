@@ -10,7 +10,7 @@ describe('API Information', () => {
     version: config.version
   };
 
-  test('should return application information', () => {
+  it('should return application information', () => {
     return request(app)
       .get('/')
       .then((res) => {

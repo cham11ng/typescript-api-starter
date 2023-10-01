@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "sourceMap": true,
     "outDir": "./build",
     "declaration": true,
     "module": "commonjs",
     "importHelpers": true,
     "removeComments": true,
+    
+    "skipLibCheck": true,
     "downlevelIteration": true,
-    "lib": ["es2015", "es2016", "es2017"],
-
+    "lib": [
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "moduleDetection": "force",
     "strict": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
@@ -25,16 +32,25 @@
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node",
-    "types": ["node", "express", "jest"],
+
+    "types": [
+      "express",
+      "bun-types"
+    ],
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "*": ["src/types/*"]
+      "*": [
+        "src/types/*"
+      ]
     },
-
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

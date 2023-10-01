@@ -11,7 +11,7 @@ describe('GET /users API test', () => {
 
   let authorization: string;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await init();
 
     const response = await request(app)
@@ -54,19 +54,21 @@ describe('POST /users API test', () => {
   const email = TEST_EMAIL;
   const password = TEST_PASSWORD;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     await init();
 
     const response = await request(app)
       .post('/login')
       .send({ email, password });
 
+    console.log(response);
+
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
   test('should successfully insert user detail into database and return inserted user detail.', () => {
     const userBody = {
-      name: faker.name.findName(),
+      name: faker.person.fullName(),
       email: 'dummy-user@starter.com',
       password: faker.internet.password()
     };

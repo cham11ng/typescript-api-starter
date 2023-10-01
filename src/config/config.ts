@@ -20,7 +20,7 @@ export default {
     maxRows: 20
   },
   auth: {
-    saltRounds: process.env.SALT_ROUNDS || 11,
+    passwordCost: process.env.PASSWORD_COST || 11,
     accessTokenDuration: process.env.ACCESS_TOKEN_DURATION || '10m',
     refreshTokenDuration: process.env.REFRESH_TOKEN_DURATION || '24h',
     emailVerificationDuration: process.env.EMAIL_VERIFICATION_DURATION || 24,
