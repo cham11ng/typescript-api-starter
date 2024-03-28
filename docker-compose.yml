@@ -19,6 +19,7 @@ services:
     container_name: "starter-api"
     volumes:
       - "./:/source"
+      - "/source/node_modules"
     working_dir: /source
     depends_on:
       - postgres

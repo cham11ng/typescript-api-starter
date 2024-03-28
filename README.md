@@ -5,7 +5,7 @@
   </a>
 </p>
 
-Starter for Node.js, Express API in Typescript and PostgreSQL with jsonwebtoken, joi, Knex, Objection.js and many other popular tools.
+This is a API starter template for building a Node.js and Express.js using Typescript and PostgreSQL as database. It includes popular tools such as jsonwebtoken, joi, Knex, Objection.js, and more.
 
 ## Requirements
 
@@ -55,13 +55,6 @@ $ yarn dev
 </p>
 
 ### Using Docker
-
-```bash
-# Make a copy of `.env.docker` and save as `.env`.
-$ cp .env.docker .env
-```
-
-Install dependencies and run the application locally.
 
 ```bash
 $ docker compose up -d api

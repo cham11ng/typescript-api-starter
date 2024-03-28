@@ -1,5 +1,3 @@
-import chalk from 'chalk';
-
 import { bindModel } from '../src/config/db';
 import factories, { FactoryType } from '../src/database/factories';
 import * as fake from '../src/utils/fake';
@@ -15,7 +13,7 @@ const { info } = console;
 function print<T>(data: T): void {
   const jsonData = JSON.stringify(data, null, ' ');
 
-  info(chalk.green(jsonData));
+  info(jsonData);
 }
 
 (async (): Promise<void> => {
@@ -30,8 +28,9 @@ function print<T>(data: T): void {
     print(await fake.generate(factoryCallback, total));
 
     process.exit(0);
-  } catch (err) {
-    info(chalk`{red ${err.message}}`);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    info(err.message);
 
     process.exit(1);
   }
