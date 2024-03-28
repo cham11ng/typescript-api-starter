@@ -1,26 +1,27 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "security",
-    "@typescript-eslint"
-  ],
+  "plugins": ["sonarjs", "simple-import-sort", "jsdoc"],
   "parserOptions": {
-    "ecmaVersion": 2018,            // Allows for the parsing of modern ECMAScript features
-    "sourceType": "module"          // Allows for the use of imports
+    "ecmaVersion": "latest",
+    "sourceType": "module"
   },
   "ignorePatterns": ["./node_modules/*"],
   "extends": [
     "eslint:recommended",
-    "plugin:security/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:sonarjs/recommended",
+    "plugin:jsdoc/recommended-typescript"
   ],
   "rules": {
     "no-error-on-unmatched-pattern": "off",
-    "@typescript-eslint/no-explicit-any": "off", // TODO: Remove this.
-    "no-return-await": "off", 
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["error"]
+    "@typescript-eslint/no-explicit-any": "warn",
+    "sonarjs/cognitive-complexity": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "simple-import-sort/imports": "warn",
+    "jsdoc/no-types": "off",
+    "jsdoc/tag-lines": "off",
+    "jsdoc/require-returns-description": "off"
   }
 }
