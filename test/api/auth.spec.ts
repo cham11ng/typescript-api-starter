@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import request from 'supertest';
 import { StatusCodes } from 'http-status-codes';
+import request from 'supertest';
 
 import app from '../../src/app';
-import { init, getRandomElement, TEST_PASSWORD, TEST_EMAIL } from '../helper';
+import { getRandomElement, init, TEST_EMAIL, TEST_PASSWORD } from '../helper';
 
 describe('Auth Workflow', () => {
   const email = TEST_EMAIL;
@@ -15,9 +15,7 @@ describe('Auth Workflow', () => {
   beforeAll(async () => {
     await init();
 
-    const response = await request(app)
-      .post('/login')
-      .send({ email, password: TEST_PASSWORD });
+    const response = await request(app).post('/login').send({ email, password: TEST_PASSWORD });
 
     authorization = `Bearer ${response.body.data.refreshToken}`;
   });

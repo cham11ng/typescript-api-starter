@@ -1,7 +1,7 @@
 /**
  * Check the given parameter is array or not.
  *
- * @param {any} arr
+ * @param {any} arr - Parameter to check.
  * @returns {boolean}
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

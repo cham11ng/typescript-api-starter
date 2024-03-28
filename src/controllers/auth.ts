@@ -1,5 +1,5 @@
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { Request, Response, NextFunction } from 'express';
 
 import config from '../config/config';
 import JWTPayload from '../domain/misc/JWTPayload';
@@ -7,18 +7,7 @@ import * as authService from '../services/authService';
 
 const { messages } = config;
 
-/**
- * Handle /login request.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function login(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const data = await authService.login(req.body);
 
@@ -30,20 +19,9 @@ export async function login(
   } catch (error) {
     next(error);
   }
-}
+};
 
-/**
- * Handle /refresh request.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function refresh(
-  _: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export const refresh = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const token = String(res.locals.refreshToken);
     const jwtPayload = res.locals.jwtPayload as JWTPayload;
@@ -57,20 +35,9 @@ export async function refresh(
   } catch (error) {
     next(error);
   }
-}
+};
 
-/**
- * Handle /logout request.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function logout(
-  _: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export const logout = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const token = String(res.locals.refreshToken);
     await authService.logout(token);
@@ -82,4 +49,4 @@ export async function logout(
   } catch (error) {
     next(error);
   }
-}
+};

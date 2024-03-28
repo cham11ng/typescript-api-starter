@@ -1,9 +1,9 @@
+import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { Request, Response, NextFunction } from 'express';
 
 import config from '../config/config';
-import * as userService from '../services/userService';
 import UserPayload from '../domain/requests/UserPayload';
+import * as userService from '../services/userService';
 
 const { messages } = config;
 
@@ -11,14 +11,11 @@ const { messages } = config;
  * Handle /users GET request.
  *
  * @param {Request} req
+ * @param _
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function index(
-  _: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function index(_: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const response = await userService.fetchAll();
 
@@ -39,11 +36,7 @@ export async function index(
  * @param {Response} res
  * @param {NextFunction} next
  */
-export async function store(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+export async function store(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const userPayload = req.body as UserPayload;
 

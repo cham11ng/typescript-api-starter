@@ -1,10 +1,10 @@
-import User from '../models/User';
-import logger from '../utils/logger';
-import * as bcrypt from '../utils/bcrypt';
-import transform from '../utils/transform';
-import Role from '../resources/enums/Role';
 import UserDetail from '../domain/entities/UserDetail';
 import UserPayload from '../domain/requests/UserPayload';
+import User from '../models/User';
+import Role from '../resources/enums/Role';
+import * as bcrypt from '../utils/bcrypt';
+import logger from '../utils/logger';
+import transform from '../utils/transform';
 
 /**
  * Fetch all users from users table.
@@ -31,7 +31,7 @@ export async function fetchAll(): Promise<UserDetail[]> {
 /**
  * Insert user from given user payload
  *
- * @param {UserPayload} params
+ * @param {UserPayload} params - User payload
  * @returns {Promise<UserDetail>}
  */
 export async function insert(params: UserPayload): Promise<UserDetail> {

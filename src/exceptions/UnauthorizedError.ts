@@ -3,23 +3,18 @@ import { StatusCodes } from 'http-status-codes';
 import Error from './Error';
 
 /**
- * @class UnauthorizedError
- * @extends {Error}
  */
 class UnauthorizedError extends Error {
   /**
    * Error message to be thrown.
    *
-   * @type {string}
-   * @memberof UnauthorizedError
    */
   message: string;
 
   /**
    * Creates an instance of UnauthorizedError.
    *
-   * @param {string} message
-   * @memberof UnauthorizedError
+   * @param {string} message - Error message.
    */
   constructor(message: string) {
     super(message, StatusCodes.UNAUTHORIZED);

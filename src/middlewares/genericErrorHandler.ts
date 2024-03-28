@@ -1,16 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 
-import logger from '../utils/logger';
 import APIResponseInterface from '../domain/responses/APIResponse';
+import logger from '../utils/logger';
 
-/**
- * Build error response for validation errors.
- *
- * @param  {Error} err
- * @return {Object}
- */
-function buildError(err: any): APIResponseInterface {
+export const buildError = (err: any): APIResponseInterface => {
   if (err.isJoi) {
     return {
       code: StatusCodes.BAD_REQUEST,
@@ -42,29 +36,19 @@ function buildError(err: any): APIResponseInterface {
     code: StatusCodes.INTERNAL_SERVER_ERROR,
     message: getReasonPhrase(StatusCodes.INTERNAL_SERVER_ERROR)
   };
-}
+};
 
-/**
- * Generic error response middleware for internal server errors.
- *
- * @param  {any} err
- * @param  {Request} req
- * @param  {Response} res
- * @param  {NextFunction} next
- * @returns void
- */
-export default function genericErrorHandler(
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const genericErrorHandler = (
   err: any,
   _: Request,
   res: Response,
   // TODO: Remove this.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   __: NextFunction
-): void {
+): void => {
   const error = buildError(err);
 
   logger.log('error', 'Error: %s', err.stack || err.message);
 
   res.status(error.code).json(error);
-}
+};
