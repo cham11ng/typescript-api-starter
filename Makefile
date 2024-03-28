@@ -1,4 +1,4 @@
-.PHONY: help prepare-dev test lint run
+.PHONY: help clean
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
@@ -22,7 +22,9 @@ endef
 export PRINT_HELP_PYSCRIPT
 
 clean: ## Remove log file.
-	rm -rf logs/**.log logs/**.json build
+	@rm -rf logs/*.{log,json}
+	@rm -rf build
+	@echo "Clean Successful."
 
-help:
+help: ## Help
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
