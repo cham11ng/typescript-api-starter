@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import request from 'supertest';
 import { StatusCodes } from 'http-status-codes';
+import request from 'supertest';
 
 import app from '../../src/app';
 import { getRandomElement, init, TEST_EMAIL, TEST_PASSWORD } from '../helper';
@@ -14,9 +14,7 @@ describe('GET /users API test', () => {
   beforeAll(async () => {
     await init();
 
-    const response = await request(app)
-      .post('/login')
-      .send({ email, password });
+    const response = await request(app).post('/login').send({ email, password });
 
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
@@ -57,16 +55,14 @@ describe('POST /users API test', () => {
   beforeAll(async () => {
     await init();
 
-    const response = await request(app)
-      .post('/login')
-      .send({ email, password });
+    const response = await request(app).post('/login').send({ email, password });
 
     authorization = `Bearer ${response.body.data.accessToken}`;
   });
 
   test('should successfully insert user detail into database and return inserted user detail.', () => {
     const userBody = {
-      name: faker.name.findName(),
+      name: faker.person.fullName(),
       email: 'dummy-user@starter.com',
       password: faker.internet.password()
     };

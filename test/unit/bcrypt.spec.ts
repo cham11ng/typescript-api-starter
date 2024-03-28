@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { hash, compare } from '../../src/utils/bcrypt';
+import { compare, hash } from '../../src/utils/bcrypt';
 
 describe('Utils: compare()', () => {
   let hashedText: string;

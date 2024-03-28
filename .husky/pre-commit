@@ -1,5 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx sync-dotenv
 yarn lint-staged
+
+# check if the .env file exist
+if [ ! -f .env ]; then
+  exit 0
+fi
+
+npx sync-dotenv

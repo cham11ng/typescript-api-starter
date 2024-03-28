@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 import { markdown } from 'nodemailer-markdown';
 
-import logger from './logger';
 import mail from '../config/mail';
 import MailOptions from '../domain/misc/MailOptions';
+import logger from './logger';
 
 const { smtp, from } = mail;
 
@@ -13,7 +13,8 @@ transporter.use('compile', markdown());
 /**
  * Send email using nodemailer transporter.
  *
- * @param {MailOptions} mailOptions
+ * @param {MailOptions} mailOptions - Email options.
+ * @returns {Promise<any>}
  */
 export async function send(mailOptions: MailOptions): Promise<any> {
   try {
@@ -23,15 +24,9 @@ export async function send(mailOptions: MailOptions): Promise<any> {
 
     logger.log('debug', 'Mail: Sending email with options -', mailOptions);
 
-    const info = await transporter.sendMail(mailOptions);
-
-    return info;
+    return await transporter.sendMail(mailOptions);
   } catch (err) {
-    logger.log(
-      'error',
-      'Mail: Failed to send email - %s',
-      err instanceof Error ? err.message : err
-    );
+    logger.log('error', 'Mail: Failed to send email - %s', err instanceof Error ? err.message : err);
   }
 }
 

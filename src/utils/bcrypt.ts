@@ -5,7 +5,7 @@ import config from '../config/config';
 /**
  * Create a hash for a string.
  *
- * @param {string} value
+ * @param {string} value - Value to hash.
  * @returns {Promise<string>}
  */
 export function hash(value: string): Promise<string> {
@@ -17,8 +17,8 @@ export function hash(value: string): Promise<string> {
 /**
  * Compare a string with the hash.
  *
- * @param {string} value
- * @param {string} hashedValue
+ * @param {string} value - Value to compare.
+ * @param {string} hashedValue - Hashed value to compare.
  * @returns {Promise<boolean>}
  */
 export function compare(value: string, hashedValue: string): Promise<boolean> {

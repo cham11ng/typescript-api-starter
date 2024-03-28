@@ -19,18 +19,19 @@ Starter for Node.js Express API in Typescript with jsonwebtoken, joi, Knex, Obje
 Clone the repository, install the dependencies.
 
 ```bash
+# Clone repository
 $ git clone git@github.com:cham11ng/typescript-api-starter.git <application-name>
 
 $ cd <application-name>
 
-$ cp .env.example .env # Update database credentials
+# Update database credentials
+$ cp .env.example .env
 
 $ yarn migrate
 ```
 
-Load fake data in database.
-
 ```bash
+# Load fake data in database.
 $ yarn load:fake <FactoryName> <Number>
 ```
 
@@ -41,9 +42,11 @@ $ yarn load:fake <FactoryName> <Number>
 Start the application.
 
 ```bash
-$ yarn build # For production
+# For production
+$ yarn build
 
-$ yarn start # For development
+# For development
+$ yarn dev
 ```
 
 <p align="center">

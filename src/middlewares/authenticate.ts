@@ -1,33 +1,19 @@
+import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
 
-import * as jwt from '../utils/jwt';
-import logger from '../utils/logger';
 import config from '../config/config';
-import { JWTErrorType } from './../resources/enums/ErrorType';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import { tokenErrorMessageMap } from '../resources/constants/maps';
+import * as jwt from '../utils/jwt';
+import logger from '../utils/logger';
+import { JWTErrorType } from './../resources/enums/ErrorType';
 
 const { errors } = config;
 
-/**
- * A middleware to authenticate the authorization token i.e. access token.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-async function authenticate(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+const authenticate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    res.locals.accessToken = String(req.headers.authorization).replace(
-      'Bearer ',
-      ''
-    );
+    res.locals.accessToken = String(req.headers.authorization).replace('Bearer ', '');
 
     if (!req.headers.authorization || !res.locals.accessToken) {
       throw new BadRequestError(errors.noToken);
@@ -38,11 +24,7 @@ async function authenticate(
 
     res.locals.loggedInPayload = response.data;
 
-    logger.log(
-      'debug',
-      'JWT: Authentication verified -',
-      res.locals.loggedInPayload
-    );
+    logger.log('debug', 'JWT: Authentication verified -', res.locals.loggedInPayload);
 
     next();
   } catch (err) {
@@ -61,6 +43,6 @@ async function authenticate(
 
     next(err);
   }
-}
+};
 
 export default authenticate;

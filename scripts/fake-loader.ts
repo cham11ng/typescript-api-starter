@@ -1,11 +1,17 @@
 import chalk from 'chalk';
 
-import * as fake from '../src/utils/fake';
 import { bindModel } from '../src/config/db';
 import factories, { FactoryType } from '../src/database/factories';
+import * as fake from '../src/utils/fake';
 
 const { info } = console;
 
+/**
+ * Print the data in JSON format.
+ *
+ * @param data - Data to print.
+ * @returns {void}
+ */
 function print<T>(data: T): void {
   const jsonData = JSON.stringify(data, null, ' ');
 

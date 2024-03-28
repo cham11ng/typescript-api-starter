@@ -1,16 +1,11 @@
 import jwbt from 'jsonwebtoken';
 
-import logger from './logger';
 import config from '../config/config';
 import JWTPayload from '../domain/misc/JWTPayload';
 import LoggedInUser from '../domain/misc/LoggedInUser';
+import logger from './logger';
 
-const {
-  accessTokenDuration,
-  accessTokenSecretKey,
-  refreshTokenDuration,
-  refreshTokenSecretKey
-} = config.auth;
+const { accessTokenDuration, accessTokenSecretKey, refreshTokenDuration, refreshTokenSecretKey } = config.auth;
 
 if (!refreshTokenSecretKey || !accessTokenSecretKey) {
   throw new Error('Auth refresh and access token secrets cannot be empty.');
@@ -19,7 +14,7 @@ if (!refreshTokenSecretKey || !accessTokenSecretKey) {
 /**
  * Generate access token from given data
  *
- * @param {LoggedInUser} data
+ * @param {LoggedInUser} data - User data to generate token.
  * @returns {string}
  */
 export function generateAccessToken(data: LoggedInUser): string {
@@ -36,7 +31,7 @@ export function generateAccessToken(data: LoggedInUser): string {
 /**
  * Generate refresh token from given data
  *
- * @param {JWTPayload} data
+ * @param {JWTPayload} data - Data to generate token.
  * @returns {string}
  */
 export function generateRefreshToken(data: JWTPayload): string {
@@ -53,7 +48,7 @@ export function generateRefreshToken(data: JWTPayload): string {
 /**
  * Verify access token.
  *
- * @param {string} token
+ * @param {string} token - Token to verify.
  * @returns {object | string}
  */
 export function verifyAccessToken(token: string): jwbt.JwtPayload | string {
@@ -63,7 +58,7 @@ export function verifyAccessToken(token: string): jwbt.JwtPayload | string {
 /**
  * Verify refresh token.
  *
- * @param {string} token
+ * @param {string} token - Token to verify.
  * @returns {object | string}
  */
 export function verifyRefreshToken(token: string): jwbt.JwtPayload | string {
