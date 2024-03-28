@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
 
   api:
-    image: "node:16-alpine"
+    image: "node:latest"
     env_file: '.env.docker'
     container_name: "starter-api"
     volumes:
@@ -24,4 +24,4 @@ services:
       - postgres
     ports:
       - "8000:8000"
-    command: sh -c "yarn && yarn dev"
+    command: bash -c "yarn && yarn dev"

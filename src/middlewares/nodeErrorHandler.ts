@@ -3,7 +3,7 @@ import logger from '../utils/logger';
 
 const { errors } = config;
 
-export const nodeErrorHandler = (err: NodeJS.ErrnoException): void => {
+const nodeErrorHandler = (err: NodeJS.ErrnoException): void => {
   switch (err.code) {
     case 'EACCES':
       logger.log('error', errors.portRequirePrivilege);
@@ -19,3 +19,5 @@ export const nodeErrorHandler = (err: NodeJS.ErrnoException): void => {
 
   process.exit(1);
 };
+
+export default nodeErrorHandler;

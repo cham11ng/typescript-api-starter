@@ -4,7 +4,7 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 import APIResponseInterface from '../domain/responses/APIResponse';
 import logger from '../utils/logger';
 
-export const buildError = (err: any): APIResponseInterface => {
+export const buildError = (err: any): APIResponseInterface<{ code: number; message: string; data?: any }> => {
   if (err.isJoi) {
     return {
       code: StatusCodes.BAD_REQUEST,
@@ -38,7 +38,7 @@ export const buildError = (err: any): APIResponseInterface => {
   };
 };
 
-export const genericErrorHandler = (
+const genericErrorHandler = (
   err: any,
   _: Request,
   res: Response,
@@ -52,3 +52,5 @@ export const genericErrorHandler = (
 
   res.status(error.code).json(error);
 };
+
+export default genericErrorHandler;

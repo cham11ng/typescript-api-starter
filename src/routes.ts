@@ -6,8 +6,8 @@ import * as userController from './controllers/user';
 import authenticate from './middlewares/authenticate';
 import validate from './middlewares/validate';
 import validateRefreshToken from './middlewares/validateRefreshToken';
-import { loginSchema } from './validators/loginRequest';
-import { userPOSTSchema } from './validators/userRequest';
+import { loginSchema } from './resources/validators/loginRequest';
+import { userPOSTSchema } from './resources/validators/userRequest';
 
 const router: Router = Router();
 

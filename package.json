@@ -12,7 +12,7 @@
     "email": "sgr.raee@gmail.com"
   },
   "engines": {
-    "node": ">= 16.5.0"
+    "node": ">= 20.9.0"
   },
   "scripts": {
     "dev": "concurrently 'npx tsc --watch' 'nodemon -q build/index.js'",
