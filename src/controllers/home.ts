@@ -5,17 +5,9 @@ import config from '../config/config';
 
 const { name, version } = config;
 
-/**
- * Handle / GET request, responds API information.
- *
- * @param {Request} req
- * @param _
- * @param {Response} res
- * @returns {void}
- */
-export function index(_: Request, res: Response): void {
+export const index = (_: Request, res: Response): void => {
   res.status(StatusCodes.OK).json({
     name,
     version
   });
-}
+};

@@ -5,7 +5,7 @@
   </a>
 </p>
 
-Starter for Node.js Express API in Typescript with jsonwebtoken, joi, Knex, Objection.js and many other popular tools.
+Starter for Node.js, Express API in Typescript and PostgreSQL with jsonwebtoken, joi, Knex, Objection.js and many other popular tools.
 
 ## Requirements
 
@@ -16,8 +16,6 @@ Starter for Node.js Express API in Typescript with jsonwebtoken, joi, Knex, Obje
 
 ## Getting Started
 
-Clone the repository, install the dependencies.
-
 ```bash
 # Clone repository
 $ git clone git@github.com:cham11ng/typescript-api-starter.git <application-name>
@@ -26,6 +24,9 @@ $ cd <application-name>
 
 # Update database credentials
 $ cp .env.example .env
+
+# Install dependencies
+$ yarn install
 
 $ yarn migrate
 ```
@@ -53,60 +54,54 @@ $ yarn dev
   <a href="https://imgur.com/gallery/4rhTo"><img src="https://i.imgur.com/GpcDbLB.gif" /></a>
 </p>
 
-**Using Docker**
-
-Make a copy of `.env.docker` and save as `.env`.
+### Using Docker
 
 ```bash
+# Make a copy of `.env.docker` and save as `.env`.
 $ cp .env.docker .env
 ```
 
 Install dependencies and run the application locally.
 
 ```bash
-$ docker compose up -d postgres
-
 $ docker compose up -d api
 
-$ docker compose exec api sh yarn migrate # Make sure server is started checking logs before running this command
+# Make sure server is started checking logs before running this command
+$ docker compose exec api sh yarn migrate
 ```
 
-View logs of the container.
-
 ```bash
-$ docker compose logs -f
-```
+# View logs of the container.
+$ docker compose logs -f api
 
-To stop the services.
-
-```bash
+# To stop the services.
 $ docker compose stop api postgres
 ```
 
 ## Generating Migrations and Seeds
 
-To create migration use `make:migration` and seed use `make:seeder`:
-
 ```bash
+# To create migration use `make:migration`
 $ yarn make:migration create_{table_name}_table
 
+# To create seed use `make:seeder`
 $ yarn make:seeder {table_name}_table_seeder
 ```
 
-Example,
-
 ```bash
+# Example
 $ yarn make:migration create_posts_table
-
 $ yarn make:seeder post_table_seeder
 ```
 
 Modify migration and seeder file as per the requirement. Then finally:
 
 ```bash
-$ yarn migrate # to migrate
+# to migrate
+$ yarn migrate
 
-$ yarn seed # to seed
+# to seed
+$ yarn seed
 ```
 
 ## Setting up REST Client
@@ -120,7 +115,7 @@ Create a file or add following lines in `.vscode` > `settings.json` and switch a
       "refreshToken": "foo",
       "accessToken": "bar",
       "email": "sgr.raee@gmail.com",
-      "password": "secret" 
+      "password": "secret"
     },
     "local": {
       "host": "localhost",

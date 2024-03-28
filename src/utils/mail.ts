@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodemailer, { Transporter, TransportOptions } from 'nodemailer';
 import { markdown } from 'nodemailer-markdown';
 
 import mail from '../config/mail';
@@ -7,7 +7,7 @@ import logger from './logger';
 
 const { smtp, from } = mail;
 
-const transporter: any = nodemailer.createTransport(smtp as any);
+const transporter: Transporter = nodemailer.createTransport(smtp as TransportOptions);
 transporter.use('compile', markdown());
 
 /**
@@ -16,6 +16,7 @@ transporter.use('compile', markdown());
  * @param {MailOptions} mailOptions - Email options.
  * @returns {Promise<any>}
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function send(mailOptions: MailOptions): Promise<any> {
   try {
     if (!mailOptions.from) {

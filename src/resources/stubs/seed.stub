@@ -1,6 +1,12 @@
 import * as Knex from 'knex';
 
-export function seed(knex: Knex): Knex.SchemaBuilder {
+/**
+ * Seed :table table
+
+ * @param {Knex} knex - knex instance.
+ * @returns {Promise<number[] | number[][]>}
+ */
+export function seed(knex: Knex): Promise<number[] | number[][]> {
   return knex('table_name')
     .del()
     .then(() => {

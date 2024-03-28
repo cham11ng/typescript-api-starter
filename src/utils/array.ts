@@ -4,7 +4,6 @@
  * @param {any} arr - Parameter to check.
  * @returns {boolean}
  */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export function isArray(arr: any): boolean {
+export function isArray(arr: unknown): boolean {
   return arr !== undefined && arr !== null && Array.isArray(arr);
 }

@@ -5,7 +5,8 @@ import Table from '../../resources/enums/Table';
 /**
  * Add user_roles table.
  *
- * @param {Knex} knex
+ * @param {Knex} knex - knex instance.
+ * @returns {Promise<void>}
  */
 export function up(knex: Knex): Promise<void> {
   return knex.schema
@@ -38,7 +39,8 @@ export function up(knex: Knex): Promise<void> {
 /**
  * Drop user_roles table.
  *
- * @param {Knex} knex
+ * @param {Knex} knex - knex instance.
+ * @returns {Knex.SchemaBuilder}
  */
 export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable(Table.USER_ROLES);

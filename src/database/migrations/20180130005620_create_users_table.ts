@@ -3,8 +3,10 @@ import { Knex } from 'knex';
 import Table from '../../resources/enums/Table';
 
 /**
+ * Add users table.
  *
- * @param knex
+ * @param {Knex} knex - knex instance.
+ * @returns {Knex.SchemaBuilder}
  */
 export function up(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.createTable(Table.USERS, (table) => {
@@ -19,8 +21,10 @@ export function up(knex: Knex): Knex.SchemaBuilder {
 }
 
 /**
+ * Drop users table.
  *
- * @param knex
+ * @param {Knex} knex - knex instance.
+ * @returns {Knex.SchemaBuilder}
  */
 export function down(knex: Knex): Knex.SchemaBuilder {
   return knex.schema.dropTable(Table.USERS);

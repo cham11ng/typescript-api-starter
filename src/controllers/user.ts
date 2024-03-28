@@ -7,15 +7,7 @@ import * as userService from '../services/userService';
 
 const { messages } = config;
 
-/**
- * Handle /users GET request.
- *
- * @param {Request} req
- * @param _
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function index(_: Request, res: Response, next: NextFunction): Promise<void> {
+export const index = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const response = await userService.fetchAll();
 
@@ -27,16 +19,9 @@ export async function index(_: Request, res: Response, next: NextFunction): Prom
   } catch (err) {
     next(err);
   }
-}
+};
 
-/**
- * Handle /users POST request.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-export async function store(req: Request, res: Response, next: NextFunction): Promise<void> {
+export const store = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const userPayload = req.body as UserPayload;
 
@@ -50,4 +35,4 @@ export async function store(req: Request, res: Response, next: NextFunction): Pr
   } catch (err) {
     next(err);
   }
-}
+};

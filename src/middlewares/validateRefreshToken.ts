@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import config from '../config/config';
+import ResponseData from '../domain/misc/ResponseData';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import { tokenErrorMessageMap } from '../resources/constants/maps';
@@ -19,13 +20,14 @@ const validateRefreshToken = async (req: Request, res: Response, next: NextFunct
     }
 
     logger.log('info', 'JWT: Verifying token - %s', res.locals.refreshToken);
-    const response: any = jwt.verifyRefreshToken(res.locals.refreshToken);
+    const response = jwt.verifyRefreshToken(res.locals.refreshToken) as ResponseData;
 
     res.locals.jwtPayload = response.data;
 
     logger.log('debug', 'JWT: Authentication verified -', res.locals.jwtPayload);
 
     next();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     const tokenErrorMessage = tokenErrorMessageMap[err.name as JWTErrorType];
     logger.log('error', 'JWT: Authentication failed - %s', err.message);

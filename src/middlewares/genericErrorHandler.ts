@@ -4,6 +4,7 @@ import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 import APIResponseInterface from '../domain/responses/APIResponse';
 import logger from '../utils/logger';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const buildError = (err: any): APIResponseInterface<{ code: number; message: string; data?: any }> => {
   if (err.isJoi) {
     return {
@@ -11,6 +12,7 @@ export const buildError = (err: any): APIResponseInterface<{ code: number; messa
       message: getReasonPhrase(StatusCodes.BAD_REQUEST),
       data:
         err.details &&
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         err.details.map((error: any) => ({
           param: error.path.join('.'),
           message: error.message
@@ -39,10 +41,10 @@ export const buildError = (err: any): APIResponseInterface<{ code: number; messa
 };
 
 const genericErrorHandler = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   err: any,
   _: Request,
   res: Response,
-  // TODO: Remove this.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   __: NextFunction
 ): void => {

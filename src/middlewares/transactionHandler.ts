@@ -10,7 +10,7 @@ const transactionHandler = (req: Request, _: Response, next: NextFunction): void
     const transactionId = req.headers['transactionId'] || randomUUID();
 
     // Set the TransactionId inside the store
-    context.getStore().set('transactionId', transactionId);
+    context.getStore()?.set('transactionId', transactionId);
 
     next();
   });

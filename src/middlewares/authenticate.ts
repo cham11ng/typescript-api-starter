@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { JsonWebTokenError } from 'jsonwebtoken';
 
 import config from '../config/config';
+import ResponseData from '../domain/misc/ResponseData';
 import BadRequestError from '../exceptions/BadRequestError';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import { tokenErrorMessageMap } from '../resources/constants/maps';
@@ -20,7 +21,7 @@ const authenticate = async (req: Request, res: Response, next: NextFunction): Pr
     }
 
     logger.log('info', 'JWT: Verifying token - %s', res.locals.accessToken);
-    const response: any = jwt.verifyAccessToken(res.locals.accessToken);
+    const response = jwt.verifyAccessToken(res.locals.accessToken) as ResponseData;
 
     res.locals.loggedInPayload = response.data;
 

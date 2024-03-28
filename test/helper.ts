@@ -47,9 +47,9 @@ export async function init(): Promise<UserDetail> {
 /**
  * Get a random element from given array.
  *
- * @param {any[]} list - List of elements.
- * @returns {any}
+ * @param {unknown[]} list - List of elements.
+ * @returns {unknown}
  */
-export function getRandomElement(list: any[]): any {
-  return faker.helpers.arrayElement<any>(list);
+export function getRandomElement(list: unknown[]): unknown {
+  return faker.helpers.arrayElement<unknown>(list);
 }
