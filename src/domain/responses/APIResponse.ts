@@ -1,10 +1,10 @@
 /**
  * API Response Interface.
  */
-interface APIResponse {
+interface APIResponse<Data> {
   code: number;
   message: string;
-  data?: any;
+  data?: Data;
 }
 
 export default APIResponse;

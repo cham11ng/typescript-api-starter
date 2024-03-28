@@ -1,5 +1,5 @@
-import * as userFactory from './userFactory';
 import UserDetail from '../../domain/entities/UserDetail';
+import * as userFactory from './userFactory';
 
 interface Callback<T> {
   run: () => Promise<T>;

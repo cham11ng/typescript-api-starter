@@ -1,32 +1,18 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
-import * as jwt from '../utils/jwt';
-import logger from '../utils/logger';
 import config from '../config/config';
 import BadRequestError from '../exceptions/BadRequestError';
-import { JWTErrorType } from '../resources/enums/ErrorType';
 import UnauthorizedError from '../exceptions/UnauthorizedError';
 import { tokenErrorMessageMap } from '../resources/constants/maps';
+import { JWTErrorType } from '../resources/enums/ErrorType';
+import * as jwt from '../utils/jwt';
+import logger from '../utils/logger';
 
 const { errors } = config;
 
-/**
- * A middleware to validateRefershToken the authorization token i.e. refresh token.
- *
- * @param {Request} req
- * @param {Response} res
- * @param {NextFunction} next
- */
-async function validateRefreshToken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> {
+const validateRefreshToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    res.locals.refreshToken = String(req.headers.authorization).replace(
-      'Bearer ',
-      ''
-    );
+    res.locals.refreshToken = String(req.headers.authorization).replace('Bearer ', '');
 
     if (!req.headers.authorization || !res.locals.refreshToken) {
       throw new BadRequestError(errors.noToken);
@@ -37,11 +23,7 @@ async function validateRefreshToken(
 
     res.locals.jwtPayload = response.data;
 
-    logger.log(
-      'debug',
-      'JWT: Authentication verified -',
-      res.locals.jwtPayload
-    );
+    logger.log('debug', 'JWT: Authentication verified -', res.locals.jwtPayload);
 
     next();
   } catch (err: any) {
@@ -56,6 +38,6 @@ async function validateRefreshToken(
       next(err);
     }
   }
-}
+};
 
 export default validateRefreshToken;

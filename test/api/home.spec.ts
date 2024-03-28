@@ -1,5 +1,5 @@
-import request from 'supertest';
 import { StatusCodes } from 'http-status-codes';
+import request from 'supertest';
 
 import app from '../../src/app';
 import config from '../../src/config/config';

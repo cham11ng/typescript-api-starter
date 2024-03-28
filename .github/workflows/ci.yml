@@ -2,15 +2,15 @@ name: Starter CI
 
 on:
   push:
-    branches: [dev, master]
+    branches: [dev, main]
   pull_request:
-    branches: [dev, master]
+    branches: [dev, main]
 
 jobs:
   build:
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [20.x]
         platform: [ubuntu-latest]
 
     runs-on: ${{ matrix.platform }}

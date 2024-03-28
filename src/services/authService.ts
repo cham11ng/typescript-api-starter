@@ -1,27 +1,25 @@
+import config from '../config/config';
+import JWTPayload from '../domain/misc/JWTPayload';
+import LoginPayload from '../domain/requests/LoginPayload';
+import TokenResponse from '../domain/responses/TokenResponse';
+import ForbiddenError from '../exceptions/ForbiddenError';
+import UnauthorizedError from '../exceptions/UnauthorizedError';
 import User from '../models/User';
+import UserSession from '../models/UserSession';
+import * as sessionService from '../services/sessionService';
+import * as bcrypt from '../utils/bcrypt';
 import * as jwt from '../utils/jwt';
 import logger from '../utils/logger';
-import config from '../config/config';
-import * as bcrypt from '../utils/bcrypt';
-import UserSession from '../models/UserSession';
-import JWTPayload from '../domain/misc/JWTPayload';
-import ForbiddenError from '../exceptions/ForbiddenError';
-import LoginPayload from '../domain/requests/LoginPayload';
-import * as sessionService from '../services/sessionService';
-import TokenResponse from '../domain/responses/TokenResponse';
-import UnauthorizedError from '../exceptions/UnauthorizedError';
 
 const { errors } = config;
 
 /**
  * Create user session for valid user login.
  *
- * @param {LoginPayload} loginPayload
- * @returns {TokenResponse}
+ * @param {LoginPayload} loginPayload - Login payload.
+ * @returns {Promise<TokenResponse>}
  */
-export async function login(
-  loginPayload: LoginPayload
-): Promise<TokenResponse> {
+export async function login(loginPayload: LoginPayload): Promise<TokenResponse> {
   const { email, password } = loginPayload;
 
   logger.log('info', 'Checking email: %s', email);
@@ -56,14 +54,11 @@ export async function login(
 /**
  * Refresh new access token.
  *
- * @param {string} token
- * @param {jwtPayload} jwtPayload
- * @returns {TokenResponse}
+ * @param {string} token - Refresh token.
+ * @param {jwtPayload} jwtPayload - JWT payload.
+ * @returns {Promise<TokenResponse>}
  */
-export async function refresh(
-  token: string,
-  jwtPayload: JWTPayload
-): Promise<TokenResponse> {
+export async function refresh(token: string, jwtPayload: JWTPayload): Promise<TokenResponse> {
   logger.log('info', 'User Session: Fetching session of token - %s', token);
 
   const session = await UserSession.query().findOne({
@@ -90,7 +85,8 @@ export async function refresh(
 /**
  * Remove user session.
  *
- * @param {string} token
+ * @param {string} token - Session token.
+ * @returns {Promise<void>}
  */
 export async function logout(token: string): Promise<void> {
   logger.log('info', 'Logout: Logging out user session - %s', token);

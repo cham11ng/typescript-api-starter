@@ -1,9 +1,9 @@
 import fs from 'fs';
+import { createLogger, format, Logger, transports } from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
-import { createLogger, format, transports, Logger } from 'winston';
 
-import context from './context';
 import app from '../config/config';
+import context from './context';
 
 const { environment, logging } = app;
 const { combine, colorize, splat, printf, timestamp } = format;
@@ -16,15 +16,10 @@ const formatter = printf((info: any) => {
 
   const meta =
     restMeta && Object.keys(restMeta).length
-      ? JSON.stringify(
-          restMeta,
-          (key: any, value: any) =>
-            keysToFilter.includes(key) ? '******' : value,
-          2
-        )
+      ? JSON.stringify(restMeta, (key: any, value: any) => (keysToFilter.includes(key) ? '******' : value), 2)
       : restMeta instanceof Object
-      ? ''
-      : restMeta;
+        ? ''
+        : restMeta;
 
   return `[ ${ts} ] [ ${transactionId} ] - [ ${level} ] ${message} ${meta}`;
 });
